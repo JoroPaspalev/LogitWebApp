@@ -1,0 +1,106 @@
+﻿
+
+@model OfferViewModel
+<!-- За да можем да използваме Service в самото View първо трябва да го регистираме в Startup, послед да напишем @@using с пътя до сървиса (LogitWebApp.Services.Offers;), трето @@inject Interface(IShortStringService) след него име с което ще се използва service(ShortString) -->
+@using LogitWebApp.Services.Offers;
+@inject IShortStringService ShortString
+
+@{
+    <!-- this.Layout = null; -->
+    this.Layout = "MyCustomLayout";
+}
+
+<section class="probootstrap-cover overflow-hidden relative" style="background-image: url('img/mainPage.png');" data-stellar-background-ratio="0.5" id="section-home">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row align-items-center p-0">
+            <div class="col-md alert">
+                <h1>Price is: @ViewData["Price"]</h1>
+                <h1>Price: @Model.Price</h1>
+
+                @ShortString.ShortString(ViewBag.veryLongString, 10)
+
+
+                <!-- Когато е изписано като email го render-ира като email т.е. показва директно Date@DateTime.Now -->
+                <h1>Date@DateTime.Now</h1>
+
+                <!-- Когато има някакъв символ преди @@ различен от [a-Z] го разбира като C# код-->
+                <h1>Date @DateTime.Now</h1>
+
+                <!-- Ако искаме да сменим приоритета слагаме скоби. Всички в тях се възприема като C# код-->
+                <h1>Date@(DateTime.Now)</h1>
+
+                <h1>@ViewBag.alert</h1>
+                @* <h1>@Html.Raw(ViewBag.alert)</h1> *@
+
+                <h2>@ViewBag.div</h2>
+                <h4>@ViewBag.div2 @Html.Raw(@ViewBag.div3) @ViewBag.div4</h4>
+
+                @{
+                    int a = 5;
+                    int b = 8;
+                    double c = a * 1.0 / b;
+                }
+
+                <h1>@a / @b --> @c</h1>
+                <h1>@(a*1.0 / b) --> @c</h1>
+
+                @*This is Razor Comment*@
+                @{
+                    //This is C# Comment
+                    /* This is C# Block Comment of
+                    some
+                    rows*/
+                }
+                <!-- This is HTML Comment -->
+                <!--Имам достъп до глобалните променливи в C# -->
+                <h1>@DateTime.UtcNow</h1>
+                <h1>@this.User.Identity.Name</h1>
+                <h1>@this.User.Identity.IsAuthenticated</h1>
+                <h1>@this.User.Identity.AuthenticationType</h1>
+                <h1>
+                    @foreach (var key in this.Context.Request.Query.Keys)
+                    {
+                        <h2>@key</h2>
+                    }
+                </h1>
+
+                <h1>---------------------------------------------------</h1>
+                <h1>
+                    @foreach (var key in this.Context.Request.Form.Keys)
+                    {
+                        <h1>@key</h1>
+                    }
+                </h1>
+                <h1>---------------------------------------------------</h1>
+                <h1>@this.Context.Request.Path</h1>
+                <h1>---------------------------------------------------</h1>
+                <h1>
+                    @foreach (var header in this.Context.Request.Headers)
+                    {
+                        <h1> @header.Key -->  @header.Value </h1>
+                    }
+                </h1>
+                <h1>---------------------------------------------------</h1>
+                <h1>
+                    @foreach (var header in this.Context.Response.Headers)
+                    {
+                        <h1> @header.Key -->  @header.Value </h1>
+                    }
+                </h1>
+                <h1>---------------------------------------------------</h1>
+
+                <!-- За да се визуализира правилно List<string> трябва да се encode-нат (ескейпнат) с & -->
+                <div>List<string></div>
+                <div>List&lt;string&gt;</div>
+
+                @Html.Raw("<html> This is how you escape an HTML tag in Razor </html>");
+                &lt;html&gt; This is how you escape an HTML tag in Razor  &lt;/html&gt;
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

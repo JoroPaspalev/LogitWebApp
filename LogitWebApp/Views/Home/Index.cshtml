@@ -1,0 +1,141 @@
+﻿@{
+    ViewData["Title"] = "Logit";
+}
+
+<section class="probootstrap-cover overflow-hidden relative" style="background-image: url('img/mainPage.png');" data-stellar-background-ratio="0.5" id="section-home">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row align-items-center p-0">
+            <!--   -->
+            <div class="col-md">
+                <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Вземете Вашата оферта още сега!</h2>
+                <p class="lead mb-5 probootstrap-animate">чрез on-line калкулатора получавате оферта на момента  <!-- <a href="https://uicookies.com/" target="_blank">uicookies.com</a> Under License <a href="https://uicookies.com/license" target="_blank">CC 3.0</a> --></p>
+                <p class="probootstrap-animate">
+                    <!-- <a href="onepage.html" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-3">See OnePage Verion</a> -->
+                </p>
+            </div>
+            <div class="col-md probootstrap-animate">
+                <form action="Offers/Calculate" method="post" class="probootstrap-form">
+                    <div class="form-group">
+                        <div class="row mb-3">
+                            <div class="col-md">
+                                <div class="form-group">
+                                    <label for="id_label_single">От</label>
+                                    <label for="id_label_single" style="width: 100%;">
+                                        <select class="js-example-basic-single js-states form-control" name="from" id="id_label_single" style="width: 100%;">
+
+                                            <option value="София">София</option>
+
+                                            <option value="Japan">Пловдив</option>
+                                            <option value="United States">Варна</option>
+                                            <option value="Brazil">Бургас</option>
+                                            <option value="China">Стара Загора</option>
+                                            <option value="Israel">Благоевград</option>
+                                            <option value="Philippines">Русе</option>
+                                            <option value="Malaysia">Велико Търново</option>
+                                            <option value="Canada">Хасково</option>
+                                            <option value="Chile">Пазарджик</option>
+                                            <option value="Chile">Плевен</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md">
+                                <div class="form-group">
+                                    <label for="id_label_single2">До</label>
+                                    <div class="probootstrap_select-wrap">
+                                        <label for="id_label_single2" style="width: 100%;">
+                                            <select class="js-example-basic-single js-states form-control" name="to" id="id_label_single2" style="width: 100%;">
+
+                                                <option value="Пловдив">Пловдив</option>
+
+                                                <option value="Japan">Варна</option>
+                                                <option value="United States">Бургас</option>
+                                                <option value="Brazil">Стара Загора</option>
+                                                <option value="China">Благоевград</option>
+                                                <option value="Israel">Русе</option>
+                                                <option value="Philippines">Велико Търново</option>
+                                                <option value="Malaysia">Хасково</option>
+                                                <option value="Canada">Пазарджик</option>
+                                                <option value="Chile">Плевен</option>
+                                                <option value="Chile">София</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END row -->
+
+                        <div class='row mb-5'>
+                            <div class="col-md-6">
+                                <label>Брой палети</label>
+                                <div class="probootstrap_select-wrap">
+                                    <label for="id_label_single2" style="width: 100%;">
+                                        <select class="js-example-basic-single js-states form-control" name="countOfPallets" id="id_label_single2" style="width: 100%;">
+
+                                            <option value="1">1</option>
+
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">Над 6</option>
+                                        </select>
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- END row -->
+
+                        <div class="row mb-5">
+                            <div class="col"><input type="text" name="length" placeholder="Ширина" class="form-control" method="post"></div>
+                            <div class="col"><input type="text" name="width" placeholder="Дължина" class="form-control"></div>
+                            <div class="col"><input type="text" name="height" placeholder="Височина" class="form-control"></div>
+                            <div class="col"><input type="text" name="weight" placeholder="Тегло" class="form-control"></div>
+
+                        </div>
+
+                        @*<div class="row mb-5">
+                            <div class="col-md">
+                                <div class="form-group">
+                                    <label for="probootstrap-date-departure">Ден на товарене</label>
+                                    <div class="probootstrap-date-wrap">
+                                        <span class="icon ion-calendar"></span>
+                                        <input type="text" id="probootstrap-date-departure" name="loadingDay" class="form-control" placeholder="Дата">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <div class="form-group">
+                                    <label for="probootstrap-date-arrival">Ден на разтоварване</label>
+                                    <div class="probootstrap-date-wrap">
+                                        <span class="icon ion-calendar"></span>
+                                        <input type="text" id="probootstrap-date-arrival" name="unloadingDay" class="form-control" placeholder="Дата">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                        <!-- END row -->
+
+                        <div class="row">
+                            <div class="col-7">
+                                <label for="round" class="mr-5"><input type="radio" id="round" name="IsExpressDelivery"> Експресна доставка</label>
+                                 <label for="oneway"><input type="radio" id="oneway" name="isFragile"> Чуплива пратка</label>
+                            </div>
+                            <div class="col-5">
+                                <input type="submit" value="Изпрати" class="btn btn-primary btn-block">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>

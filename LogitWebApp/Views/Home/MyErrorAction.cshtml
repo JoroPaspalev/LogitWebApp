@@ -1,0 +1,25 @@
+﻿
+@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="container pt-5">
+    <div class="container pt-5  text-center">
+        <h1 class="btn btn-danger bg-danger">Възникна грешка при обработването на вашата заявка!</h1>
+    </div>
+</div>
+
+<div class="container  text-center">
+    @if (Model.ShowRequestId)
+    {
+        <p>
+            <strong>Request ID:</strong> <code>@Model.RequestId</code>
+        </p>
+    }
+</div>
+
+<div class="text-center">
+    <img class="mx-auto" title="Профил" src="/img/error.jpg" alt="404 Page Not Found Picture" />
+</div>
+
