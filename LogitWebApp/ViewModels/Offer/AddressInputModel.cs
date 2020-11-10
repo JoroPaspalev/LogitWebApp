@@ -14,48 +14,48 @@ namespace LogitWebApp.ViewModels.Offer
         [Required]
         public string ShipmentId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Име/Фирма е задължително!")]
         public string LoadingName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Телефонния номер е задължителен!")]   
+        [RegularExpression(@"[0-9]{4}-[0-9]{3}-[0-9]{3}", ErrorMessage = "Телефонния номер е във формат xxxx-xxx-xxx")]
         public string LoadingPhone { get; set; }
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage ="Email е задължителено поле!")]
+        [EmailAddress(ErrorMessage ="Въведения Email е в неправилен формат!")]
         public string LoadingEmail { get; set; }
 
-        [Required]
-        public string LoadingTown { get; set; }
+        //[Required]
+        //public string LoadingTown { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Улицата е задължителено поле!")]
         public string LoadingStreet { get; set; }
 
-        [Required]
-        [Phone]
+        [Required(ErrorMessage = "Полето номер на улица е задължително!")]        
         public string LoadingNumber { get; set; }
 
         [ValidateCurrentDateAttribute]
         [ModelBinder(typeof(ExtractDateModelBinderAttribute))]        
         public DateTime LoadingDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Име/Фирма е задължително!")]
         public string UnloadingName { get; set; }
 
-        [Required]
-        [Phone]
+        [Required(ErrorMessage = "Телефонния номер е задължителен!")]
+        [RegularExpression(@"[0-9]{4}-[0-9]{3}-[0-9]{3}", ErrorMessage = "Телефонния номер е във формат xxxx-xxx-xxx")]
         public string UnloadingPhone { get; set; }
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Email е задължителено поле!")]
+        [EmailAddress(ErrorMessage = "Въведения Email е в неправилен формат!")]
         public string UnloadingEmail { get; set; }
 
-        [Required]
-        public string UnloadingTown { get; set; }
+        //[Required]
+        //public string UnloadingTown { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Улицата е задължителено поле!")]
         public string UnloadingStreet { get; set; }
 
-        [Required] //не може да е int защото има адреси 2B или Черни връх 23A
+        [Required(ErrorMessage = "Полето номер на улица е задължително!")] //не може да е int защото има адреси 2B или Черни връх 23A
         public string UnloadingNumber { get; set; }
 
         [ValidateCurrentDateAttribute]//Това проверява дали unloadingDate е преди текущата дата и гърми

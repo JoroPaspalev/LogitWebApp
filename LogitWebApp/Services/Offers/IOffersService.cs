@@ -9,6 +9,6 @@ namespace LogitWebApp.Services.Offers
 {
     public interface IOffersService
     {
-        Shipment GetOffer(OfferInputModel input);
+        public Shipment GetOffer(OfferInputModel input);
     }
 }

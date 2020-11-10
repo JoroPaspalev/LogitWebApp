@@ -30,12 +30,24 @@ namespace LogitWebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return this.Json(ModelState);
+                this.ViewBag.ShipmentId = input.ShipmentId;
+
+                return this.View();
             }
 
             this.ordersService.CreateOrder(input);
 
-            return this.Redirect("/");
+            ViewBag.ShipmentId = input.ShipmentId;//Това да го махна???
+
+            return this.RedirectToAction("OrderAdded", "Orders", new { Shipmentid = input.ShipmentId});
+        }
+
+
+        public IActionResult OrderAdded(string shipmentId)
+        {
+            ViewBag.ShipmentId = shipmentId;
+
+            return this.View();
         }
     }
 }

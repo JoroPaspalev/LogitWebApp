@@ -55,9 +55,9 @@
                     <li class="nav-item active"><a class="nav-link" href="/">Начало</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">За Нас</a></li>
                     <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Register">Регистрация</a></li>
-
-
+                    @*<li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Register">Регистрация</a></li>*@
+                    <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Register">Добави нов Шофьор</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Shipments">Пратки на шофьора</a></li>
 
                     <partial name="_LoginPartial" />
 

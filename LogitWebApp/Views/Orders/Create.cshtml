@@ -1,4 +1,5 @@
-﻿
+﻿@using LogitWebApp.ViewModels.Offer
+@model AddressInputModel
 
 <section class="probootstrap-cover overflow-hidden relative" style="        background-image: url('/img/bg_1.jpg');" data-stellar-background-ratio="0.5" id="section-home">
     <div class=""></div>
@@ -12,27 +13,67 @@
                         <div class="row mb-3">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label class="mb-3" for="id_label_single">Адрес на товарене</label>
-                                    <div class="mb-3"><input type="text" name="loadingName" placeholder="Име/Фирма" class="form-control" method="post"></div>
-                                    <div class="mb-3"><input type="text" name="loadingPhone" placeholder="Телефон" class="form-control" method="post"></div>
-                                    <div class="mb-3"><input type="text" name="loadingEmail" placeholder="Email" class="form-control"></div>
-                                    <div class="mb-3"><input type="text" name="loadingTown" placeholder="Населено място" class="form-control" method="post"></div>
-                                    <div class="mb-3"><input type="text" name="loadingStreet" placeholder="Улица" class="form-control"></div>
-                                    <div class="mb-3"><input type="text" name="loadingNumber" placeholder="№" class="form-control"></div>
+
+                                    <label class="mb-3" asp-for="LoadingName">Адрес на товарене</label>
+                                    <div class="mb-3">
+                                        <input type="text" asp-for="LoadingName" placeholder="Име/Фирма" class="form-control" method="post">
+                                        <span class="text-danger error-text-size" asp-validation-for="LoadingName"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <input type="text" asp-for="LoadingPhone" placeholder="Телефон" class="form-control" method="post">
+                                        <span class="text-danger error-text-size" asp-validation-for="LoadingPhone"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <input type="text" asp-for="LoadingEmail" placeholder="Email" class="form-control">
+                                        <span class="text-danger error-text-size" asp-validation-for="LoadingEmail"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <input type="text" asp-for="LoadingStreet" placeholder="Улица" class="form-control">
+                                        <span class="text-danger error-text-size" asp-validation-for="LoadingStreet"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <input type="text" asp-for="LoadingNumber" placeholder="№" class="form-control">
+                                        <span class="text-danger error-text-size" asp-validation-for="LoadingNumber"></span>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label class="mb-3" for="id_label_single">Адрес на товарене</label>
-                                    <div class="mb-3"><input type="text" name="unloadingName" placeholder="Име/Фирма" class="form-control" method="post"></div>
-                                    <div class="mb-3"><input type="text" name="unloadingPhone" placeholder="Телефон" class="form-control" method="post"></div>
-                                    <div class="mb-3"><input type="text" name="unloadingEmail" placeholder="Email" class="form-control"></div>
-                                    <div class="mb-3"><input type="text" name="unloadingTown" placeholder="Населено място" class="form-control" method="post"></div>
-                                    <div class="mb-3"><input type="text" name="unloadingStreet" placeholder="Улица" class="form-control"></div>
-                                    <div class="mb-3"><input type="text" name="unloadingNumber" placeholder="№" class="form-control"></div>
+                                    <label class="mb-3" asp-for="UnloadingName">Адрес на товарене</label>
 
-                                    <div class="mb-3"><input type="hidden" name="shipmentId"  value="@ViewBag.ShipmentId"></div>
+                                    <div class="mb-3">
+                                        <input type="text" asp-for="UnloadingName" placeholder="Име/Фирма" class="form-control" method="post">
+                                        <span class="text-danger error-text-size" asp-validation-for="UnloadingName"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <input type="text" asp-for="UnloadingPhone" placeholder="Телефон" class="form-control" method="post">
+                                        <span class="text-danger error-text-size" asp-validation-for="UnloadingPhone"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <input type="text" asp-for="UnloadingEmail" placeholder="Email" class="form-control">
+                                        <span class="text-danger error-text-size" asp-validation-for="UnloadingEmail"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <input type="text" asp-for="UnloadingStreet" placeholder="Улица" class="form-control">
+                                        <span class="text-danger error-text-size" asp-validation-for="UnloadingStreet"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <input type="text" asp-for="UnloadingNumber" placeholder="№" class="form-control">
+                                        <span class="text-danger error-text-size" asp-validation-for="UnloadingNumber"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <input type="hidden" asp-for="ShipmentId" placeholder="@ViewBag.ShipmentId" value="@ViewBag.ShipmentId">
+                                    </div>
 
                                 </div>
                             </div>

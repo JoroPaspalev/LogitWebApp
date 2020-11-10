@@ -17,7 +17,6 @@ namespace LogitWebApp.Controllers
             this.driversService = driversService;
         }
 
-
         public IActionResult Register()
         {
             //Само Admin може да извиква този action
@@ -49,9 +48,28 @@ namespace LogitWebApp.Controllers
         {
             return this.View();
         }
+
         public IActionResult DriverExist()
         {
             return this.View();
         }
+
+        public IActionResult Shipments()
+        {
+            return this.View();
+        }
+
+        public IActionResult All()
+        {
+            var allShipments = this.driversService.GetAllShipments();
+
+            return this.View(allShipments);
+        }
+
+        public IActionResult TakeShipment(string shipmentId)
+        {
+            return this.View();
+        }
+
     }
 }

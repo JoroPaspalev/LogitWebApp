@@ -20,9 +20,11 @@ namespace LogitWebApp.Services.Orders
 
         public void CreateOrder(AddressInputModel input)
         {
+            var currShipment = this.db.Shipments.FirstOrDefault(s=>s.Id == input.ShipmentId);
+
             var loadingAddress = new Address
             {
-                Town = input.LoadingTown,
+                Town = currShipment.From,
                 Street = input.LoadingStreet,
                 StreetNumber = input.LoadingNumber,
 
@@ -30,7 +32,7 @@ namespace LogitWebApp.Services.Orders
 
             var unloadingAddress = new Address
             {
-                Town = input.UnloadingTown,
+                Town = currShipment.To,
                 Street = input.UnloadingStreet,
                 StreetNumber = input.UnloadingNumber
             };

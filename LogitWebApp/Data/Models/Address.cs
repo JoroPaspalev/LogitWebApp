@@ -36,5 +36,10 @@ namespace LogitWebApp.Data.Models
 
         public virtual ICollection<Shipment> ShipmentsUnloading { get; set; }
 
+        public override string ToString()
+        {
+            return $"{Town}, ул. {Street} N{StreetNumber}";
+        }
+
     }
 }

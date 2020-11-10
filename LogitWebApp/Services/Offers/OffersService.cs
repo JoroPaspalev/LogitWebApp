@@ -71,8 +71,8 @@ namespace LogitWebApp.Services.Offers
 
             var currShipment = new Shipment
             {
-                Price = (cellingPricePerPallet * input.CountOfPallets),
                 CountOfPallets = input.CountOfPallets,
+                Price = cellingPricePerPallet * input.CountOfPallets,
                 From = input.From,
                 To = input.To,
                 Length = input.Length,
@@ -87,6 +87,7 @@ namespace LogitWebApp.Services.Offers
             this.db.SaveChanges();
 
             return currShipment;
+
         }
     }
 }

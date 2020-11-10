@@ -16,6 +16,8 @@ using LogitWebApp.Services.Offers;
 using LogitWebApp.Services.SeedDb;
 using LogitWebApp.Services.Orders;
 using LogitWebApp.Services.Drivers;
+using LogitWebApp.ViewModels.Drivers;
+using LogitWebApp.Services.Home;
 
 namespace LogitWebApp
 {
@@ -46,7 +48,8 @@ namespace LogitWebApp
             services.AddTransient<IShortStringService, ShortStringService>();
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IDriversService, DriversService>();
-
+            services.AddTransient<IHomeService, HomeService>();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

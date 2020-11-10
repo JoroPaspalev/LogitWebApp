@@ -1,4 +1,5 @@
-﻿using LogitWebApp.Data;
+﻿using LogitWebApp.Attributes.ModelValidationAttributes;
+using LogitWebApp.Data;
 using LogitWebApp.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,10 @@ namespace LogitWebApp.ViewModels.Drivers
 
         //public DriverInputModel(ApplicationDbContext db)
         //{
-        //    this.db = db;
+        //    this.db = db;z
         //}
 
+        //[CheckDriverExist]
         [Required(ErrorMessage ="Името на шофьора е задължително!")]
         [RegularExpression(@"^[A-ZА-Я]{1}[a-zа-я]+$", ErrorMessage ="Името трябва да започва с една голяма буква, следвана само от малки!")]
         [MaxLength(20, ErrorMessage ="Името не може да навдишава 20 символа!")]

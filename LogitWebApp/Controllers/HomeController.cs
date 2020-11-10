@@ -10,18 +10,20 @@ using LogitWebApp.Services.SeedDb;
 using LogitWebApp.ViewModels.Offer;
 using LogitWebApp.Services.Offers;
 using LogitWebApp.Data.Models;
+using LogitWebApp.Services.Home;
 
 namespace LogitWebApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IOffersService offersService;
+        private readonly IHomeService homeService;
 
-        public HomeController(ILogger<HomeController> logger, ISeedService seedService, IOffersService offersService)
+        public HomeController(ILogger<HomeController> logger, ISeedService seedService, IHomeService homeService)
         {
             _logger = logger;
-            this.offersService = offersService;
+            this.homeService = homeService;
+
             //Start only first time to seed data in Db
             //seedService.SeedDb();
         }
@@ -43,11 +45,21 @@ namespace LogitWebApp.Controllers
             if (input.From.ToLower() == input.To.ToLower())
             {
                 return this.Redirect($"/Offers/ShipmentInSameCity?cityName={input.From}");
-            }
+            }            
 
-            Shipment shipment = this.offersService.GetOffer(input);
+            return this.RedirectToAction("Calculate", "Offers", new OfferInputModel
+            {
+                From = input.From,
+                To = input.To,
+                CountOfPallets = input.CountOfPallets,
+                Length = input.Length,
+                Width = input.Width,
+                Height = input.Height,
+                Weight = input.Weight,
+                IsExpressDelivery = input.IsExpressDelivery,
+                IsFragile = input.IsFragile
 
-            return this.Redirect($"/Offers/Calculate?shipmentId={shipment.Id}");
+            });
         }
 
 
