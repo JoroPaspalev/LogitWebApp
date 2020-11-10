@@ -10,7 +10,22 @@
 
         <div class="row p-3 align-items-center">
             <div class="col-12">
-                <h3 class="text-secondary">Оферта за превоз на товари  №: <strong>@Model.Id</strong></h3>
+
+                <div class="card-body">
+                    <button type="button" class="btn btn-lg btn-block btn-outline-light">
+                        <h3 class="text-secondary font-weight-bold">
+                            <span >
+                                Оферта за превоз на товари  №:
+                                <input type="text" readonly class="form-control text-center" id="departureTime" name="from" value="@Model.Id">
+
+                            
+                        </h3>
+                    </button>
+                </div>
+
+
+
+
                 <hr>
             </div>
             <div class="col-6 text-dark">

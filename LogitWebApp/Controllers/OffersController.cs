@@ -20,16 +20,37 @@ namespace LogitWebApp.Controllers
             this.offersService = offersService;
         }
 
+        public IActionResult ShipmentInSameCity(string cityName)
+        {
+            ViewBag.CityName = cityName;
+
+            return this.View();
+        }
+
+        public IActionResult Calculate(int shipmentId)
+        {
+            //ще си вземе по shipmentId Shipment-а и ще го подаде на View-то което ще покаже офертата с цената
+
+            return this.View();
+
+        }
+
         [HttpPost]
         public IActionResult Calculate(OfferInputModel input)
         {
+            if (!ModelState.IsValid)
+            {
+                return this.Json(ModelState);
+            }
+
+            if (input.From.ToLower() == input.To.ToLower())
+            {               
+                return this.Redirect($"/Offers/ShipmentInSameCity?cityName={input.From}");
+            }
+
             Shipment offerForShipment = this.offersService.GetOffer(input);
             
             return this.View(offerForShipment);
-
-
-
-
 
 
             //Delete this test

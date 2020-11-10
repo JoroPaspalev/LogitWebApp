@@ -28,6 +28,11 @@ namespace LogitWebApp.Controllers
         [HttpPost]
         public IActionResult Create(AddressInputModel input)
         {
+            if (!ModelState.IsValid)
+            {
+                return this.Json(ModelState);
+            }
+
             this.ordersService.CreateOrder(input);
 
             return this.Redirect("/");

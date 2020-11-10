@@ -1,4 +1,7 @@
-﻿@{
+﻿
+@using LogitWebApp.ViewModels.Offer
+@model OfferInputModel
+@{
     ViewData["Title"] = "Logit";
 }
 
@@ -6,65 +9,93 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row align-items-center p-0">
-            <!--   -->
             <div class="col-md">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Вземете Вашата оферта още сега!</h2>
-                <p class="lead mb-5 probootstrap-animate">чрез on-line калкулатора получавате оферта на момента  <!-- <a href="https://uicookies.com/" target="_blank">uicookies.com</a> Under License <a href="https://uicookies.com/license" target="_blank">CC 3.0</a> --></p>
-                <p class="probootstrap-animate">
-                    <!-- <a href="onepage.html" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-3">See OnePage Verion</a> -->
-                </p>
+                <p class="lead mb-5 probootstrap-animate">чрез <span class="text-success font-weight-bold">on-line</span> калкулатора получавате оферта на момента</p>
             </div>
+
             <div class="col-md probootstrap-animate">
-                <form action="Offers/Calculate" method="post" class="probootstrap-form">
+                <form action="" method="post" class="probootstrap-form">
+                    @*Ако това го отмаркирам грешките ще започнат да се показват не под всяко поле а ще бъдат на куп където е поставен този Div *@
+                    @* <div class="text-danger" asp-validation-summary="All"></div> *@
                     <div class="form-group">
                         <div class="row mb-3">
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="id_label_single">От</label>
-                                    <label for="id_label_single" style="width: 100%;">
-                                        <select class="js-example-basic-single js-states form-control" name="from" id="id_label_single" style="width: 100%;">
+                                    <label asp-for="From">От</label>
+                                    <label asp-for="From" style="width: 100%;">
+                                        <select class="js-example-basic-single js-states form-control" name="from" id="From" style="width: 100%;">
 
                                             <option value="София">София</option>
-
-                                            <option value="Japan">Пловдив</option>
-                                            <option value="United States">Варна</option>
-                                            <option value="Brazil">Бургас</option>
-                                            <option value="China">Стара Загора</option>
-                                            <option value="Israel">Благоевград</option>
-                                            <option value="Philippines">Русе</option>
-                                            <option value="Malaysia">Велико Търново</option>
-                                            <option value="Canada">Хасково</option>
-                                            <option value="Chile">Пазарджик</option>
-                                            <option value="Chile">Плевен</option>
+                                            <option value="Пловдив">Пловдив</option>
+                                            <option value="Варна">Варна</option>
+                                            <option value="Бургас">Бургас</option>
+                                            <option value="Стара Загора">Стара Загора</option>
+                                            <option value="Русе">Русе</option>
+                                            <option value="Шумен">Шумен</option>
+                                            <option value="Плевен">Плевен</option>
+                                            <option value="Велико Търново">Велико Търново</option>
+                                            <option value="Благоевград">Благоевград</option>
+                                            <option value="Сливен">Сливен</option>
+                                            <option value="Ямбол">Ямбол</option>
+                                            <option value="Видин">Видин</option>
+                                            <option value="Враца">Враца</option>
+                                            <option value="Добрич">Добрич</option>
+                                            <option value="Добрич">Добрич</option>
+                                            <option value="Габрово">Габрово</option>
+                                            <option value="Перник">Перник</option>
+                                            <option value="Хасково">Хасково</option>
+                                            <option value="Търговище">Търговище</option>
+                                            <option value="Смолян">Смолян</option>
+                                            <option value="Силистра">Силистра</option>
+                                            <option value="Разград">Разград</option>
+                                            <option value="Пазарджик">Пазарджик</option>
+                                            <option value="Монтана">Монтана</option>
+                                            <option value="Ловеч">Ловеч</option>
+                                            <option value="Кюстендил">Кюстендил</option>
+                                            <option value="Кърджали">Кърджали</option>
                                         </select>
                                     </label>
                                 </div>
                             </div>
 
-
-
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="id_label_single2">До</label>
-                                    <div class="probootstrap_select-wrap">
-                                        <label for="id_label_single2" style="width: 100%;">
-                                            <select class="js-example-basic-single js-states form-control" name="to" id="id_label_single2" style="width: 100%;">
+                                    <label asp-for="To">До</label>
+                                    <label asp-for="To" style="width: 100%;">
+                                        <select class="js-example-basic-single js-states form-control" name="to" id="To" style="width: 100%;">
 
-                                                <option value="Пловдив">Пловдив</option>
+                                            <option value="Пловдив">Пловдив</option>
+                                            <option value="Варна">Варна</option>
+                                            <option value="Бургас">Бургас</option>
+                                            <option value="Стара Загора">Стара Загора</option>
+                                            <option value="Русе">Русе</option>
+                                            <option value="Шумен">Шумен</option>
+                                            <option value="Плевен">Плевен</option>
+                                            <option value="Велико Търново">Велико Търново</option>
+                                            <option value="Благоевград">Благоевград</option>
+                                            <option value="Сливен">Сливен</option>
+                                            <option value="Ямбол">Ямбол</option>
+                                            <option value="Видин">Видин</option>
+                                            <option value="Враца">Враца</option>
+                                            <option value="Добрич">Добрич</option>
+                                            <option value="Добрич">Добрич</option>
+                                            <option value="Габрово">Габрово</option>
+                                            <option value="Перник">Перник</option>
+                                            <option value="Хасково">Хасково</option>
+                                            <option value="Търговище">Търговище</option>
+                                            <option value="Смолян">Смолян</option>
+                                            <option value="Силистра">Силистра</option>
+                                            <option value="Разград">Разград</option>
+                                            <option value="Пазарджик">Пазарджик</option>
+                                            <option value="Монтана">Монтана</option>
+                                            <option value="Ловеч">Ловеч</option>
+                                            <option value="Кюстендил">Кюстендил</option>
+                                            <option value="Кърджали">Кърджали</option>
+                                            <option value="София">София</option>
 
-                                                <option value="Japan">Варна</option>
-                                                <option value="United States">Бургас</option>
-                                                <option value="Brazil">Стара Загора</option>
-                                                <option value="China">Благоевград</option>
-                                                <option value="Israel">Русе</option>
-                                                <option value="Philippines">Велико Търново</option>
-                                                <option value="Malaysia">Хасково</option>
-                                                <option value="Canada">Пазарджик</option>
-                                                <option value="Chile">Плевен</option>
-                                                <option value="Chile">София</option>
-                                            </select>
-                                        </label>
-                                    </div>
+                                        </select>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -88,48 +119,44 @@
                                         </select>
                                     </label>
                                 </div>
-
                             </div>
                         </div>
                         <!-- END row -->
 
-                        <div class="row mb-5">
-                            <div class="col"><input type="text" name="length" placeholder="Ширина" class="form-control" method="post"></div>
-                            <div class="col"><input type="text" name="width" placeholder="Дължина" class="form-control"></div>
-                            <div class="col"><input type="text" name="height" placeholder="Височина" class="form-control"></div>
-                            <div class="col"><input type="text" name="weight" placeholder="Тегло" class="form-control"></div>
-
+                        <div class="row ">
+                            <div class="col">
+                                <input type="text" asp-for="Width" placeholder="Ширина" class="form-control">
+                                <span class="text-danger error-text-size" asp-validation-for="Width"></span>
+                            </div>
+                            <div class="col">
+                                <input type="text" asp-for="Length" placeholder="Дължина" class="form-control">
+                                <span class="text-danger error-text-size" asp-validation-for="Length"></span>
+                            </div>
+                            <div class="col">
+                                <input type="text" asp-for="Height" placeholder="Височина" class="form-control">
+                                <span class="text-danger error-text-size" asp-validation-for="Height"></span>
+                            </div>
+                            <div class="col">
+                                <input type="text" asp-for="Weight" placeholder="Тегло" class="form-control">
+                                <span class="text-danger error-text-size" asp-validation-for="Weight"></span>
+                            </div>
                         </div>
-
-                        @*<div class="row mb-5">
-                            <div class="col-md">
-                                <div class="form-group">
-                                    <label for="probootstrap-date-departure">Ден на товарене</label>
-                                    <div class="probootstrap-date-wrap">
-                                        <span class="icon ion-calendar"></span>
-                                        <input type="text" id="probootstrap-date-departure" name="loadingDay" class="form-control" placeholder="Дата">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md">
-                                <div class="form-group">
-                                    <label for="probootstrap-date-arrival">Ден на разтоварване</label>
-                                    <div class="probootstrap-date-wrap">
-                                        <span class="icon ion-calendar"></span>
-                                        <input type="text" id="probootstrap-date-arrival" name="unloadingDay" class="form-control" placeholder="Дата">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>*@
+                        <div class="row mt-1 mb-5">
+                            <div class="col text-secondary"><span class="error-text-size">*Посочените размера са в метри</span></div>
+                        </div>
                         <!-- END row -->
 
                         <div class="row">
                             <div class="col-7">
-                                <label for="round" class="mr-5"><input type="radio" id="round" name="IsExpressDelivery"> Експресна доставка</label>
-                                 <label for="oneway"><input type="radio" id="oneway" name="isFragile"> Чуплива пратка</label>
+                                <label for="round" class="mr-5">
+                                    <input type="radio" id="round" name="IsExpressDelivery" value="true"> Експресна доставка
+                                </label>
+                                <label for="oneway">
+                                    <input type="radio" id="oneway" name="isFragile" value="true"> Чуплива пратка
+                                </label>
                             </div>
                             <div class="col-5">
-                                <input type="submit" value="Изпрати" class="btn btn-primary btn-block">
+                                <input type="submit" value="Изпрати" class="btn btn-success btn-block">
                             </div>
                         </div>
                     </div>

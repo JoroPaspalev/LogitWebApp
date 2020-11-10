@@ -23,14 +23,18 @@ namespace LogitWebApp.Services.Offers
         public Shipment GetOffer(OfferInputModel input)
         {
             double kilometers = this.db.Distances
-                .Where(d => d.FromCity.ToLower() == input.From.ToLower() && d.ToCity.ToLower() == input.To.ToLower())
+                .Where(d =>
+                (d.FromCity.ToLower() == input.From.ToLower() && d.ToCity.ToLower() == input.To.ToLower())
+                ||
+                (d.FromCity.ToLower() == input.To.ToLower() && d.ToCity.ToLower() == input.From.ToLower())
+                )
                 .Select(x => x.DistanceInKM)
-                .First();
+                .FirstOrDefault();
 
             decimal costForOnePallet = (decimal)(kilometers) * costPerKilometer / countOfPalletsInOneTruck;
             decimal cellingPricePerPallet = costForOnePallet * profit;
 
-            if (input.IsExpressDelivery == "on")
+            if (input.IsExpressDelivery)
             {
                 cellingPricePerPallet *= 1.20M;
             }
@@ -74,9 +78,9 @@ namespace LogitWebApp.Services.Offers
                 Length = input.Length,
                 Width = input.Width,
                 Height = input.Height,
-                Weight = input.Weight,                             
-                IsExpressDelivery = input.IsExpressDelivery == "on",
-                IsFragile = input.IsFragile == "on"
+                Weight = input.Weight,
+                IsExpressDelivery = input.IsExpressDelivery,
+                IsFragile = input.IsFragile
             };
 
             this.db.Shipments.Add(currShipment);

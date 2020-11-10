@@ -1,0 +1,39 @@
+﻿@using LogitWebApp.ViewModels.Drivers
+@model DriverInputModel
+
+<section class="probootstrap-cover overflow-hidden relative" style=" background-image: url('/img/bg_1.jpg');" data-stellar-background-ratio="0.5" id="section-home">
+    <div class="container">
+        <div class="row p-0">
+            <div class="col-12">
+                <h1>Регистрация на шофьор</h1>
+                <hr>
+            </div>
+        </div>
+
+        <form asp-action="Register" class="row pt-0">
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label">Име</label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-white bg-danger "></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label">Фамилия</label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-white bg-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="control-label">Телефонен номер</label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-white bg-danger"></span>
+                </div>
+            </div>
+            <div class="col-12 pt-3">
+                <div class="form-group">
+                    <input type="submit" value="Регистрирай" class="btn btn-success" />
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+

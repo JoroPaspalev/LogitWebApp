@@ -8,16 +8,20 @@ using Microsoft.Extensions.Logging;
 using LogitWebApp.Models;
 using LogitWebApp.Services.SeedDb;
 using LogitWebApp.ViewModels.Offer;
+using LogitWebApp.Services.Offers;
+using LogitWebApp.Data.Models;
 
 namespace LogitWebApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IOffersService offersService;
 
-        public HomeController(ILogger<HomeController> logger, ISeedService seedService)
+        public HomeController(ILogger<HomeController> logger, ISeedService seedService, IOffersService offersService)
         {
             _logger = logger;
+            this.offersService = offersService;
             //Start only first time to seed data in Db
             //seedService.SeedDb();
         }
@@ -25,10 +29,28 @@ namespace LogitWebApp.Controllers
         public IActionResult Index()
         {
             var isAuthenticated = this.HttpContext.User.Identity.IsAuthenticated;
-
-          
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Index(OfferInputModel input)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            if (input.From.ToLower() == input.To.ToLower())
+            {
+                return this.Redirect($"/Offers/ShipmentInSameCity?cityName={input.From}");
+            }
+
+            Shipment shipment = this.offersService.GetOffer(input);
+
+            return this.Redirect($"/Offers/Calculate?shipmentId={shipment.Id}");
+        }
+
+
 
         public IActionResult Exception()
         {
@@ -52,6 +74,23 @@ namespace LogitWebApp.Controllers
             return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public IActionResult StatusCodeError(int errorCode)
+        {
+            if (errorCode == 404)
+            {
+                return this.View("404");
+            }
+            else if (errorCode == 500)
+            {
+                //За да се зареди това View не е нужно да пишем "/Home/500" защото автоматично се търси в папка /Home подаденото име на View - в случая 500. Ако там го няма го търси в Views/Shared
+                return this.View("500");
+            }
+            else
+            {
+                return this.View(errorCode);
+            }
+        }
+
 
         public IActionResult MyTestView()
         {
@@ -60,7 +99,7 @@ namespace LogitWebApp.Controllers
                 Weight = 12,
                 Height = 122,
                 Length = 234,
-                IsFragile = true.ToString(),
+                IsFragile = true,
                 Width = 99,
                 CountOfPallets = 33
             };

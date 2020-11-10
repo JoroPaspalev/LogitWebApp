@@ -56,11 +56,11 @@ namespace LogitWebApp.Services.Orders
             this.db.Participants.Add(receiver);
             this.db.SaveChanges();
 
-            DateTime parsedLoadingDate;
-            bool isParsed = DateTime.TryParseExact(input.LoadingDate, "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedLoadingDate);
+            //DateTime parsedLoadingDate;
+            //bool isParsed = DateTime.TryParseExact(input.LoadingDate, "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedLoadingDate);
 
-            DateTime parsedUnloadingDate;
-            bool isParsedUnloadingDate = DateTime.TryParseExact(input.UnloadingDate, "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedUnloadingDate);
+            //DateTime parsedUnloadingDate;
+            //bool isParsedUnloadingDate = DateTime.TryParseExact(input.UnloadingDate, "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedUnloadingDate);
 
             Shipment shipment = this.db.Shipments.FirstOrDefault(x => x.Id == input.ShipmentId);
 
@@ -69,8 +69,8 @@ namespace LogitWebApp.Services.Orders
             shipment.Sender = sender;
             shipment.Receiver = receiver;
             shipment.OrderCreatedOn = DateTime.UtcNow;
-            shipment.LoadingDate = parsedLoadingDate;
-            shipment.UnloadingDate = parsedUnloadingDate;
+            shipment.LoadingDate = input.LoadingDate;
+            shipment.UnloadingDate = input.UnloadingDate;
 
             var currOrder = new Order
             {

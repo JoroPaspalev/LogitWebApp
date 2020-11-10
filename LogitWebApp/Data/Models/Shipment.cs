@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,19 +18,27 @@ namespace LogitWebApp.Data.Models
 
         public int CountOfPallets { get; set; }
 
+        [Required]
+        [MaxLength(20)]
         public string From { get; set; }
 
+        [Required]
+        [MaxLength(20)]
         public string To { get; set; }
 
         public string Description { get; set; }
 
-        public double Width { get; set; }
+        [Required]
+        public double? Width { get; set; }
 
-        public double Length { get; set; }
+        [Required]
+        public double? Length { get; set; }
 
-        public double Height { get; set; }
+        [Required]
+        public double? Height { get; set; }
 
-        public double Weight { get; set; }
+        [Required]
+        public double? Weight { get; set; }
 
         public decimal Price { get; set; }
 

@@ -19,26 +19,153 @@ namespace LogitWebApp.Services.SeedDb
 
         public void SeedDb()
         {
-            string inputData = File.ReadAllText("wwwroot/lib/InitialSeedData/FromSofiaTo.txt");
-
-            var splittedData = inputData.Split(new string[] { "\r","\n" }, StringSplitOptions.RemoveEmptyEntries);
-
-            for (int i = 0; i < splittedData.Length; i+=2)
+            List<string> cityNamesBG = new List<string>()
             {
-                var toCity = splittedData[i];
-                double km = double.Parse(splittedData[i + 1]);
+                "София"
+                ,
+                "Пловдив"
+                ,
+                "Варна"
+                ,
+                "Бургас"
+                ,
+                "Стара Загора"
+                ,
+                "Русе"
+                ,
+                "Шумен"
+                ,
+                "Плевен"
+                ,
+                "Велико Търново"
+                ,
+                "Благоевград"
+                ,
+                "Сливен"
+                ,
+                "Ямбол"
+                ,
+                "Видин"
+                ,
+                "Враца"
+                ,
+                "Добрич"
+                ,
+                "Габрово"
+                ,
+                "Перник"
+                ,
+                "Хасково"
+                ,
+                "Търговище"
+                ,
+                "Смолян"
+                ,
+                "Силистра"
+                ,
+                "Разград"
+                ,
+                "Пазарджик"
+                ,
+                "Монтана"
+                ,
+                "Ловеч"
+                ,
+                "Кюстендил"
+                ,
+                "Кърджали"
+            };
 
-                string fromCity = "София";//Replace this with new one city - Русе, Варна...
+            List<string> cityNamesEN = new List<string>()
+            {
+                "Sofia"
+                ,
+                "Plovdiv"
+                ,
+                "Varna"
+                ,
+                "Burgas"
+                ,
+                "StaraZagora"
+                ,
+                "Ruse"
+                ,
+                "Shumen"
+                ,
+                "Pleven"
+                ,
+                "VelikoTurnovo"
+                ,
+                "BlagoevGrad"
+                ,
+                "Sliven"
+                ,
+                "Yambol"
+                ,
+                "Vidin"
+                ,
+                "Vratsa"
+                ,
+                "Dobrich"
+                ,
+                "Gabrovo"
+                ,
+                "Pernik"
+                ,
+                "Haskovo"
+                ,
+                "Turgovishte"
+                ,
+                "Smolyan"
+                ,
+                "Silistra"
+                ,
+                "Razgrad"
+                ,
+                "Pazardjik"
+                ,
+                "Montana"
+                ,
+                "Lovetch"
+                ,
+                "Kyustendil"
+                ,
+                "Kurdjali"
+            };
 
-                var currDistance = new Distance()
-                {
-                    FromCity = fromCity,
-                    ToCity = toCity,
-                    DistanceInKM = km
-                };
+            Dictionary<string, string> cityNames = new Dictionary<string, string>();
 
-                this.db.Add(currDistance);                
+            for (int i = 0; i < 5; i++)
+            {
+                cityNames.Add(cityNamesBG[i], cityNamesEN[i]); 
             }
+
+            foreach (var kvp in cityNames)
+            {
+                string bgName = kvp.Key;
+                string enName = kvp.Value;
+
+                string inputData = File.ReadAllText($"wwwroot/lib/InitialSeedData/From{enName}To.txt");
+
+                var splittedData = inputData.Split(new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+                for (int i = 0; i < splittedData.Length; i += 2)
+                {
+                    var toCity = splittedData[i];
+                    double km = double.Parse(splittedData[i + 1]);
+
+                    string fromCity = bgName;//Replace this with new one city - Русе, Варна...
+
+                    var currDistance = new Distance()
+                    {
+                        FromCity = fromCity,
+                        ToCity = toCity,
+                        DistanceInKM = km
+                    };
+
+                    this.db.Distances.Add(currDistance);
+                }
+            }          
 
             this.db.SaveChanges();
 
