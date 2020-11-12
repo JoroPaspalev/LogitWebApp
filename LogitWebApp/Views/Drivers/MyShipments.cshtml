@@ -1,0 +1,135 @@
+﻿
+@using LogitWebApp.ViewModels.Drivers
+@model IEnumerable<AllShipmentsWithAddresses>
+
+<style>
+    .table-shipments {
+        border-collapse: separate;
+        border-spacing: 0 20px;
+        font-size: 14px;
+    }
+</style>
+
+<div class="pt-5">
+    <h1 class="text-center text-dark pt-5">Редактиране на пратки</h1>
+    <hr class="bg-info">
+</div>
+
+<div class="container pl-1 pr-1">
+    <table class="table table-sm  table-shipments">
+        <tbody>
+            @foreach (var shipment in Model)
+            {
+                <form method="post" action="/Drivers/MyShipments?shipmentId=@shipment.Id">
+                    <tr class=" pt-5 m-5 ">
+                        <td class="row border border-info rounded align-items-center pb-3">
+
+                            <partial name="_ShipmentPartialView" , model="shipment">
+
+                                <div class="col-xl-2">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label asp-for="@shipment.Width" class="mb-1">Ширина:</label>
+                                            <input asp-for="@shipment.Width" name="Width" class="form-control  mb-2" value="@shipment.Width">
+                                            <span asp-validation-for="@shipment.Width class=" text-danger error-text-size""></span>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <label asp-for="@shipment.Length" class="mb-1">Дължина:</label>
+                                            <input asp-for="@shipment.Length" name="Length" class="form-control  mb-2" value="@shipment.Length">
+                                            <span asp-validation-for="@shipment.Length class=" text-danger error-text-size""></span>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <label asp-for="@shipment.Height" class="mb-1">Височина</label>
+                                            <input asp-for="@shipment.Height" name="Height" class="form-control  mb-2" value="@shipment.Height">
+                                            <span asp-validation-for="@shipment.Height class=" text-danger error-text-size""></span>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <label asp-for="@shipment.Weight" class="mb-1">Тегло</label>
+                                            <input asp-for="@shipment.Weight" name="Weight" class="form-control  mb-2" value="@shipment.Weight">
+                                            <span asp-validation-for="@shipment.Weight class=" text-danger error-text-size""></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-2">
+                                    <div class="row">
+
+                                        <div class="col-12">
+                                            <label asp-for="@shipment.CountOfPallets" class="mb-1"></label>
+                                            <input type="text" asp-for="@shipment.CountOfPallets" name="CountOfPallets" class="form-control  mb-2" value="@shipment.CountOfPallets">
+                                            <span asp-validation-for="@shipment.CountOfPallets class=" text-danger error-text-size""></span>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label asp-for="@shipment.IsDelivered" class="mb-1">Доставена ли е</label>
+
+                                            @if (!@shipment.IsDelivered)
+                                            {
+                                                <select asp-for="@shipment.IsDelivered" name="IsDelivered" class="form-control  mb-2">
+                                                    <option value="false">Не</option>
+                                                    <option value="true">Да</option>
+                                                </select>
+                                            }
+                                            else
+                                            {
+                                                @*<input asp-for="@shipment.IsDelivered" readonly class="form-control" checked disabled />*@
+                                        <div class="text-center pb-2">
+                                            <img src="/img/check.png" />
+                                        </div>
+                                            }
+
+
+                                            <span asp-validation-for="@shipment.IsDelivered class=" text-danger error-text-size""></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-2">
+                                    <div class="row pt-3">
+                                        <div class="col-10">
+                                            <input type="submit" class="btn btn-warning pl-1 pr-1 pt-5 pb-5" value="Редактирай" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-12">
+                                    <div class="row ml-1 mr-1">
+                                        <label class="mb-1" asp-for="@shipment.Comment"></label>
+                                        <textarea asp-for="@shipment.Comment" name="Comment" class="form-control"></textarea>
+                                    </div>
+                                </div>
+
+
+
+
+                        </td>
+                    </tr>
+
+
+
+
+
+                </form>
+
+
+
+
+
+
+
+
+            }
+        </tbody>
+    </table>
+</div>
+
+@*Id = x.Id,
+
+
+    ,
+     IsFragile = x.IsFragile,
+*@

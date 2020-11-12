@@ -15,7 +15,8 @@ namespace LogitWebApp.Attributes.ModelBinderAttributes
         {
             var value = bindingContext.ValueProvider.GetValue("loadingDate").FirstValue;
 
-            string[] allowedFormats = { "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy" };
+            //string[] allowedFormats = { "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy" };
+            string[] allowedFormats = { "yyyy-MM-dd"};
             DateTime parsedLoadingDate;
             bool isParsedDate = DateTime.TryParseExact(value, allowedFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedLoadingDate);
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using LogitWebApp.Data.Models;
 using LogitWebApp.Services.Orders;
@@ -35,7 +36,9 @@ namespace LogitWebApp.Controllers
                 return this.View();
             }
 
-            this.ordersService.CreateOrder(input);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            this.ordersService.CreateOrder(input, userId);
 
             ViewBag.ShipmentId = input.ShipmentId;//Това да го махна???
 

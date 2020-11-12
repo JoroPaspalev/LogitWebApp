@@ -8,7 +8,12 @@ namespace LogitWebApp.Data.Models
 {
     public class Driver
     {
-        public int Id { get; set; }
+        public Driver()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
+        public string Id { get; set; }
 
         [Required]
         public string FirstName { get; set; }

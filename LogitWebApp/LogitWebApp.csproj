@@ -31,8 +31,20 @@
     <Compile Remove="Data\Migrations\20201102173700_AddCollectionOfShipmentsInAddresses.Designer.cs" />
     <Compile Remove="Data\Migrations\20201102173916_AddCollectionOfShipmentsInAddresses.cs" />
     <Compile Remove="Data\Migrations\20201102173916_AddCollectionOfShipmentsInAddresses.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201102205201_initialSetup.cs" />
+    <Compile Remove="Data\Migrations\20201102205201_initialSetup.Designer.cs" />
     <Compile Remove="Data\Migrations\20201102205516_initialSetup123.cs" />
     <Compile Remove="Data\Migrations\20201102205516_initialSetup123.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201111220636_ChangeCreatorColumnFromIntToString.cs" />
+    <Compile Remove="Data\Migrations\20201111220636_ChangeCreatorColumnFromIntToString.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201111223159_fixedParticipantIdFromIntToString.cs" />
+    <Compile Remove="Data\Migrations\20201111223159_fixedParticipantIdFromIntToString.Designer.cs" />
+    <Compile Remove="Migrations\20201111225405_initialSetup.cs" />
+    <Compile Remove="Migrations\20201111225405_initialSetup.Designer.cs" />
+    <Compile Remove="Migrations\20201111232312_ChangeInTableOrdersCreatortypeFromParticipantToApplicationUser.cs" />
+    <Compile Remove="Migrations\20201111232312_ChangeInTableOrdersCreatortypeFromParticipantToApplicationUser.Designer.cs" />
+    <Compile Remove="Migrations\20201112083150_ChangeDriverIdToBeGUID.cs" />
+    <Compile Remove="Migrations\20201112083150_ChangeDriverIdToBeGUID.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -453,6 +465,12 @@
     <Content Update="wwwroot\img\bg_1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\img\check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\img\check1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\img\error.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -591,6 +609,11 @@
     <Content Update="wwwroot\lib\jquery\LICENSE.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="Views\Shipment\" />
   </ItemGroup>
 
 </Project>

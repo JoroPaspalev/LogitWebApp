@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LogitWebApp.Migrations
 {
-    public partial class initialSetup : Migration
+    public partial class InitialSetup : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,7 +57,8 @@ namespace LogitWebApp.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Discriminator = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -83,8 +84,7 @@ namespace LogitWebApp.Migrations
                 name: "Drivers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(nullable: false),
                     LastName = table.Column<string>(nullable: false),
                     PhoneNumber = table.Column<string>(nullable: false)
@@ -98,8 +98,7 @@ namespace LogitWebApp.Migrations
                 name: "Participants",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(nullable: false),
                     Name = table.Column<string>(maxLength: 45, nullable: false),
                     Phone = table.Column<string>(nullable: false),
                     Email = table.Column<string>(maxLength: 45, nullable: true)
@@ -221,8 +220,8 @@ namespace LogitWebApp.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     CountOfPallets = table.Column<int>(nullable: false),
-                    From = table.Column<string>(nullable: true),
-                    To = table.Column<string>(nullable: true),
+                    From = table.Column<string>(maxLength: 20, nullable: false),
+                    To = table.Column<string>(maxLength: 20, nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Width = table.Column<double>(nullable: false),
                     Length = table.Column<double>(nullable: false),
@@ -238,9 +237,9 @@ namespace LogitWebApp.Migrations
                     UnloadingDate = table.Column<DateTime>(nullable: true),
                     LoadingAddressId = table.Column<int>(nullable: true),
                     UnloadingAddressId = table.Column<int>(nullable: true),
-                    SenderId = table.Column<int>(nullable: true),
-                    ReceiverId = table.Column<int>(nullable: true),
-                    DriverId = table.Column<int>(nullable: true)
+                    SenderId = table.Column<string>(nullable: true),
+                    ReceiverId = table.Column<string>(nullable: true),
+                    DriverId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -282,16 +281,16 @@ namespace LogitWebApp.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    CreatorId = table.Column<int>(nullable: true),
+                    CreatorId = table.Column<string>(nullable: true),
                     ShipmentId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Participants_CreatorId",
+                        name: "FK_Orders_AspNetUsers_CreatorId",
                         column: x => x.CreatorId,
-                        principalTable: "Participants",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(

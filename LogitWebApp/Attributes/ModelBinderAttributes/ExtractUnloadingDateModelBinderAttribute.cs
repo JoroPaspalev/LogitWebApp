@@ -13,7 +13,8 @@ namespace LogitWebApp.Attributes.ModelBinderAttributes
         {
             var value = bindingContext.ValueProvider.GetValue("UnloadingDate").FirstValue;
 
-            string[] allowedFormats = { "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy" };
+            //string[] allowedFormats = { "MM/dd/yyyy", "M/dd/yyyy", "MM/d/yyyy", "M/d/yyyy" };
+            string[] allowedFormats = { "yyyy-MM-dd" };
             DateTime parsedUnloadingDate;
             bool isParsedDate = DateTime.TryParseExact(value, allowedFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedUnloadingDate);
 

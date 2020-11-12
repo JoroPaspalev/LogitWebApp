@@ -64,16 +64,16 @@ namespace LogitWebApp.Data.Models
         public int? UnloadingAddressId { get; set; }
         public virtual Address UnloadingAddress { get; set; }
 
-        public int? SenderId { get; set; }
+        public string SenderId { get; set; }
         public virtual Participant Sender { get; set; }
 
-        public int? ReceiverId { get; set; }
+        public string ReceiverId { get; set; }
         public virtual Participant Receiver { get; set; }
 
         //public int PayerId { get; set; }
         //public virtual Participant Payer { get; set; }
 
-        public int? DriverId { get; set; }
+        public string DriverId { get; set; }
         public virtual Driver Driver { get; set; }
     }
 }

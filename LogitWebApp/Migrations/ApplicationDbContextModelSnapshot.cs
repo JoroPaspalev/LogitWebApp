@@ -75,10 +75,8 @@ namespace LogitWebApp.Migrations
 
             modelBuilder.Entity("LogitWebApp.Data.Models.Driver", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -102,8 +100,8 @@ namespace LogitWebApp.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("CreatorId")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatorId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ShipmentId")
                         .IsRequired()
@@ -120,10 +118,8 @@ namespace LogitWebApp.Migrations
 
             modelBuilder.Entity("LogitWebApp.Data.Models.Participant", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(45)")
@@ -157,13 +153,16 @@ namespace LogitWebApp.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DriverId")
-                        .HasColumnType("int");
+                    b.Property<string>("DriverId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("From")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
-                    b.Property<double>("Height")
+                    b.Property<double?>("Height")
+                        .IsRequired()
                         .HasColumnType("float");
 
                     b.Property<bool>("IsDelivered")
@@ -175,7 +174,8 @@ namespace LogitWebApp.Migrations
                     b.Property<bool>("IsFragile")
                         .HasColumnType("bit");
 
-                    b.Property<double>("Length")
+                    b.Property<double?>("Length")
+                        .IsRequired()
                         .HasColumnType("float");
 
                     b.Property<int?>("LoadingAddressId")
@@ -190,14 +190,16 @@ namespace LogitWebApp.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ReceiverId")
-                        .HasColumnType("int");
+                    b.Property<string>("ReceiverId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("SenderId")
-                        .HasColumnType("int");
+                    b.Property<string>("SenderId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("To")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<int?>("UnloadingAddressId")
                         .HasColumnType("int");
@@ -205,10 +207,12 @@ namespace LogitWebApp.Migrations
                     b.Property<DateTime?>("UnloadingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Weight")
+                    b.Property<double?>("Weight")
+                        .IsRequired()
                         .HasColumnType("float");
 
-                    b.Property<double>("Width")
+                    b.Property<double?>("Width")
+                        .IsRequired()
                         .HasColumnType("float");
 
                     b.HasKey("Id");
@@ -289,6 +293,10 @@ namespace LogitWebApp.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -340,6 +348,8 @@ namespace LogitWebApp.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -426,9 +436,16 @@ namespace LogitWebApp.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("LogitWebApp.Areas.Identity.Data.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
             modelBuilder.Entity("LogitWebApp.Data.Models.Order", b =>
                 {
-                    b.HasOne("LogitWebApp.Data.Models.Participant", "Creator")
+                    b.HasOne("LogitWebApp.Areas.Identity.Data.ApplicationUser", "Creator")
                         .WithMany()
                         .HasForeignKey("CreatorId");
 

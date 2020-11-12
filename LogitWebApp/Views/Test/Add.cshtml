@@ -1,8 +1,77 @@
-﻿<div class="pt-5">
-    <h1 class="pt-5">Add Recepie</h1>
-    <form method="post">
-        <input type="text" name="Name"/>
-        <input type="text" name="CookingTime" />
-        <input type="submit" />
-    </form>
+﻿@using LogitWebApp.ViewModels.Test
+@model AddRecepieInputModel
+
+<div class="container pt-5  align-items-center">
+    <h1 class="pt-5 text-center">Add Recepie</h1>
+    <div class="row justify-content-center">
+        <div class="col-sm justify-content-center">
+
+            <div asp-validation-summary="All"></div>
+            <form method="post" class="col-6">
+
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Type"></label>
+                    <input asp-for="Type" class="form-control" />
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CookingTime"></label>
+                    <input asp-for="CookingTime" class="form-control" />
+                    <span asp-validation-for="CookingTime" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FirstCooked"></label>
+                    <input asp-for="FirstCooked" class="form-control" />
+                    <span asp-validation-for="FirstCooked" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="IsDelicious"></label>
+                    <input asp-for="IsDelicious" class="form-control" />
+                    <span asp-validation-for="IsDelicious" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Dog.Name"></label>
+                    <input asp-for="Dog.Name" placeholder="Dog Name" class="form-control" />
+                    <span asp-validation-for="Dog.Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Dog.Age"></label>
+                    <input asp-for="Dog.Age" placeholder="Dog Age" class="form-control" />
+                    <span asp-validation-for="Dog.Age" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Minutes"></label>
+                    <input asp-for="Minutes" placeholder="Minutes" class="form-control" />
+                    <span asp-validation-for="Minutes" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="Name"></label>
+                    <input name="Name" class="form-control" value="" />
+                </div>
+
+
+
+                <input type="submit" class="btn btn-info" value="Sent" />
+            </form>
+        </div>
+    </div>
 </div>

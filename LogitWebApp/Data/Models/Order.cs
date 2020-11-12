@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogitWebApp.Areas.Identity.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,8 +18,9 @@ namespace LogitWebApp.Data.Models
         [Key]
         public string Id { get; set; }
        
-        public int? CreatorId { get; set; }
-        public Participant Creator { get; set; }
+        public string CreatorId { get; set; }
+
+        public ApplicationUser Creator { get; set; }
         //public ApplicationUser Creator { get; set; }
 
         [Required]

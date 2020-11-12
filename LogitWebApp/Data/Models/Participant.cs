@@ -13,9 +13,10 @@ namespace LogitWebApp.Data.Models
         {
             this.ShipmentSenders = new HashSet<Shipment>();
             this.ShipmentReceivers = new HashSet<Shipment>();
+            this.Id = Guid.NewGuid().ToString();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         [MaxLength(45)]

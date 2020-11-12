@@ -61,7 +61,7 @@ namespace LogitWebApp
 
                 //1.
                 //това ми отваря оня готиния прозорец със сините бутони, когато app-a хвърли грешка
-                //app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();
 
                 //2.
                 //Когато използваме този middleware и app-а хвърли някъде грешка, този middleware я улавя и извиква в HomeController --> action-a MyErrorAction, той пък ще извика viеw, което се намира в Views/Home/MyErrorAction.cshtml
@@ -73,11 +73,13 @@ namespace LogitWebApp
                 //app.UseStatusCodePagesWithRedirects("/Home/StatusCodeError?errorCode={0}");
 
                 //Тъй като UseStatusCodePagesWithRedirects не ми хваща грешки от тип 500, трябва да регистрирам и middleware UseExceptionHandler за да може той да ги улавя и връща View за тях
-                app.UseExceptionHandler("/Home/MyErrorAction");
-                //3.2
-                app.UseStatusCodePagesWithReExecute("/Home/StatusCodeError", "?errorCode={0}");
 
-                app.UseDatabaseErrorPage();
+                //Спри 1 и пусни тези трите неща за да ти излезе усмихнатото човече 
+                ////////app.UseExceptionHandler("/Home/MyErrorAction");
+                //////////3.2
+                ////////app.UseStatusCodePagesWithReExecute("/Home/StatusCodeError", "?errorCode={0}");
+
+                ////////app.UseDatabaseErrorPage();
             }
             else
             {

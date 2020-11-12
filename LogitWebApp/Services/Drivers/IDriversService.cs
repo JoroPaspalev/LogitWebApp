@@ -14,5 +14,9 @@ namespace LogitWebApp.Services.Drivers
         public bool IsDriverExist(DriverInputModel input);
 
         public IEnumerable<AllShipmentsWithAddresses> GetAllShipments();
+
+        public IEnumerable<AllShipmentsWithAddresses> GetMyShipments(string driverId);
+
+        public void ChangeShipmentData(EditShipment input);
     }
 }

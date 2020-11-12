@@ -25,7 +25,7 @@ namespace LogitWebApp.Controllers
             this.homeService = homeService;
 
             //Start only first time to seed data in Db
-            //seedService.SeedDb();
+            seedService.SeedDb();
         }
 
         public IActionResult Index()

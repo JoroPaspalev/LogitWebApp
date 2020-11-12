@@ -22,57 +22,35 @@
                 <tr class=" pt-5 m-5 ">
                     <td class="row border border-info rounded align-items-center pb-3">
 
-                        <div class="col-6">
-                            <div class="row">
-                                <div class="col-8">
-                                    <label for="LoadingAddress">Адрес за товарене:</label>
-                                    <input type="text" readonly class="form-control" id="LoadingAddress" name="LoadingAddress" value="@shipment.LoadingAddress">
-                                </div>
-
-                                <div class="col-4">
-                                    <label for="LoadingDate">Дата на товарене:</label>
-                                    <input type="text" readonly class="form-control" id="LoadingDate" name="LoadingDate" value="@shipment.LoadingDate">
-                                </div>
-
-                                <div class="col-8">
-                                    <label for="UnloadingAddress">Адрес за разтоварване:</label>
-                                    <input type="text" readonly class="form-control" id="UnloadingAddress" name="UnloadingAddress" value="@shipment.UnloadingAddress">
-                                </div>
-
-                                <div class="col-4">
-                                    <label for="UnloadingDate">Дата на разтоварване:</label>
-                                    <input type="text" readonly class="form-control" id="UnloadingDate" name="UnloadingDate" value="@shipment.UnloadingDate">
-                                </div>
-                            </div>                           
-                        </div>
+                        <partial name="_ShipmentPartialView" , model="shipment" />
 
                         <div class="col-2">
                             <div class="row">
                                 <div class="col-6">
-                                    <label for="Width">Ширина:</label>
-                                    <input type="text" readonly class="form-control" id="Width" name="Width" value="@shipment.Width">
+                                    <label asp-for="@shipment.Width">Ширина:</label>
+                                    <input asp-for="@shipment.Width" readonly class="form-control" value="@shipment.Width">
                                 </div>
 
                                 <div class="col-6">
-                                    <label for="Length">Дължина:</label>
-                                    <input type="text" readonly class="form-control" id="Length" name="Length" value="@shipment.Length">
+                                    <label asp-for="@shipment.Length">Дължина:</label>
+                                    <input asp-for="@shipment.Length" readonly class="form-control" value="@shipment.Length">
                                 </div>
 
                                 <div class="col-6">
-                                    <label for="Height">Височина:</label>
-                                    <input type="text" readonly class="form-control" id="Height" name="Height" value="@shipment.Height">
+                                    <label asp-for="@shipment.Height">Височина:</label>
+                                    <input asp-for="@shipment.Height" readonly class="form-control" value="@shipment.Height">
                                 </div>
 
                                 <div class="col-6">
-                                    <label for="Weight">Тегло:</label>
-                                    <input type="text" readonly class="form-control" id="Weight" name="Weight" value="@shipment.Weight">
-                                </div>                               
+                                    <label asp-for="@shipment.Weight">Тегло:</label>
+                                    <input asp-for="@shipment.Weight" readonly class="form-control" value="@shipment.Weight">
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-2">
                             <div class="row">
-                                
+
                                 <div class="col-12">
                                     <label for="CountOfPallets">Брой палети:</label>
                                     <input type="text" readonly class="form-control" id="CountOfPallets" name="CountOfPallets" value="@shipment.CountOfPallets">

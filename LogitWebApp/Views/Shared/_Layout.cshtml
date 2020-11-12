@@ -29,7 +29,10 @@
     <link rel="stylesheet" href="~/Joro/css/main.css">
 
     <style>
-        .alert { margin-top:50px;}
+        .alert {
+            margin-top: 50px;
+        }
+
         .offer {
             margin-top: 200px;
             margin-bottom: 100px;
@@ -37,20 +40,24 @@
             border: 1px solid black;
             opacity: 0.6;
         }
-        .offer:hover {opacity: 0.75;}
+
+            .offer:hover {
+                opacity: 0.75;
+            }
     </style>
 
 </head>
 <body>
-    
+
 
     <nav class="navbar bg-dark navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
         <div class="container">
-            <a class="navbar-brand navbar-dark" href="/">Logit</a>            
+            <a class="navbar-brand navbar-dark" href="/">Logit</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu" aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <span><i class="ion-navicon"></i></span>
             </button>
             <div class="collapse navbar-collapse" id="probootstrap-menu">
+                
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a class="nav-link" href="/">Начало</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">За Нас</a></li>
@@ -137,6 +144,7 @@
     <script src="/js/select2.min.js"></script>
 
     <script src="/js/main.js"></script>
-
+   
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
