@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,16 +12,21 @@ namespace LogitWebApp.ViewModels.Drivers
         public string Id { get; set; }
 
         [Display(Name = "Брой палети")]
+        
         public int CountOfPallets { get; set; }
 
         public string Description { get; set; }
 
+        [Required(ErrorMessage ="Полето е задължително!")]
         public double? Width { get; set; }
 
+        [Required(ErrorMessage = "Полето е задължително!")]
         public double? Length { get; set; }
 
+        [Required(ErrorMessage = "Полето е задължително!")]
         public double? Height { get; set; }
 
+        [Required(ErrorMessage = "Полето е задължително!")]
         public double? Weight { get; set; }
 
         [Display(Name = "Коментар")]
@@ -40,6 +46,7 @@ namespace LogitWebApp.ViewModels.Drivers
         [Display(Name = "Адрес на разтоварене")]
         public string UnloadingAddress { get; set; }
 
-
+        [Display(Name ="Прикачи снимка")]
+        public IFormFile Picture { get; set; }
     }
 }

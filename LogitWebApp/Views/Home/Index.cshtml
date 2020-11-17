@@ -11,7 +11,7 @@
         <div class="row align-items-center p-0">
             <div class="col-md">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Вземете Вашата оферта още сега!</h2>
-                <p class="lead mb-5 probootstrap-animate">чрез <span class="text-success font-weight-bold">on-line</span> калкулатора получавате оферта на момента</p>
+                <p class="lead mb-5 probootstrap-animate">чрез <span class="text-warning font-weight-bold">on-line</span> калкулатора получавате оферта на момента</p>
             </div>
 
             <div class="col-md probootstrap-animate">
@@ -40,7 +40,7 @@
                                             <option value="Ямбол">Ямбол</option>
                                             <option value="Видин">Видин</option>
                                             <option value="Враца">Враца</option>
-                                            <option value="Добрич">Добрич</option>    
+                                            <option value="Добрич">Добрич</option>
                                             <option value="Габрово">Габрово</option>
                                             <option value="Перник">Перник</option>
                                             <option value="Хасково">Хасково</option>
@@ -77,7 +77,7 @@
                                             <option value="Ямбол">Ямбол</option>
                                             <option value="Видин">Видин</option>
                                             <option value="Враца">Враца</option>
-                                            <option value="Добрич">Добрич</option>   
+                                            <option value="Добрич">Добрич</option>
                                             <option value="Габрово">Габрово</option>
                                             <option value="Перник">Перник</option>
                                             <option value="Хасково">Хасково</option>
@@ -154,7 +154,7 @@
                                 </label>
                             </div>
                             <div class="col-5">
-                                <input type="submit" value="Изпрати" class="btn btn-success btn-block">
+                                <input type="submit" value="Изпрати" class="btn btn-warning btn-block">
                             </div>
                         </div>
                     </div>
@@ -163,4 +163,14 @@
         </div>
     </div>
 
+    @section Scripts
+    {
+        <partial name="_ValidationScriptsPartial" />
+    }
 </section>
+
+@section LogitLogoImg
+{
+    <img src="~/img/logit15.png" /> 
+}
+

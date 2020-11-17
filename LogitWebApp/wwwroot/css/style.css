@@ -16,6 +16,10 @@ html {
   overflow-x: hidden;
   font-size: 1em; }
 
+.order-text{
+    font-size: 18px;
+}
+
 body {
   font-family: "Work Sans", Arial, sans-serif; }
 
@@ -62,6 +66,13 @@ a {
     color: rgba(255, 255, 255, 0.7); }
   .probootstrap-cover > .container > .row {
     padding: 7em 0; }
+
+.table-shipments {
+    border-collapse: separate;
+    border-spacing: 0 20px;
+    font-size: 14px;
+}
+
 
 .btn {
   padding: 15px 25px;

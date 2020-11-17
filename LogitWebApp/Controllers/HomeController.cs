@@ -118,5 +118,15 @@ namespace LogitWebApp.Controllers
 
             return this.View(viewModel);
         }
+
+        public IActionResult About()
+        {
+            return this.View();
+        }
+
+        public IActionResult Contact()
+        {
+            return this.View();
+        }
     }
 }

@@ -8,6 +8,6 @@ namespace LogitWebApp.Services.Orders
 {
     public interface IOrdersService
     {       
-        void CreateOrder(AddressInputModel input, string userId);
+        string CreateOrder(AddressInputModel input, string userId);
     }
 }

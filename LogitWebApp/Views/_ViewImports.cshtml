@@ -1,7 +1,12 @@
-﻿@using LogitWebApp
+﻿<!--Този файл прави 2 неща -->
+<!--1. Всеки един от using-ите по-долу става автоматично достъпен за всяко едно View -->
+<!--2. Да включим TagHelpres за дадения проект (@@addTagHelper *, LogitWebApp) да бъдат налични за всяко едно  View -->
+
+@using LogitWebApp
 @using LogitWebApp.Models
-@using LogitWebApp.Data.Models 
+@using LogitWebApp.Data.Models
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, LogitWebApp
 
 
 <!-- Като напиша тук в този файл(_ViewImports.cshtml) using-а(@@using LogitWebApp.ViewModels.Offer) всяко едно View което се намира в папка Views може да използва клас OfferViewModel без да пише  @@using LogitWebApp.ViewModels.Offer -->

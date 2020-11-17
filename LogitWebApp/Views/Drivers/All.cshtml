@@ -9,8 +9,10 @@
     }
 </style>
 
-<div class="pt-5">
-    <h1 class="text-center text-dark pt-5">Пратки за превозване</h1>
+<div class="bg-dark pt-5 pb-4"></div>
+
+<div class="pt-0">
+    <h1 class="text-center text-dark pt-3">Пратки за превозване</h1>
     <hr class="bg-info">
 </div>
 
@@ -22,7 +24,7 @@
                 <tr class=" pt-5 m-5 ">
                     <td class="row border border-info rounded align-items-center pb-3">
 
-                        <partial name="_ShipmentPartialView" , model="shipment" />
+                        <partial name="_ShipmentPartialViewShort" , model="shipment" />
 
                         <div class="col-2">
                             <div class="row">
@@ -84,9 +86,3 @@
     </table>
 </div>
 
-                  @*Id = x.Id,
-                    
-                    
-                   ,
-                    IsFragile = x.IsFragile,
-                    *@

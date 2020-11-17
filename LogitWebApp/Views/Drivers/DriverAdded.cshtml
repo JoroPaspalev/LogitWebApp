@@ -1,7 +1,6 @@
-﻿<div class="container pt-5">
-    <div class="row p-4 align-items-center">
-        <div class="col-12 alert alert-success">
-            <h3 class="text-center">Вие успешно добавихте шофьор към базата данни!</h3>
-        </div>
-    </div>
-</div>
+﻿@using LogitWebApp.ViewModels.Shared
+@model ChangesApplied
+
+    <div class="bg-dark pt-5 pb-4"></div>
+
+    <partial name="_ChangesAppliedPartialView" , model="@Model" />

@@ -33,10 +33,9 @@ namespace LogitWebApp.Data.Models
 
         public virtual ICollection<Shipment> ShipmentReceivers { get; set; }
 
-        //[Required]
-        //[ForeignKey("Address")]
-        //public int AddressId { get; set; }
-
-        //public virtual Address Address { get; set; }
+        public override string ToString()
+        {
+            return $"{Name}, тел. {Phone}";
+        }
     }
 }

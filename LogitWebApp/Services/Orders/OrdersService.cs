@@ -18,7 +18,7 @@ namespace LogitWebApp.Services.Orders
             this.db = db;
         }
 
-        public void CreateOrder(AddressInputModel input, string userId)
+        public string CreateOrder(AddressInputModel input, string userId)
         {
             var currShipment = this.db.Shipments.FirstOrDefault(s=>s.Id == input.ShipmentId);
 
@@ -84,6 +84,8 @@ namespace LogitWebApp.Services.Orders
 
             this.db.Orders.Add(currOrder);
             this.db.SaveChanges();
+
+            return currOrder.Id;
 
         }
     }

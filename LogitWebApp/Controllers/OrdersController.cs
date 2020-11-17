@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LogitWebApp.Data.Models;
 using LogitWebApp.Services.Orders;
 using LogitWebApp.ViewModels.Offer;
+using LogitWebApp.ViewModels.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LogitWebApp.Controllers
@@ -38,19 +39,19 @@ namespace LogitWebApp.Controllers
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            this.ordersService.CreateOrder(input, userId);
+            string orderId = this.ordersService.CreateOrder(input, userId);           
 
-            ViewBag.ShipmentId = input.ShipmentId;//Това да го махна???
-
-            return this.RedirectToAction("OrderAdded", "Orders", new { Shipmentid = input.ShipmentId});
+            return this.RedirectToAction("OrderAdded", "Orders", new ChangesApplied
+            {
+                Message = "Вие успешно добавихте поръчка с номер:",
+                OrderId = orderId
+            });
         }
 
 
-        public IActionResult OrderAdded(string shipmentId)
+        public IActionResult OrderAdded(ChangesApplied input)
         {
-            ViewBag.ShipmentId = shipmentId;
-
-            return this.View();
+            return this.View(input);
         }
     }
 }

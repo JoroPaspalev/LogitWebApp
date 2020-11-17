@@ -18,5 +18,7 @@ namespace LogitWebApp.Services.Drivers
         public IEnumerable<AllShipmentsWithAddresses> GetMyShipments(string driverId);
 
         public void ChangeShipmentData(EditShipment input);
+
+        public AllShipmentsWithAddresses GetShipment(string shipmentId);
     }
 }

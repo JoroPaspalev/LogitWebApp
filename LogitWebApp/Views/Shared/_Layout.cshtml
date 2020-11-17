@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/css/animate.css">
     <link rel="stylesheet" href="/fonts/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="/css/zoomEffect.css">
 
     <link rel="stylesheet" href="/css/owl.carousel.min.css">
 
@@ -50,17 +51,24 @@
 <body>
 
 
-    <nav class="navbar bg-dark navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
-        <div class="container">
-            <a class="navbar-brand navbar-dark" href="/">Logit</a>
+    <nav class="navbar  navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
+        <div class="container pl-0 ml-5">
+            @if (IsSectionDefined("LogitLogoImg"))//Ако има секция с името "LogitLogoImg" покажи я, ако не направи другото
+            {
+                <a class="navbar-brand navbar-dark rounded-0" href="/">@RenderSection("LogitLogoImg", false)</a>
+            }
+            else
+            {
+                <a class="navbar-brand navbar-dark rounded-0" href="/">LOGIT</a>
+            }
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu" aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <span><i class="ion-navicon"></i></span>
             </button>
             <div class="collapse navbar-collapse" id="probootstrap-menu">
-                
+
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a class="nav-link" href="/">Начало</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">За Нас</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About">За Нас</a></li>
                     <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
                     @*<li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Register">Регистрация</a></li>*@
                     <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Register">Добави нов Шофьор</a></li>
@@ -70,7 +78,7 @@
 
 
 
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Контакти</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Contact">Контакти</a></li>
                 </ul>
             </div>
         </div>
@@ -82,8 +90,16 @@
         </main>
     </div>
 
-    <footer class="probootstrap_section probootstrap-border-top">
-        <div class="container">
+    <footer class=" probootstrap-border-top">
+        <div class="">
+            <div class="row">
+                <div class="col-md-12">
+                    <vc:all-ordered-shipments message="Брой направени поръчки от клиенти до момента"></vc:all-ordered-shipments>
+                </div>
+            </div>
+        </div>
+
+        <div class="container pt-5">
             <div class="row mb-5">
                 <div class="col-md-3 col-xs-6">
                     <h3 class="probootstrap_font-18 mb-3">Quick Links</h3>
@@ -144,7 +160,7 @@
     <script src="/js/select2.min.js"></script>
 
     <script src="/js/main.js"></script>
-   
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

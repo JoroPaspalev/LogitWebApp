@@ -61,8 +61,8 @@ namespace LogitWebApp.Services.Drivers
                 .Select(s => new AllShipmentsWithAddresses
                 {
                     Id = s.Id,
-                    LoadingAddress = s.LoadingAddress.ToString(),
-                    UnloadingAddress = s.UnloadingAddress.ToString(),
+                    LoadingAddress = s.Sender.ToString() + ", " + s.LoadingAddress.ToString(),
+                    UnloadingAddress = s.Receiver.ToString() + ", " + s.UnloadingAddress.ToString(),
                     Description = s.Description,
                     Comment = s.Comment,
                     CountOfPallets = s.CountOfPallets,
@@ -86,7 +86,7 @@ namespace LogitWebApp.Services.Drivers
             currShipment.Length = input.Length;
             currShipment.Height = input.Height;
             currShipment.Weight = input.Weight;
-            currShipment.CountOfPallets = input.CountOfPallets;
+            currShipment.CountOfPallets = input.CountOfPallets?? 0;
             currShipment.Comment = input.Comment;
             currShipment.IsDelivered = input.IsDelivered;
 
@@ -96,6 +96,30 @@ namespace LogitWebApp.Services.Drivers
         public bool IsDriverExist(DriverInputModel input)
         {
             return this.db.Drivers.Any(d => d.FirstName == input.FirstName && d.LastName == input.LastName && d.PhoneNumber == input.PhoneNumber);
+        }
+
+        public AllShipmentsWithAddresses GetShipment(string shipmentId)
+        {
+            var shipmentForEdititng = this.db.Shipments.Where(s => s.Id == shipmentId)
+                .Select(s => new AllShipmentsWithAddresses
+                {
+                    Id = s.Id,
+                    LoadingAddress = s.Sender.ToString() + ", " + s.LoadingAddress.ToString(),
+                    UnloadingAddress = s.Receiver.ToString() + ", " + s.UnloadingAddress.ToString(),
+                    Description = s.Description,
+                    Comment = s.Comment,
+                    CountOfPallets = s.CountOfPallets,
+                    Length = s.Length,
+                    Width = s.Width,
+                    Weight = s.Weight,
+                    Height = s.Height,
+                    LoadingDate = s.LoadingDate ?? DateTime.UtcNow,
+                    UnloadingDate = s.UnloadingDate ?? DateTime.UtcNow,
+                    IsDelivered = s.IsDelivered
+                })
+                .First();
+
+            return shipmentForEdititng;
         }
     }
 }

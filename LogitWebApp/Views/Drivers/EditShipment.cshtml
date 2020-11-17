@@ -1,123 +1,140 @@
 ﻿@using LogitWebApp.ViewModels.Drivers
 @model AllShipmentsWithAddresses
 
-<section class="probootstrap-cover overflow-hidden relative" style="        background-image: url('/img/bg_1.jpg');" data-stellar-background-ratio="0.5" id="section-home">
-    <div class=""></div>
+
+<section class="probootstrap-cover overflow-hidden relative" style="background-image: url('/img/bg_1.jpg');" data-stellar-background-ratio="0.5" id="section-home">
+    <div class="overlay"></div>
     <div class="container">
+        <div class="row pt-0 ">
+            <div class="col-md">
 
-        <div class="row align-items-center p-0">
+                <form method="post" asp-controller="Drivers" asp-action="EditShipment" enctype="multipart/form-data">
+                    <tr class=" pt-5 m-5 ">
+                        <td class="row probootstrap_border-1 border-dark bg-light rounded align-items-center pb-3">
 
-            <div class="col probootstrap-animate">
-                <form action="/Orders/Create" method="post" class="probootstrap-form">
-                    <div class="form-group">
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <div class="form-group">
+                            <input asp-for="@Model.Id" hidden name="ShipmentId" />
 
-                                    <label class="mb-3" asp-for="LoadingAddress"></label>
-                                    <div class="mb-3">
-                                        <input type="text" readonly asp-for="LoadingAddress" class="form-control" method="post">
+                            @*<div asp-validation-summary="All" class="text-danger error-text-size"></div>*@
 
+                            <partial name="_ShipmentPartialView" , model="Model">
+
+                                <div class="row row ml-1 mr-1">
+
+                                    <div class="col-xl-6">
+                                        <div class="">
+                                            <label class="mb-1" asp-for="@Model.Comment"></label>
+                                            <textarea rows="4" asp-for="@Model.Comment" name="Comment" class="form-control"></textarea>
+                                        </div>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <input type="text" asp-for="Width" class="form-control" method="post">
+                                    <div class="col-xl-2">
 
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label asp-for="@Model.Width" class="mb-1">Ширина:</label>
+                                                <input asp-for="@Model.Width" name="Width" class="form-control  mb-2" value="@Model.Width">
+                                                <span asp-validation-for="@Model.Width" class="text-danger error-text-size"></span>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <label asp-for="@Model.Length" class="mb-1">Дължина:</label>
+                                                <input asp-for="@Model.Length" name="Length" class="form-control  mb-2" value="@Model.Length">
+                                                <span asp-validation-for="@Model.Length" class="text-danger error-text-size"></span>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <label asp-for="@Model.Height" class="mb-1">Височина</label>
+                                                <input asp-for="@Model.Height" name="Height" class="form-control  mb-2" value="@Model.Height">
+                                                <span asp-validation-for="@Model.Height" class="text-danger error-text-size"></span>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <label asp-for="@Model.Weight" class="mb-1">Тегло</label>
+                                                <input asp-for="@Model.Weight" name="Weight" class="form-control  mb-2" value="@Model.Weight">
+                                                <span asp-validation-for="@Model.Weight" class="text-danger error-text-size"></span>
+                                            </div>
+
+                                        </div>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <input type="text" asp-for="Length" class="form-control">
-                                        <span class="text-danger error-text-size" asp-validation-for="Length"></span>
+                                    <div class="col-xl-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label asp-for="@Model.CountOfPallets" class="mb-1"></label>
+                                                <input type="text" asp-for="@Model.CountOfPallets" name="CountOfPallets" class="form-control  mb-2" value="@Model.CountOfPallets">
+                                                <span asp-validation-for="@Model.CountOfPallets" class="text-danger error-text-size"></span>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label asp-for="@Model.IsDelivered" class="mb-1">Доставена ли е </label>
+
+                                                @if (!Model.IsDelivered)
+                                                {
+                                                    <select asp-for="@Model.IsDelivered" name="IsDelivered" class="form-control  mb-2">
+                                                        <option value="false">Не</option>
+                                                        <option value="true">Да</option>
+                                                    </select>
+                                                }
+                                                else
+                                                {
+                                                    @*<input asp-for="@shipment.IsDelivered" readonly class="form-                                  control" checked disabled />*@
+
+                                                    <div class="text-center form-control p-0">
+                                                        <img src="/img/check.png" />
+
+                                                        <select hidden asp-for="@Model.IsDelivered" name="IsDelivered" class="form-control" mb-2>
+                                                            <option value="true">Да</option>
+                                                        </select>
+                                                    </div>
+                                                }
+
+                                                <span asp-validation-for="@Model.IsDelivered" class="text-danger error-text-size"></span>
+                                            </div>
+
+                                        </div>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <input type="text" asp-for="Height" class="form-control">
-                                        <span class="text-danger error-text-size" asp-validation-for="Height"></span>
+                                    <div class="col-xl-2">
+                                        <div class="row pt-3 text-right">
+                                            <div class="col-12">
+                                                <input type="submit" class="btn btn-warning pl-1 pr-1 pt-5 pb-5" value="Редактирай" />
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <input type="text" asp-for="LoadingDate" placeholder="№" class="form-control">
-                                        <span class="text-danger error-text-size" asp-validation-for="LoadingDate"></span>
+                                    <div class="col-xl-2">
+                                        <div class="row p-3 ">
+                                            <div class="col-12">
+
+                                                @*<label for="file-upload" class="custom-file-upload">
+                                        <i class="fa fa-cloud-upload"></i>Качи снимка</label>
+                                        <input hidden type="file" id="file-upload" asp-for="@editShipment.Picture" name="Picture"/>
+                                        <span asp-validation-for="@editShipment.Picture"></span>*@
+
+                                                <label asp-for="@Model.Picture"></label>
+                                                <input asp-for="@Model.Picture"  />
+                                                <span asp-validation-for="@Model.Picture" class="text-danger"></span>
+
+                                            </div>
+                                        </div>
                                     </div>
+
+
+
+
+
+
                                 </div>
-                            </div>
+                        </td>
+                    </tr>
 
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label class="mb-3" asp-for="UnloadingAddress">Адрес на товарене</label>
 
-                                    <div class="mb-3">
-                                        <input type="text" asp-for="UnloadingAddress" placeholder="Име/Фирма" class="form-control" method="post">
-                                        <span class="text-danger error-text-size" asp-validation-for="UnloadingAddress"></span>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <input type="text" asp-for="UnloadingDate" placeholder="Телефон" class="form-control" method="post">
-                                        <span class="text-danger error-text-size" asp-validation-for="UnloadingDate"></span>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <input type="text" asp-for="CountOfPallets" placeholder="Email" class="form-control">
-                                        <span class="text-danger error-text-size" asp-validation-for="CountOfPallets"></span>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <input type="text" asp-for="Comment" placeholder="Улица" class="form-control">
-                                        <span class="text-danger error-text-size" asp-validation-for="Comment"></span>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <input type="text" asp-for="Description" placeholder="№" class="form-control">
-                                        <span class="text-danger error-text-size" asp-validation-for="Description"></span>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <input type="hidden" asp-for="Id" placeholder="@ViewBag.ShipmentId" value="@ViewBag.ShipmentId">
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END row -->
-
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <textarea rows="5" asp-for="Description" placeholder="Допълнително описание" class="form-control"></textarea>
-                                <span asp-validation-for="Description" class="text-danger error-text-size"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    @*<div class="row mb-5">
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label asp-for="LoadingDate">Дата на товарене</label>
-                                <input asp-for="LoadingDate" class="form-control">
-                                <span asp-validation-for="LoadingDate" class="text-danger error-text-size"></span>
-                            </div>
-                        </div>
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label asp-for="UnloadingDate">Дата на разтоварване</label>
-                                <input asp-for="UnloadingDate" class="form-control">
-                                <span asp-validation-for="UnloadingDate" class="text-danger error-text-size"></span>
-                            </div>
-                        </div>
-                    </div>*@
-                    <!-- END row -->
-                    <div class="row pb-3">
-                        <div class="col-md-7">
-                        </div>
-
-                        <div class="text-center col-md-5">
-                            <input type="submit" value="Направи поръчка" class="text-center btn btn-success btn-block ">
-                        </div>
-                    </div>
 
                 </form>
+
+
             </div>
         </div>
     </div>
+
 </section>

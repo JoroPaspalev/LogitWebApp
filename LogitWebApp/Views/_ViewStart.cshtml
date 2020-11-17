@@ -1,3 +1,16 @@
 ﻿@{
-    Layout = "_Layout";
+
+    Layout = "_Layout"; //
+
+    //Layout = "MyCustomLayout"; Ако избера това ще подмени оригиналния _Layout с друг с име MyCustomLayout
+
+    //Layout = null; Ако избера това няма да се зарежда Layout на нито едно View т.е. ще се показва само самото View без Layout
+
+
+    //Ако искаме дадено View да има собствен Layout, който да е различен от останалите --> Отиваме в това View и на първия ред пишем
+    
+        @*@{
+             Layout = "MyCustomLayout"; като MyCustomLayout e името на новия Layout с който искаме да заменим стария
+          }*@
+    
 }
