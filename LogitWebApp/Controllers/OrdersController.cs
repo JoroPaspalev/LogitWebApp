@@ -7,10 +7,12 @@ using LogitWebApp.Data.Models;
 using LogitWebApp.Services.Orders;
 using LogitWebApp.ViewModels.Offer;
 using LogitWebApp.ViewModels.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LogitWebApp.Controllers
 {
+    [Authorize(Roles ="Admin, User")]
     public class OrdersController : Controller
     {
         private readonly IOrdersService ordersService;
@@ -48,6 +50,10 @@ namespace LogitWebApp.Controllers
             });
         }
 
+        //public IActionResult CreateOrder()
+        //{
+        //    return this.Redirect("/");
+        //}
 
         public IActionResult OrderAdded(ChangesApplied input)
         {

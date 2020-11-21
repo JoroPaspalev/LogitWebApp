@@ -41,9 +41,11 @@ namespace LogitWebApp.ViewModels.Drivers
         public DateTime UnloadingDate { get; set; }
 
         [Display(Name = "Адрес на товарене")]
+        [Required]
         public string LoadingAddress { get; set; }
 
         [Display(Name = "Адрес на разтоварене")]
+        [Required]
         public string UnloadingAddress { get; set; }
 
         [Display(Name ="Прикачи снимка")]

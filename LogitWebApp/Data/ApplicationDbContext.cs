@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+
 using LogitWebApp.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LogitWebApp.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
         {
@@ -42,6 +44,15 @@ namespace LogitWebApp.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            ////Това добавя нова Role с името Admin в таблицата AspNetRoles
+            //builder.Entity<IdentityRole>()
+            //    .HasData(new IdentityRole
+            //    {
+            //        Name = "Admin",
+            //        NormalizedName = "Admin".ToUpper()
+            //    });
+
 
             builder.Entity<Shipment>()
                  .HasOne(x => x.LoadingAddress)

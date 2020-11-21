@@ -18,7 +18,7 @@
                             <tbody>
                                 @foreach (var editShipment in Model)
                                 {
-                                    <form method="post" action="/Drivers/Edit?shipmentId=@editShipment.Id" enctype="multipart/form-data">
+                                    <form method="post" asp-controller="Drivers" asp-action="Edit">
                                         <tr class=" pt-5 m-5 ">
                                             <td class="row probootstrap_border-1 border-dark bg-light rounded align-items-center pb-3">
 
@@ -29,7 +29,6 @@
                                                 <partial name="_ShipmentPartialView" , model="editShipment">
 
                                                     <div class="row row ml-1 mr-1">
-
                                                         <div class="col-xl-6">
                                                             <div class="">
                                                                 <label class="mb-1" asp-for="@editShipment.Comment"></label>

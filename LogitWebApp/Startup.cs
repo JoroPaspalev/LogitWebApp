@@ -18,6 +18,10 @@ using LogitWebApp.Services.Orders;
 using LogitWebApp.Services.Drivers;
 using LogitWebApp.ViewModels.Drivers;
 using LogitWebApp.Services.Home;
+using Microsoft.AspNetCore.Mvc;
+
+using LogitWebApp.Data.Seeding;
+using LogitWebApp.Data.Models;
 
 namespace LogitWebApp
 {
@@ -36,11 +40,44 @@ namespace LogitWebApp
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)//давам го на true ако искам преди да се логне да ми потвърди email-а си
+            services.AddDefaultIdentity<ApplicationUser>(options =>
+                {
+                    //давам го на true ако искам преди да се логне да ми потвърди email-а си
+                    options.SignIn.RequireConfirmedAccount = false;
 
+                    //Това е за потвърждение на Email-а
+                    options.SignIn.RequireConfirmedEmail = false;
+
+                    //Тези настройки са за паролата. По default са задължителни. Тук ги махам 
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequiredLength = 5;
+                    options.Password.RequiredUniqueChars = 0;
+
+                    //При колко опита за грешна парола да се заключи акаунта
+                    options.Lockout.MaxFailedAccessAttempts = 2;
+
+                    //Изискваш ли в Db да има само един user с този emdil. Ако го дам на false ще може Pesho и Ivan да бъдат с един и същи Email. Което не е много OK
+                    options.User.RequireUniqueEmail = true;
+
+
+                    //Кои символи позволяваме да има в Username
+                    //options.User.AllowedUserNameCharacters = "abcdefj... ABCDEFG... 0123456789_-!@#";
+
+                })
+
+                //In your ConfigureServices method, you're already calling AddDefaultIdentity which is a new addition in 2.1 that scaffolds Identity without role support
+                //тъй като по default Identity-то на ASP.Net Core не поддържа Роли, трябва да ги добавим ръчно иначе не намира roleManager-а там където трябва да се inject-не и гърми
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(configure =>
+            {
+                //Това ми добавя [ValidateAntiForgeryToken] на всеки Action който приема <form> при [HttpPost]
+                configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
             services.AddRazorPages();
 
             services.AddTransient<IOffersService, OffersService>();
@@ -49,12 +86,14 @@ namespace LogitWebApp
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IDriversService, DriversService>();
             services.AddTransient<IHomeService, HomeService>();
-           
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
+
+
             if (env.IsDevelopment())
             {
                 //Има 3 варианта за улавяне на грешки
@@ -99,6 +138,7 @@ namespace LogitWebApp
 
             app.UseRouting();
 
+            //Това да двата middlewares които ми активират атрибутите за Authentication. Трябва да са точно в този ред за да работят
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -109,6 +149,9 @@ namespace LogitWebApp
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            ApplicationDbInitializer.SeedRoles(roleManager).Wait();
+            ApplicationDbInitializer.SeedAdmin(userManager).Wait();
         }
     }
 }

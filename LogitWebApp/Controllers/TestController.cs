@@ -42,11 +42,11 @@ namespace LogitWebApp.Controllers
             //Save Data i Db
             return this.RedirectToAction("ThankYou", "Test");
         }
+
         public IActionResult ThankYou()
         {
             return this.View();
         }
-
 
         public IActionResult Shipment()
         {
@@ -54,6 +54,21 @@ namespace LogitWebApp.Controllers
         }
 
 
+       
+        public IActionResult Index1()
+        {
+            return this.View();
+        }
+
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult Index1(string info)
+        {
+            ViewBag.Info = info;
+
+            return this.View();
+        }
 
 
 

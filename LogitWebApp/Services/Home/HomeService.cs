@@ -16,5 +16,25 @@ namespace LogitWebApp.Services.Home
         {
             this.db = db;
         }
+
+        public string CreateShipment(OfferInputModel input)
+        {
+            var currShipment = new Shipment()
+            {
+                From = input.From,
+                To = input.To,
+                CountOfPallets = input.CountOfPallets,
+                Length = input.Length,
+                Width = input.Width,
+                Height = input.Height,
+                Weight = input.Weight,
+                IsExpressDelivery = input.IsExpressDelivery,
+                IsFragile = input.IsFragile
+            };
+
+            this.db.Shipments.Add(currShipment);
+            this.db.SaveChanges();
+            return currShipment.Id;
+        }
     }
 }

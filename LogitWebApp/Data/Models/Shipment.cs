@@ -70,10 +70,8 @@ namespace LogitWebApp.Data.Models
         public string ReceiverId { get; set; }
         public virtual Participant Receiver { get; set; }
 
-        //public int PayerId { get; set; }
-        //public virtual Participant Payer { get; set; }
-
+        [ForeignKey("Driver")]
         public string DriverId { get; set; }
-        public virtual Driver Driver { get; set; }
+        public virtual ApplicationUser Driver { get; set; }
     }
 }

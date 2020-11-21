@@ -1,4 +1,4 @@
-﻿using LogitWebApp.Areas.Identity.Data;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,7 +21,6 @@ namespace LogitWebApp.Data.Models
         public string CreatorId { get; set; }
 
         public ApplicationUser Creator { get; set; }
-        //public ApplicationUser Creator { get; set; }
 
         [Required]
         [ForeignKey("Shipment")]

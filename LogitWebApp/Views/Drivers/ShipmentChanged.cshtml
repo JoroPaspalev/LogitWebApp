@@ -1,16 +1,15 @@
 ﻿@using LogitWebApp.ViewModels.Shared
-@model ChangesApplied 
+@model ChangesApplied
 
-    <div class="bg-dark pt-5 pb-4"></div>
+<div class="bg-dark pt-5 pb-4"></div>
 
-@*Искам да подам ShipmentId като string на PartialView-то*@
-
-<partial name="_ChangesAppliedPartialView", model="@Model" />
-
-@*<div class="container pt-5">
-    <div class="row p-4 align-items-center">
-        <div class="col-12 alert alert-success">
-            <h3 class="text-center">Вие успешно променихте поръчка с номер: <h2 class="text-center">@ViewBag.ShipmentId!</h2></h3>
+<section class="probootstrap-cover overflow-hidden relative" style="background-image: url('/img/bg_1.jpg');" data-stellar-background-ratio="0.5" id="section-home">
+    <div class="overlay"></div>
+    <div class="container pш-5 ">
+        <div class="">
+            <partial name="_ChangesAppliedPartialView" , model="@Model" />
         </div>
     </div>
-</div>*@
+    <div class="container p-5"></div>
+</section>
+<!-- END section -->

@@ -1,9 +1,19 @@
 ﻿
 @using LogitWebApp.ViewModels.Offer
+@using Ganss.XSS
 @model OfferInputModel
 @{
     ViewData["Title"] = "Logit";
+    //var data = "<script>alert('Hasked!');</script>";
+    //var data1 = "<style> body{color: red;}</style>";
+    //var data2 = "<p>You are Idiot!!! That is not escaped from Sanitizer!!!</p>";
+    //var sanitizer = new HtmlSanitizer();
+    //var sanitizedData = sanitizer.Sanitize(data + data1 + data2);
+
+
 }
+
+@*@Html.Raw(sanitizedData)*@
 
 <section class="probootstrap-cover overflow-hidden relative" style="background-image: url('img/mainPage.png');" data-stellar-background-ratio="0.5" id="section-home">
     <div class="overlay"></div>
@@ -163,10 +173,7 @@
         </div>
     </div>
 
-    @section Scripts
-    {
-        <partial name="_ValidationScriptsPartial" />
-    }
+   
 </section>
 
 @section LogitLogoImg

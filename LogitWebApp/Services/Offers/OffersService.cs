@@ -1,26 +1,21 @@
 ﻿using LogitWebApp.Data;
 using LogitWebApp.Data.Models;
-using LogitWebApp.ViewModels.Offer;
-using System;
-using System.Collections.Generic;
+using static LogitWebApp.Common.GlobalConstants;
 using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace LogitWebApp.Services.Offers
 {
     public class OffersService : IOffersService
     {
-        private readonly ApplicationDbContext db;
-        private const int countOfPalletsInOneTruck = 30;
-        private const decimal costPerKilometer = 2M; //Costs are 2lv/km
-        private const decimal profit = 2;
+        private readonly ApplicationDbContext db;       
 
         public OffersService(ApplicationDbContext db)
         {
             this.db = db;
         }
 
-        public Shipment GetOffer(OfferInputModel input)
+        public Shipment GetOffer(Shipment input)
         {
             double kilometers = this.db.Distances
                 .Where(d =>
@@ -69,25 +64,15 @@ namespace LogitWebApp.Services.Offers
                 cellingPricePerPallet *= 1.5M;
             }
 
-            var currShipment = new Shipment
-            {
-                CountOfPallets = input.CountOfPallets,
-                Price = cellingPricePerPallet * input.CountOfPallets,
-                From = input.From,
-                To = input.To,
-                Length = input.Length,
-                Width = input.Width,
-                Height = input.Height,
-                Weight = input.Weight,
-                IsExpressDelivery = input.IsExpressDelivery,
-                IsFragile = input.IsFragile
-            };
-
-            this.db.Shipments.Add(currShipment);
+            input.Price = cellingPricePerPallet * input.CountOfPallets;
             this.db.SaveChanges();
+           
+            return input;
+        }
 
-            return currShipment;
-
+        public Shipment GetShipmentById(string shipmentId)
+        {
+            return this.db.Shipments.FirstOrDefault(s => s.Id == shipmentId);
         }
     }
 }

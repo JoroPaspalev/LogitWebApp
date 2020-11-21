@@ -1,9 +1,10 @@
 ﻿using LogitWebApp.Data;
 using LogitWebApp.Data.Models;
 using LogitWebApp.ViewModels.Drivers;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
+using static LogitWebApp.Common.GlobalConstants;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,23 +13,31 @@ namespace LogitWebApp.Services.Drivers
     public class DriversService : IDriversService
     {
         private readonly ApplicationDbContext db;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public DriversService(ApplicationDbContext db)
+        public DriversService(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
             this.db = db;
+            this.userManager = userManager;
         }
 
-        public void AddDriver(DriverInputModel input)
+        public async Task AddDriver(DriverInputModel input)
         {
-            var currDriver = new Driver
+            var currDriver = new ApplicationUser
             {
+                Email = input.Email,
+                UserName = input.Email,
                 FirstName = input.FirstName,
                 LastName = input.LastName,
                 PhoneNumber = input.PhoneNumber
             };
 
-            this.db.Drivers.Add(currDriver);
-            this.db.SaveChanges();
+            var result = await this.userManager.CreateAsync(currDriver, input.Password);
+
+            if (result.Succeeded)
+            {
+                await this.userManager.AddToRoleAsync(currDriver, Driver_RoleName);
+            }
         }
 
         public IEnumerable<AllShipmentsWithAddresses> GetAllShipments()
@@ -51,13 +60,12 @@ namespace LogitWebApp.Services.Drivers
                     UnloadingDate = x.UnloadingDate ?? DateTime.Now
                 })
                 .ToList();
-
         }
 
         public IEnumerable<AllShipmentsWithAddresses> GetMyShipments(string driverId)
         {
             var myShipments = this.db.Shipments
-                .Where(x => x.DriverId == null && x.LoadingAddress != null && x.UnloadingAddress != null)
+                .Where(x => x.DriverId == driverId && x.LoadingAddress != null && x.UnloadingAddress != null)
                 .Select(s => new AllShipmentsWithAddresses
                 {
                     Id = s.Id,
@@ -86,16 +94,16 @@ namespace LogitWebApp.Services.Drivers
             currShipment.Length = input.Length;
             currShipment.Height = input.Height;
             currShipment.Weight = input.Weight;
-            currShipment.CountOfPallets = input.CountOfPallets?? 0;
+            currShipment.CountOfPallets = input.CountOfPallets ?? 0;
             currShipment.Comment = input.Comment;
             currShipment.IsDelivered = input.IsDelivered;
 
             this.db.SaveChanges();
         }
 
-        public bool IsDriverExist(DriverInputModel input)
+        public bool IsDriverExist(string email)
         {
-            return this.db.Drivers.Any(d => d.FirstName == input.FirstName && d.LastName == input.LastName && d.PhoneNumber == input.PhoneNumber);
+            return this.userManager.Users.Any(u => u.Email == email) ? true : false;
         }
 
         public AllShipmentsWithAddresses GetShipment(string shipmentId)
@@ -120,6 +128,27 @@ namespace LogitWebApp.Services.Drivers
                 .First();
 
             return shipmentForEdititng;
+        }
+
+        public bool IsPhoneExist(string phone)
+        {
+            return this.userManager.Users.Any(u => u.PhoneNumber == phone) ? true : false;
+        }
+
+        public void AttachShipmentToDriver(string shipmentId, string userId)
+        {
+            var currShipment = this.db.Shipments.FirstOrDefault(s => s.Id == shipmentId);
+            currShipment.DriverId = userId;
+            this.db.SaveChanges();
+        }
+
+        public async Task<bool> DeleteDriver(string email)
+        {
+            var currUser = this.userManager.Users.FirstOrDefault(u => u.Email == email);
+
+            var result = await this.userManager.DeleteAsync(currUser);
+
+            return result.Succeeded ? true : false;
         }
     }
 }

@@ -31,8 +31,8 @@ input, textarea, p {
   color: #fff; }
 
 ::selection {
-  background: #000;
-  color: #fff; }
+    background: #fce699;
+    color: $black;}
 
 ::-moz-selection {
   background: #000;
@@ -561,3 +561,19 @@ a {
 .probootstrap-animate {
   opacity: 0;
   visibility: hidden; }
+
+.alert {
+    margin-top: 50px;
+}
+
+.offer {
+    margin-top: 200px;
+    margin-bottom: 100px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    opacity: 0.6;
+}
+
+    .offer:hover {
+        opacity: 0.75;
+    }

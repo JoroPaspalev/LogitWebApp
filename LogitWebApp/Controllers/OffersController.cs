@@ -27,11 +27,12 @@ namespace LogitWebApp.Controllers
             return this.View();
         }
 
-        public IActionResult Calculate(OfferInputModel input)
+        public IActionResult Calculate(string ShipmentId)
         {
             //ще си вземе по shipmentId Shipment-а и ще го подаде на View-то което ще покаже офертата с цената
+            Shipment currShipment = this.offersService.GetShipmentById(ShipmentId);
 
-            Shipment offerForShipment = this.offersService.GetOffer(input);
+            Shipment offerForShipment = this.offersService.GetOffer(currShipment);
 
             return this.View(offerForShipment);
 

@@ -53,9 +53,6 @@ namespace LogitWebApp.ViewModels.Offer
         [EmailAddress(ErrorMessage = "Въведения Email е в неправилен формат!")]
         public string UnloadingEmail { get; set; }
 
-        //[Required]
-        //public string UnloadingTown { get; set; }
-
         [Required(ErrorMessage = "Улицата е задължителено поле!")]
         [RegularExpression(@"^[А-Яа-я. ]*$", ErrorMessage = "Полето Улица може да съдържа само малки или големи букви на кирилица, точка и интервал")]
         public string UnloadingStreet { get; set; }

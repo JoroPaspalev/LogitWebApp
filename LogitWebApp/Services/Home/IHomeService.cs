@@ -8,6 +8,6 @@ namespace LogitWebApp.Services.Home
 {
     public interface IHomeService
     {
-        //public string CreateShipment(OfferInputModel input);
+        public string CreateShipment(OfferInputModel input);
     }
 }

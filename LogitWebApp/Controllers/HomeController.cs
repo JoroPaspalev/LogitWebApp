@@ -24,8 +24,9 @@ namespace LogitWebApp.Controllers
             _logger = logger;
             this.homeService = homeService;
 
+            //TODO - Fix this
             //Start only first time to seed data in Db
-            seedService.SeedDb();
+            //seedService.SeedDb();
         }
 
         public IActionResult Index()
@@ -45,21 +46,11 @@ namespace LogitWebApp.Controllers
             if (input.From.ToLower() == input.To.ToLower())
             {
                 return this.Redirect($"/Offers/ShipmentInSameCity?cityName={input.From}");
-            }            
+            }
 
-            return this.RedirectToAction("Calculate", "Offers", new OfferInputModel
-            {
-                From = input.From,
-                To = input.To,
-                CountOfPallets = input.CountOfPallets,
-                Length = input.Length,
-                Width = input.Width,
-                Height = input.Height,
-                Weight = input.Weight,
-                IsExpressDelivery = input.IsExpressDelivery,
-                IsFragile = input.IsFragile
+           string shipmentId = this.homeService.CreateShipment(input);
 
-            });
+            return this.RedirectToAction("Calculate", "Offers", new { ShipmentId = shipmentId });
         }
 
 

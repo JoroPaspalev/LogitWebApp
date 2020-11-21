@@ -9,25 +9,22 @@ using System.Threading.Tasks;
 namespace LogitWebApp.Attributes.ModelValidationAttributes
 {
     public class CheckDriverExist : ValidationAttribute
-    {       
-        private readonly DriverInputModel input;       
-
+    {         
         //Как да взема input модела runTime????? и да го подам тук?
-        public CheckDriverExist(DriverInputModel input)
-        {
-            this.input = input;
+        public CheckDriverExist()
+        {           
         }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var servise = validationContext.GetService(typeof(IDriversService)) as DriversService;
 
-            if (servise.IsDriverExist(input))
+            if (servise.IsDriverExist((string)value))
             {
-                return new ValidationResult("Шофьор с подадените данни вече съществува в базата данни!");
+                return new ValidationResult("Шофьор с подадения Email вече съществува в базата данни!", new List<string>() { "Email"});
             }
 
-            return new ValidationResult("");
+            return ValidationResult.Success;
         }
     }
 }
