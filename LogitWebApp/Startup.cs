@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using LogitWebApp.Data.Seeding;
 using LogitWebApp.Data.Models;
+using LogitWebApp.Services.Users;
 
 namespace LogitWebApp
 {
@@ -79,6 +80,11 @@ namespace LogitWebApp
                 configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
             services.AddRazorPages();
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = "1283745898662878";
+                options.AppSecret = "a4bd3196130530380091c1cb9f617e13";
+            });
 
             services.AddTransient<IOffersService, OffersService>();
             services.AddTransient<ISeedService, SeedService>();
@@ -86,6 +92,7 @@ namespace LogitWebApp
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IDriversService, DriversService>();
             services.AddTransient<IHomeService, HomeService>();
+            services.AddTransient<IUsersService, UsersService>();
 
         }
 

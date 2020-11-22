@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/css/animate.css">
     <link rel="stylesheet" href="/fonts/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="/css/zoomEffect.css">
-
+   
     <link rel="stylesheet" href="/css/owl.carousel.min.css">
 
     <link rel="stylesheet" href="/fonts/flaticon/font/flaticon.css">
@@ -37,6 +37,9 @@
 </head>
 <body>
 
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/bg_BG/sdk.js#xfbml=1&version=v9.0&appId=1283745898662878&autoLogAppEvents=1" nonce="nG2SIhe2"></script>
 
     <nav class="navbar  navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
         <div class="container pl-0 ml-5">
@@ -78,7 +81,7 @@
                         }
                         else if (await UserManager.IsInRoleAsync(currUser, User_RoleName))
                         {
-
+                            <li class="nav-item"><a class="nav-link" asp-controller="Users" asp-action="AllUserShipments">Моите поръчки</a></li>
                         }
                     }
 

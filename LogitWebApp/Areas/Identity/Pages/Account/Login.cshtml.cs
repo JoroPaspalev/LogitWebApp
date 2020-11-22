@@ -98,7 +98,7 @@ namespace LogitWebApp.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Невалиден вход!");
                     return Page();
                 }
             }

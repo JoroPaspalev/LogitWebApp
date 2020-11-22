@@ -10,3 +10,10 @@
     cursor: pointer;
     border-radius: 3px;
 }
+
+.no-bullets {
+    list-style: none;
+}
+
+
+

@@ -21,6 +21,12 @@ namespace LogitWebApp.Controllers
             this.signInManager = signInManager;
         }
 
+        public IActionResult Index()
+        {
+            return this.View();
+        }
+
+
         [AllowAnonymous]
         public IActionResult Register()
         {

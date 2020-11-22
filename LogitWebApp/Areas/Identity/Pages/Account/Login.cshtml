@@ -1,20 +1,24 @@
 ﻿@page
 @model LoginModel
 
+
+
+
 <section class="probootstrap-cover overflow-hidden relative" style=" background-image: url('/img/bg_1.jpg');" data-stellar-background-ratio="0.5" id="section-home">
     <div class="overlay"></div>
     <div class="container">
         <div class="row  p-0">
             <div class="col-12">
                 <h1 class="text-light text-center">Вход в системата</h1>
-                <hr class="col-3 bg-light">
+                <hr class="col-3 bg-light mb-1">
             </div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
-
-                        <form method="post" asp-area="Identity" asp-page="/Account/Login">
+                        <div asp-validation-summary="All" class="text-danger no-bullets"></div>
+                        <!-- asp-route-returnUrl добавя към "/Identity/Account/Login" пътя, стойността която е записана в Proprerty ReturnUrl, като QueryString-->
+                        <form method="post" asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="@Model.ReturnUrl">
                             <div class="form-group">
                                 <label asp-for="@Model.Input.Email" class="control-label probootstrap_text-gray-300"></label>
                                 <input asp-for="@Model.Input.Email" class="form-control" />
@@ -35,11 +39,10 @@
                             <div class="row">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
-                                    <div class="form-group text-black-50 pt-3">
+                                    <div class="form-group text-black-50 pt-0">
                                         <input type="submit" value="Вход" class="btn btn-warning" />
                                     </div>
                                 </div>
-                                <div class="col-md-4"></div>
                             </div>
 
                             <div class="form-group">
@@ -50,8 +53,54 @@
                                     <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="control-label probootstrap_text-gray-300">Регистрирай се!</a>
                                 </p>
                             </div>
-
                         </form>
+
+                        <div class="">
+                            <div class="row">
+                                <div class=""></div>
+                                <div class="col-md-12">
+
+                                    <div >
+                                        <section>
+                                            
+                                            @{
+                                                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                                                {
+                                                    <div>
+                                                        <p>
+                                                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                                            for details on setting up this ASP.NET application to support logging in via external services.
+                                                        </p>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                                        <div>
+                                                            <p>
+                                                                @foreach (var provider in Model.ExternalLogins)
+                                                                {
+                                                                <button type="submit" class="btn btn-primary btn-block pl-0 " name="provider" value="@provider.Name" title=" Влез чрез профила си в @provider.DisplayName"><img src="/img/30_facebook.png" />&nbsp Влез с @provider.DisplayName профил</button>
+                                                                }
+
+                                                                @*<div class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="true" data-width=""></div>*@
+
+                                                            </p>
+                                                        </div>
+                                                    </form>
+                                                }
+                                            }
+                                        </section>
+                                    </div>
+
+
+                                </div>
+                                <div class=""></div>
+                            </div>
+                        </div>
+
+
+
                     </div>
                     <div class="col-md-4"></div>
                 </div>
@@ -66,7 +115,7 @@
 
 
 
-<h1>@ViewData["Title"]</h1>
+@*<h1>@ViewData["Title"]</h1>
 <div class="row">
     <div class="col-md-4">
         <section>
@@ -121,7 +170,10 @@
 
             </form>
         </section>
-    </div>
+    </div>*@
+
+
+
     <div class="col-md-6 col-md-offset-2">
         <section>
             <h4>Use another service to log in.</h4>

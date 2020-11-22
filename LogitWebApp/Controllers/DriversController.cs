@@ -57,7 +57,7 @@ namespace LogitWebApp.Controllers
         }
 
         [HttpPost]
-        public async Task< IActionResult> DeleteDriver(DeleteDriver input)
+        public async Task< IActionResult> DeleteDriver(DeleteDriverInputModel input)
         {
             if (!this.driversService.IsDriverExist(input.Email))
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LogitWebApp.ViewModels.Drivers
 {
-    public class DeleteDriver
+    public class DeleteDriverInputModel
     {
         [Display(Name = "Въведете Email на шофьора")]
         [Required(ErrorMessage ="Полето Email не може да е празно!")]
