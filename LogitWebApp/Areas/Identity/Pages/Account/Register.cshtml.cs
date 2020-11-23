@@ -124,6 +124,7 @@ namespace LogitWebApp.Areas.Identity.Pages.Account
                 };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
                 if (result.Succeeded)
                 {
                     //Add new registered User to User Role
