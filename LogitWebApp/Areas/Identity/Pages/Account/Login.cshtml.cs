@@ -22,7 +22,7 @@ namespace LogitWebApp.Areas.Identity.Pages.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, 
+        public LoginModel(SignInManager<ApplicationUser> signInManager,
             ILogger<LoginModel> logger,
             UserManager<ApplicationUser> userManager)
         {
@@ -43,13 +43,13 @@ namespace LogitWebApp.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required(ErrorMessage ="Полето Email е задължително")]
+            [Required(ErrorMessage = "Полето Email е задължително")]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required(ErrorMessage ="Полето Парола е задължително")]
+            [Required(ErrorMessage = "Полето Парола е задължително")]
             [DataType(DataType.Password)]
-            [Display(Name ="Парола")]
+            [Display(Name = "Парола")]
             public string Password { get; set; }
 
             //[Display(Name = "Да запомня ли входните данни?")]

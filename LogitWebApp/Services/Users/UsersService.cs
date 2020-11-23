@@ -18,7 +18,7 @@ namespace LogitWebApp.Services.Users
 
         public IEnumerable<UserAllShipmentsViewModel> GetAllUserShipments(string userId)
         {
-            var AllShipments = this.db.Orders.Where(o => o.CreatorId == "e63484ad-ca2f-4df2-97d3-edbabc8f1b8e")
+            var AllShipments = this.db.Orders.Where(o => o.CreatorId == userId)
                 .Select(x => new UserAllShipmentsViewModel
                 {
                     OrderId = x.Id,

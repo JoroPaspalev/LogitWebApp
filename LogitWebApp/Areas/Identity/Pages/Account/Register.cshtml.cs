@@ -63,22 +63,22 @@ namespace LogitWebApp.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Required]
-            [Display(Name ="Фирма")]
+            [Display(Name = "Фирма")]
             public string CompanyName { get; set; }
 
             [Required]
-            [Display(Name ="Адрес")]
+            [Display(Name = "Адрес")]
             public string Address { get; set; }
 
             [Required]
             [RegularExpression(@"^\+359[0-9]{9}$")]
-            [Display(Name ="Мобилен номер")]
+            [Display(Name = "Мобилен номер")]
             public string PhoneNumber { get; set; }
-           
-            [Display(Name ="Факс")]
+
+            [Display(Name = "Факс")]
             public long? Fax { get; set; }
 
-            
+
             [Display(Name = "ДДС Номер")]
             public string VatNumber { get; set; }
 
@@ -89,10 +89,10 @@ namespace LogitWebApp.Areas.Identity.Pages.Account
 
             [Required]
             [RegularExpression(@"^[а-яА-Яa-zA-z]+ [а-яА-Яa-zA-z]+ [а-яА-Яa-zA-z]+$")]
-            [Display(Name ="Управител")]
+            [Display(Name = "Управител")]
             public string Manager { get; set; }
 
-            [Display(Name ="Сайт")]
+            [Display(Name = "Сайт")]
             public string Site { get; set; }
         }
 
@@ -109,7 +109,7 @@ namespace LogitWebApp.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser 
+                var user = new ApplicationUser
                 {
                     UserName = Input.Email,
                     Email = Input.Email,
