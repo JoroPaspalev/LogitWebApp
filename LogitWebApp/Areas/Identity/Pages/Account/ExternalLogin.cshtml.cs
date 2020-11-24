@@ -70,12 +70,15 @@ namespace LogitWebApp.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnGetCallbackAsync(string returnUrl = null, string remoteError = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
+
             if (remoteError != null)
             {
                 ErrorMessage = $"Error from external provider: {remoteError}";
                 return RedirectToPage("./Login", new {ReturnUrl = returnUrl });
             }
+
             var info = await _signInManager.GetExternalLoginInfoAsync();
+
             if (info == null)
             {
                 ErrorMessage = "Error loading external login information.";
@@ -112,13 +115,14 @@ namespace LogitWebApp.Areas.Identity.Pages.Account
             }
         }
 
-
         //Тук трябва да сложа добавяне на User към роля
         public async Task<IActionResult> OnPostConfirmationAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
+
             // Get the information about the user from the external login provider
             var info = await _signInManager.GetExternalLoginInfoAsync();
+
             if (info == null)
             {
                 ErrorMessage = "Error loading external login information during confirmation.";
@@ -137,6 +141,7 @@ namespace LogitWebApp.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    //Add User to Role here
                     await _userManager.AddToRoleAsync(user, User_RoleName);
 
                     result = await _userManager.AddLoginAsync(user, info);

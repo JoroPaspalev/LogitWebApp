@@ -12,6 +12,7 @@ namespace LogitWebApp.Data.Models
         public Shipment()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.Images = new HashSet<Image>();
         }
 
         public string Id { get; set; }
@@ -55,11 +56,9 @@ namespace LogitWebApp.Data.Models
         public DateTime? LoadingDate { get; set; }
 
         public DateTime? UnloadingDate { get; set; }       
-
         
         public int? LoadingAddressId { get; set; }
         public virtual Address LoadingAddress { get; set; }
-
         
         public int? UnloadingAddressId { get; set; }
         public virtual Address UnloadingAddress { get; set; }
@@ -73,5 +72,8 @@ namespace LogitWebApp.Data.Models
         [ForeignKey("Driver")]
         public string DriverId { get; set; }
         public virtual ApplicationUser Driver { get; set; }
+
+        public virtual ICollection<Image> Images { get; set; }
+
     }
 }

@@ -1,95 +1,131 @@
-﻿
-@model Shipment
+﻿@model Shipment
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Logit - Transport Company</title>
+    <meta name="description" content="Free Bootstrap 4 Theme by uicookies.com">
+    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+    <link rel="icon" type="image/gif" href="/img/favicon.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="wwwroot/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="wwwroot/css/animate.css">
+    <link rel="stylesheet" href="wwwroot/fonts/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="wwwroot/css/zoomEffect.css">
+
+    <link rel="stylesheet" href="wwwroot/css/owl.carousel.min.css">
+
+    <link rel="stylesheet" href="wwwroot/fonts/flaticon/font/flaticon.css">
+
+    <link rel="stylesheet" href="wwwroot/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="wwwroot/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="wwwroot/css/select2.css">
+
+    <link rel="stylesheet" href="wwwroot/css/helpers.css">
+    <link rel="stylesheet" href="wwwroot/css/style.css">
+
+    <link rel="stylesheet" href="~/Joro/css/main.css">
+
+</head>
+<body>
 
 
 
-<section class="probootstrap-cover overflow-hidden relative" style="background-image: url('/img/bg_1.jpg');" data-stellar-background-ratio="0.5" id="section-home">
-    <div class="overlay"></div>
-    <div class="container">
+
+
+    <section class="probootstrap-cover overflow-hidden relative" style="background-image: url('/img/bg_1.jpg');" data-stellar-background-ratio="0.5" id="section-home">
+        <div class="overlay"></div>
         <div class="container">
+            <div class="container">
 
-            <div class="row pt-0 pb-0 pl-3 pr-3 align-items-center">
-                <div class="col-12">
+                <div class="row pt-0 pb-0 pl-3 pr-3 align-items-center">
+                    <div class="col-12">
 
-                    <div class="">
-                        <button type="button" class="btn btn-lg btn-block btn-secondary boreder border-dark">
-                            <h3 class="probootstrap_text-gray-200 font-weight-bold">
-                                <span>
-                                    Оферта за превоз на товари  №:
-                                    <input asp-for="@Model.Id" readonly class="form-control font-weight-bold order-text text-center mt-2">
-                            </h3>
-                        </button>
+                        <div class="">
+                            <button type="button" class="btn btn-lg btn-block btn-secondary boreder border-dark">
+                                <h3 class="probootstrap_text-gray-200 font-weight-bold">
+                                    <span>
+                                        Оферта за превоз на товари  №:
+                                        <input asp-for="@Model.Id" readonly class="form-control font-weight-bold order-text text-center mt-2">
+                                </h3>
+                            </button>
+                        </div>
+                        <hr class="">
                     </div>
-                    <hr class="">
-                </div>
-                <div class="col-6 text-dark">
-                    <label for="departureTime" class="probootstrap_text-gray-300">От:</label>
-                    <input type="text" readonly class="form-control" id="departureTime" name="from" value="@Model.From">
-                </div>
+                    <div class="col-6 text-dark">
+                        <label for="departureTime" class="probootstrap_text-gray-300">От:</label>
+                        <input type="text" readonly class="form-control" id="departureTime" name="from" value="@Model.From">
+                    </div>
 
-                <div class="col-6 text-dark">
-                    <label for="departureTime" class="probootstrap_text-gray-300">До:</label>
-                    <input type="text" readonly class="form-control" id="departureTime" name="to" value="@Model.To">
-                </div>
-            </div>
-
-            <div class="row p-3 align-items-center">
-
-                <div class="col-3 text-dark">
-
-                    <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Брой палети:</label>
-                    <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.CountOfPallets">
-
-                    <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Дължина:</label>
-                    <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.Length">
-
-                    <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Тегло:</label>
-                    <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.Weight">
-
-                </div>
-
-                <div class="col-3 text-dark">
-
-                    <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Ширина:</label>
-                    <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.Width">
-
-                    <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Височина:</label>
-                    <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.Height">
-
-                    <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Експресна доставка:</label>
-                    @if (Model.IsExpressDelivery)
-                    {
-                        <input type="text" readonly class="form-control" name="countOfPallets" value="Да">
-                    }
-                    else
-                    {
-                        <input type="text" readonly class="form-control"  name="countOfPallets" value="Не">
-                    }
-
-                </div>
-
-                <div class="col-6 pt-5 ">
-                    <div class=" card shadow-sm border border-dark">
-                        <div class="card-header border">
-                            <h2 class="text-secondary">Цена:</h2>
-                        </div>
-                        <div class="card-body">
-                            <button type="button" class="btn btn-lg btn-block btn-outline-dark"><h1 class="text-lowercase"><strong>@Model.Price.ToString("#.##") Лв.</strong></h1></button>
-                        </div>
+                    <div class="col-6 text-dark">
+                        <label for="departureTime" class="probootstrap_text-gray-300">До:</label>
+                        <input type="text" readonly class="form-control" id="departureTime" name="to" value="@Model.To">
                     </div>
                 </div>
-            </div>
 
-            <div class="col-12 pt-5 text-center">
-                <div class="button-holder">
-                    <a href="/Orders/Create?shipmentId=@Model.Id" class="btn btn-warning btn-block text-uppercase">Направи поръчка</a>
+                <div class="row p-3 align-items-center">
+
+                    <div class="col-3 text-dark">
+
+                        <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Брой палети:</label>
+                        <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.CountOfPallets">
+
+                        <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Дължина:</label>
+                        <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.Length">
+
+                        <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Тегло:</label>
+                        <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.Weight">
+
+                    </div>
+
+                    <div class="col-3 text-dark">
+
+                        <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Ширина:</label>
+                        <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.Width">
+
+                        <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Височина:</label>
+                        <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.Height">
+
+                        <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Експресна доставка:</label>
+                        @if (Model.IsExpressDelivery)
+                        {
+                            <input type="text" readonly class="form-control" name="countOfPallets" value="Да">
+                        }
+                        else
+                        {
+                            <input type="text" readonly class="form-control" name="countOfPallets" value="Не">
+                        }
+
+                    </div>
+
+                    <div class="col-6 pt-5 ">
+                        <div class=" card shadow-sm border border-dark">
+                            <div class="card-header border">
+                                <h2 class="text-secondary">Цена:</h2>
+                            </div>
+                            <div class="card-body">
+                                <button type="button" class="btn btn-lg btn-block btn-outline-dark"><h1 class="text-lowercase"><strong>@Model.Price.ToString("#.##") лв.</strong></h1></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 pt-5 text-center">
+                    <div class="button-holder">
+                        <a href="/Orders/Create?shipmentId=@Model.Id" class="btn btn-warning btn-block text-uppercase">Направи поръчка</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
-
+</body>
+</html>
 
 

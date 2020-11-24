@@ -32,6 +32,7 @@ namespace LogitWebApp.Data
 
         public DbSet<Distance> Distances { get; set; }
 
+        public DbSet<Image> Images { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

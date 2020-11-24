@@ -23,6 +23,8 @@ using Microsoft.AspNetCore.Mvc;
 using LogitWebApp.Data.Seeding;
 using LogitWebApp.Data.Models;
 using LogitWebApp.Services.Users;
+using LogitWebApp.Services.Export;
+using WHMS.Services.Common;
 
 namespace LogitWebApp
 {
@@ -93,6 +95,8 @@ namespace LogitWebApp
             services.AddTransient<IDriversService, DriversService>();
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<IUsersService, UsersService>();
+            services.AddScoped<IViewRenderService, ViewRenderService>();
+            services.AddScoped<IHtmlToPdfConverter, HtmlToPdfConverter>();
 
         }
 
