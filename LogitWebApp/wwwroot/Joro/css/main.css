@@ -15,5 +15,13 @@
     list-style: none;
 }
 
+.form-control-joro {
+    min-height: 0;
+    height: 33px;
+    display: inline;
+}
 
-
+.ptmtJoro{
+    padding-top: 3px;
+    margin-bottom: 2px;
+}

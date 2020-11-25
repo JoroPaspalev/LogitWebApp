@@ -30,9 +30,15 @@
 
                                                     <div class="row row ml-1 mr-1">
                                                         <div class="col-xl-6">
-                                                            <div class="">
-                                                                <label class="mb-1" asp-for="@editShipment.Comment"></label>
-                                                                <textarea rows="4" readonly asp-for="@editShipment.Comment" name="Comment" class="form-control"></textarea>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label class="mb-1" asp-for="@editShipment.Description"></label>
+                                                                    <textarea rows="4" readonly asp-for="@editShipment.Description" class="form-control"></textarea>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label class="mb-1" asp-for="@editShipment.Comment"></label>
+                                                                    <textarea rows="4" readonly asp-for="@editShipment.Comment" class="form-control"></textarea>
+                                                                </div>
                                                             </div>
                                                         </div>
 
@@ -115,9 +121,9 @@
                                                                 <div class="col-12">
 
                                                                     @*<label for="file-upload" class="custom-file-upload">
-                                                                        <i class="fa fa-cloud-upload"></i>Качи снимка</label>
-                                                                        <input hidden type="file" id="file-upload" asp-for="@editShipment.Picture" name="Picture"/>
-                                                                        <span asp-validation-for="@editShipment.Picture"></span>*@
+                    <i class="fa fa-cloud-upload"></i>Качи снимка</label>
+                    <input hidden type="file" id="file-upload" asp-for="@editShipment.Picture" name="Picture"/>
+                    <span asp-validation-for="@editShipment.Picture"></span>*@
 
                                                                 </div>
                                                             </div>

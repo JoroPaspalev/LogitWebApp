@@ -24,11 +24,11 @@ namespace LogitWebApp.Controllers
             this.userManager = userManager;
         }
 
-        public IActionResult AllUserShipments()
+        public IActionResult AllUserOrders()
         {
             var userId = this.userManager.GetUserId(User);
 
-            IEnumerable<UserAllShipmentsViewModel> allShipments =  this.usersService.GetAllUserShipments(userId);
+            IEnumerable<UserOrderViewModel> allShipments =  this.usersService.GetAllUserOrders(userId);
 
             return View(allShipments);
 

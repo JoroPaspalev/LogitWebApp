@@ -8,6 +8,8 @@ namespace LogitWebApp.Services.Users
 {
     public interface IUsersService
     {
-       public IEnumerable<UserAllShipmentsViewModel> GetAllUserShipments(string userId);
+        public IEnumerable<UserOrderViewModel> GetAllUserOrders(string userId);
+
+        public UserOrderViewModel GetOrder(string orderId);
     }
 }

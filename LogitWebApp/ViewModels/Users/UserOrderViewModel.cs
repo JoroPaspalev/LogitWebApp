@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LogitWebApp.ViewModels.Users
 {
-    public class UserAllShipmentsViewModel
+    public class UserOrderViewModel
     {
         public string OrderId { get; set; }
 

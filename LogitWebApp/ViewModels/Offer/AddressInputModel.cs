@@ -16,14 +16,16 @@ namespace LogitWebApp.ViewModels.Offer
 
         [Required(ErrorMessage = "Име/Фирма е задължително!")]
         [Display(Name ="Адрес на товарене")]// Това сменя <label> name от LoadingName да се показва Адрес на товарене
+        [MaxLength(45)]
         public string LoadingName { get; set; }
 
-        [Required(ErrorMessage = "Телефонния номер е задължителен!")]
+        [Required(ErrorMessage = "Телефонния номер е задължителен!")]        
         [RegularExpression(@"[0-9]{4}-[0-9]{3}-[0-9]{3}", ErrorMessage = "Телефонния номер е във формат xxxx-xxx-xxx")]
         public string LoadingPhone { get; set; }
 
         [Required(ErrorMessage = "Email е задължителено поле!")]
         [EmailAddress(ErrorMessage = "Въведения Email е в неправилен формат!")]
+        [MaxLength(45)]
         public string LoadingEmail { get; set; }
 
         //[Required]
@@ -31,9 +33,11 @@ namespace LogitWebApp.ViewModels.Offer
 
         [Required(ErrorMessage = "Улицата е задължителено поле!")]
         [RegularExpression(@"^[А-Яа-я. ]*$", ErrorMessage ="Полето Улица може да съдържа само малки или големи букви на кирилица, точка и интервал")]
+        [MaxLength(30)]
         public string LoadingStreet { get; set; }
 
         [Required(ErrorMessage = "Полето номер на улица е задължително!")]
+        [MaxLength(5)]
         public string LoadingNumber { get; set; }
 
         [ValidateCurrentDateAttribute(ErrorMessage = "Датата за товарене трябва да е минимум 1 ден след датата на поръчката")]
@@ -43,6 +47,7 @@ namespace LogitWebApp.ViewModels.Offer
         public DateTime? LoadingDate { get; set; }
 
         [Required(ErrorMessage = "Име/Фирма е задължително!")]
+        [MaxLength(45)]
         public string UnloadingName { get; set; }
 
         [Required(ErrorMessage = "Телефонния номер е задължителен!")]
@@ -51,13 +56,16 @@ namespace LogitWebApp.ViewModels.Offer
 
         [Required(ErrorMessage = "Email е задължителено поле!")]
         [EmailAddress(ErrorMessage = "Въведения Email е в неправилен формат!")]
+        [MaxLength(30)]
         public string UnloadingEmail { get; set; }
 
         [Required(ErrorMessage = "Улицата е задължителено поле!")]
         [RegularExpression(@"^[А-Яа-я. ]*$", ErrorMessage = "Полето Улица може да съдържа само малки или големи букви на кирилица, точка и интервал")]
+        [MaxLength(30)]
         public string UnloadingStreet { get; set; }
 
         [Required(ErrorMessage = "Полето номер на улица е задължително!")] //не може да е int защото има адреси 2B или Черни връх 23A
+        [MaxLength(5)]
         public string UnloadingNumber { get; set; }
 
         [ValidateCurrentDateAttribute(ErrorMessage = "Датата на разтоварене неможе да е днес или в миналото")]//Това проверява дали unloadingDate е преди текущата дата и гърми

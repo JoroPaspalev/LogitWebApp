@@ -12,12 +12,13 @@ namespace LogitWebApp.ViewModels.Drivers
         public string Id { get; set; }
 
         [Display(Name = "Брой палети")]
-        
+
         public int CountOfPallets { get; set; }
 
+        [Display(Name = "Описание")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage ="Полето е задължително!")]
+        [Required(ErrorMessage = "Полето е задължително!")]
         public double? Width { get; set; }
 
         [Required(ErrorMessage = "Полето е задължително!")]
@@ -48,7 +49,7 @@ namespace LogitWebApp.ViewModels.Drivers
         [Required]
         public string UnloadingAddress { get; set; }
 
-        [Display(Name ="Прикачи снимка")]
+        [Display(Name = "Прикачи снимка")]
         public IFormFile Picture { get; set; }
     }
 }
