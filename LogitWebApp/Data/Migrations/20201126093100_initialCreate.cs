@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LogitWebApp.Migrations
 {
-    public partial class InitialSetup : Migration
+    public partial class initialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,14 +11,14 @@ namespace LogitWebApp.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Town = table.Column<string>(nullable: false),
-                    Street = table.Column<string>(nullable: false),
-                    StreetNumber = table.Column<string>(nullable: false),
-                    Block = table.Column<string>(nullable: true),
-                    Floor = table.Column<int>(nullable: true),
-                    Entrance = table.Column<string>(nullable: true)
+                    Town = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StreetNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Block = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Floor = table.Column<int>(type: "int", nullable: true),
+                    Entrance = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -29,10 +29,10 @@ namespace LogitWebApp.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -43,22 +43,30 @@ namespace LogitWebApp.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VatNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Bulstat = table.Column<int>(type: "int", nullable: false),
+                    Manager = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Site = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Fax = table.Column<long>(type: "bigint", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,11 +77,11 @@ namespace LogitWebApp.Migrations
                 name: "Distances",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FromCity = table.Column<string>(nullable: true),
-                    ToCity = table.Column<string>(nullable: true),
-                    DistanceInKM = table.Column<double>(nullable: false)
+                    FromCity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ToCity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DistanceInKM = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -84,10 +92,10 @@ namespace LogitWebApp.Migrations
                 name: "Drivers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    FirstName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: false),
-                    PhoneNumber = table.Column<string>(nullable: false)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -98,10 +106,10 @@ namespace LogitWebApp.Migrations
                 name: "Participants",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(maxLength: 45, nullable: false),
-                    Phone = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(maxLength: 45, nullable: true)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(45)", maxLength: 45, nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(45)", maxLength: 45, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -112,11 +120,11 @@ namespace LogitWebApp.Migrations
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -133,11 +141,11 @@ namespace LogitWebApp.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -154,10 +162,10 @@ namespace LogitWebApp.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -174,8 +182,8 @@ namespace LogitWebApp.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -198,10 +206,10 @@ namespace LogitWebApp.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
-                    Value = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -218,42 +226,48 @@ namespace LogitWebApp.Migrations
                 name: "Shipments",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    CountOfPallets = table.Column<int>(nullable: false),
-                    From = table.Column<string>(maxLength: 20, nullable: false),
-                    To = table.Column<string>(maxLength: 20, nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    Width = table.Column<double>(nullable: false),
-                    Length = table.Column<double>(nullable: false),
-                    Height = table.Column<double>(nullable: false),
-                    Weight = table.Column<double>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false),
-                    Comment = table.Column<string>(nullable: true),
-                    IsFragile = table.Column<bool>(nullable: false),
-                    IsExpressDelivery = table.Column<bool>(nullable: false),
-                    IsDelivered = table.Column<bool>(nullable: false),
-                    OrderCreatedOn = table.Column<DateTime>(nullable: true),
-                    LoadingDate = table.Column<DateTime>(nullable: true),
-                    UnloadingDate = table.Column<DateTime>(nullable: true),
-                    LoadingAddressId = table.Column<int>(nullable: true),
-                    UnloadingAddressId = table.Column<int>(nullable: true),
-                    SenderId = table.Column<string>(nullable: true),
-                    ReceiverId = table.Column<string>(nullable: true),
-                    DriverId = table.Column<string>(nullable: true)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CountOfPallets = table.Column<int>(type: "int", nullable: false),
+                    From = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    To = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Width = table.Column<double>(type: "float", nullable: false),
+                    Length = table.Column<double>(type: "float", nullable: false),
+                    Height = table.Column<double>(type: "float", nullable: false),
+                    Weight = table.Column<double>(type: "float", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsFragile = table.Column<bool>(type: "bit", nullable: false),
+                    IsExpressDelivery = table.Column<bool>(type: "bit", nullable: false),
+                    IsDelivered = table.Column<bool>(type: "bit", nullable: false),
+                    OrderCreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LoadingDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UnloadingDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LoadingAddressId = table.Column<int>(type: "int", nullable: true),
+                    UnloadingAddressId = table.Column<int>(type: "int", nullable: true),
+                    SenderId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ReceiverId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    DriverId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Shipments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Shipments_Drivers_DriverId",
-                        column: x => x.DriverId,
-                        principalTable: "Drivers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Shipments_Addresses_LoadingAddressId",
                         column: x => x.LoadingAddressId,
                         principalTable: "Addresses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Shipments_Addresses_UnloadingAddressId",
+                        column: x => x.UnloadingAddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Shipments_AspNetUsers_DriverId",
+                        column: x => x.DriverId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -268,10 +282,32 @@ namespace LogitWebApp.Migrations
                         principalTable: "Participants",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Extension = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShipmentId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    AddedByDriverId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Shipments_Addresses_UnloadingAddressId",
-                        column: x => x.UnloadingAddressId,
-                        principalTable: "Addresses",
+                        name: "FK_Images_AspNetUsers_AddedByDriverId",
+                        column: x => x.AddedByDriverId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Images_Shipments_ShipmentId",
+                        column: x => x.ShipmentId,
+                        principalTable: "Shipments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -280,9 +316,9 @@ namespace LogitWebApp.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    CreatorId = table.Column<string>(nullable: true),
-                    ShipmentId = table.Column<string>(nullable: false)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CreatorId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ShipmentId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -341,6 +377,16 @@ namespace LogitWebApp.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Images_AddedByDriverId",
+                table: "Images",
+                column: "AddedByDriverId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Images_ShipmentId",
+                table: "Images",
+                column: "ShipmentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_CreatorId",
                 table: "Orders",
                 column: "CreatorId");
@@ -397,22 +443,25 @@ namespace LogitWebApp.Migrations
                 name: "Distances");
 
             migrationBuilder.DropTable(
+                name: "Drivers");
+
+            migrationBuilder.DropTable(
+                name: "Images");
+
+            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Shipments");
 
             migrationBuilder.DropTable(
-                name: "Drivers");
+                name: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "Addresses");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Participants");

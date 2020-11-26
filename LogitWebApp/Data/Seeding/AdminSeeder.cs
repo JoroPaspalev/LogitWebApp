@@ -1,39 +1,19 @@
-﻿using LogitWebApp.Data.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
-
-//Това казва използвай статичните данни от static class GlobalConstant
+using LogitWebApp.Data.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using static LogitWebApp.Common.GlobalConstants;
 
 namespace LogitWebApp.Data.Seeding
 {
-    public static class ApplicationDbInitializer
+    public class AdminSeeder : ISeeder
     {
-        public static async Task SeedRoles(RoleManager<IdentityRole> roleManager)
+        public async Task SeedAsync(ApplicationDbContext db, IServiceProvider serviceProvider)
         {
-            string[] roles = new string[] { Admin_RoleName, Driver_RoleName, User_RoleName };
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            foreach (var role in roles)
-            {
-                //Това добавя нова Role с името Admin в таблицата AspNetRoles, ако вече я няма
-                IdentityRole currRole = await roleManager.FindByNameAsync(role);
-                if (currRole == null)
-                {
-                    //Ако я няма търсената Роля я направи
-                    var identityRole = new IdentityRole()
-                    {
-                        Name = role,
-                        NormalizedName = role.ToUpper()
-                    };
-
-                    //Имаме вече роля, сега трябва да я добавим в базата данни, като използваме roleManager
-                    await roleManager.CreateAsync(identityRole);
-                }
-            };            
-        }
-
-        public static async Task SeedAdmin(UserManager<ApplicationUser> userManager)
-        {
             //Сега ми намери user-а, който е с този email. Ако няма такъв, значи базата е изтрита и трябва да си създам нов user, който в последствие да го добавя в роля = "Admin"
             ApplicationUser user = await userManager.FindByEmailAsync(Admin_Email);
             if (user == null)
@@ -57,6 +37,11 @@ namespace LogitWebApp.Data.Seeding
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(appUser, Admin_RoleName);
+                }
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception(string.Join(Environment.NewLine, result.Errors.Select(e => e.Description)));
                 }
             }
         }

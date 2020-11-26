@@ -1,24 +1,23 @@
-﻿using LogitWebApp.Data;
-using LogitWebApp.Data.Models;
+﻿using LogitWebApp.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LogitWebApp.Services.SeedDb
+namespace LogitWebApp.Data.Seeding
 {
-    public class SeedService : ISeedService
+    public class DistancesSeeder : ISeeder
     {
-        private readonly ApplicationDbContext db;
-
-        public SeedService(ApplicationDbContext db)
+        public async Task SeedAsync(ApplicationDbContext db, IServiceProvider serviceProvider)
         {
-            this.db = db;
-        }
+            bool isThereAnyDistanceInDb = db.Distances.Any();
 
-        public void SeedDb()
-        {
+            if (isThereAnyDistanceInDb)
+            {
+                return;
+            }
+
             List<string> cityNamesBG = new List<string>()
             {
                 "София"
@@ -135,9 +134,10 @@ namespace LogitWebApp.Services.SeedDb
 
             Dictionary<string, string> cityNames = new Dictionary<string, string>();
 
+            //В момента има попълнени само 5 файла с данни за разстоянията между градовете затова е i < 5
             for (int i = 0; i < 5; i++)
             {
-                cityNames.Add(cityNamesBG[i], cityNamesEN[i]); 
+                cityNames.Add(cityNamesBG[i], cityNamesEN[i]);
             }
 
             foreach (var kvp in cityNames)
@@ -163,12 +163,11 @@ namespace LogitWebApp.Services.SeedDb
                         DistanceInKM = km
                     };
 
-                    this.db.Distances.Add(currDistance);
+                    await db.Distances.AddAsync(currDistance);
                 }
-            }          
+            }
 
-            this.db.SaveChanges();
-
+            db.SaveChanges();
         }
     }
 }

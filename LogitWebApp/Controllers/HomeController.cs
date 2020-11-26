@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using LogitWebApp.Models;
-using LogitWebApp.Services.SeedDb;
 using LogitWebApp.ViewModels.Offer;
-using LogitWebApp.Services.Offers;
-using LogitWebApp.Data.Models;
 using LogitWebApp.Services.Home;
+using LogitWebApp.Views.Home;
 
 namespace LogitWebApp.Controllers
 {
@@ -19,14 +14,10 @@ namespace LogitWebApp.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IHomeService homeService;
 
-        public HomeController(ILogger<HomeController> logger, ISeedService seedService, IHomeService homeService)
+        public HomeController(ILogger<HomeController> logger, IHomeService homeService)
         {
             _logger = logger;
             this.homeService = homeService;
-
-            //TODO - Fix this
-            //Start only first time to seed data in Db
-            //seedService.SeedDb();
         }
 
         public IActionResult Index()
@@ -52,8 +43,6 @@ namespace LogitWebApp.Controllers
 
             return this.RedirectToAction("Calculate", "Offers", new { ShipmentId = shipmentId });
         }
-
-
 
         public IActionResult Exception()
         {
@@ -94,7 +83,6 @@ namespace LogitWebApp.Controllers
             }
         }
 
-
         public IActionResult MyTestView()
         {
             var viewModel = new OfferInputModel
@@ -107,7 +95,13 @@ namespace LogitWebApp.Controllers
                 CountOfPallets = 33
             };
 
-            return this.View(viewModel);
+            var model = new TestViewModel()
+            {
+                CountOfPallets = 234,
+                CategoryId = 3
+            };
+
+            return this.View(model);
         }
 
         public IActionResult About()

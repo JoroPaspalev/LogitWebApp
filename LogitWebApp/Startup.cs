@@ -13,10 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using LogitWebApp.Services.Offers;
-using LogitWebApp.Services.SeedDb;
 using LogitWebApp.Services.Orders;
 using LogitWebApp.Services.Drivers;
-using LogitWebApp.ViewModels.Drivers;
 using LogitWebApp.Services.Home;
 using Microsoft.AspNetCore.Mvc;
 
@@ -88,8 +86,7 @@ namespace LogitWebApp
                 options.AppSecret = "a4bd3196130530380091c1cb9f617e13";
             });
 
-            services.AddTransient<IOffersService, OffersService>();
-            services.AddTransient<ISeedService, SeedService>();
+            services.AddTransient<IOffersService, OffersService>();            
             services.AddTransient<IShortStringService, ShortStringService>();
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IDriversService, DriversService>();
@@ -97,13 +94,20 @@ namespace LogitWebApp
             services.AddTransient<IUsersService, UsersService>();
             services.AddScoped<IViewRenderService, ViewRenderService>();
             services.AddScoped<IHtmlToPdfConverter, HtmlToPdfConverter>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
+            // Seed data on application startup
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
+                dbContext.Database.Migrate();
+
+                new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+            }
 
             if (env.IsDevelopment())
             {
@@ -159,10 +163,7 @@ namespace LogitWebApp
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-            });
-
-            ApplicationDbInitializer.SeedRoles(roleManager).Wait();
-            ApplicationDbInitializer.SeedAdmin(userManager).Wait();
+            });            
         }
     }
 }

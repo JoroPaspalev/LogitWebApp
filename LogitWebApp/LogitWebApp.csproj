@@ -39,12 +39,6 @@
     <Compile Remove="Data\Migrations\20201111220636_ChangeCreatorColumnFromIntToString.Designer.cs" />
     <Compile Remove="Data\Migrations\20201111223159_fixedParticipantIdFromIntToString.cs" />
     <Compile Remove="Data\Migrations\20201111223159_fixedParticipantIdFromIntToString.Designer.cs" />
-    <Compile Remove="Migrations\20201111225405_initialSetup.cs" />
-    <Compile Remove="Migrations\20201111225405_initialSetup.Designer.cs" />
-    <Compile Remove="Migrations\20201111232312_ChangeInTableOrdersCreatortypeFromParticipantToApplicationUser.cs" />
-    <Compile Remove="Migrations\20201111232312_ChangeInTableOrdersCreatortypeFromParticipantToApplicationUser.Designer.cs" />
-    <Compile Remove="Migrations\20201112083150_ChangeDriverIdToBeGUID.cs" />
-    <Compile Remove="Migrations\20201112083150_ChangeDriverIdToBeGUID.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

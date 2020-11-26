@@ -1,9 +1,29 @@
-﻿@model OfferInputModel
+﻿@*@model OfferInputModel*@
+@using LogitWebApp.Views.Home; 
+@model TestViewModel
 
-<form class="pt-5 bg-danger">
-</form>
 
-<div>
+<div class="container pt-5">
+    <div class="row">
+        <form method="post" class="col-md-6 offset-md-3">
+            <div class="">
+                <label asp-for="CountOfPallets"></label>
+                <input asp-for="CountOfPallets" class="form-control" />
+                <span asp-validation-for="CountOfPallets" class="text-danger"></span>
+            </div>
+            <label asp-for="CategoryId"></label>
+            <select asp-for="CategoryId" class="form-control"></select>
+
+
+        </form>
+
+    </div>
+</div>
+
+
+
+
+@*<div>
     <partial name="_MyPartialView" model="Model" />
 </div>
 <div>
@@ -11,4 +31,4 @@
 </div>
 <div>
     <partial name="_MyPartialView" model="Model" />
-</div>
+</div>*@
