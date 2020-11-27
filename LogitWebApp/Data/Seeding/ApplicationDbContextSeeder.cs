@@ -27,6 +27,7 @@ namespace LogitWebApp.Data.Seeding
                 new RolesSeeder(),
                 new AdminSeeder(),
                 new DistancesSeeder(),
+                new CitiesSeeder(),
             };
 
             foreach (var seeder in seeders)

@@ -22,17 +22,21 @@ namespace LogitWebApp.Services.Orders
         {
             var currShipment = this.db.Shipments.FirstOrDefault(s=>s.Id == input.ShipmentId);
 
+            var fromCity = this.db.Shipments.Where(s => s.Id == input.ShipmentId).Select(x => new { Name = x.FromCity.Name }).First();
+
+            var toCity = this.db.Shipments.Where(s => s.Id == input.ShipmentId).Select(x => new { Name = x.ToCity.Name })
+                .First();
+
             var loadingAddress = new Address
             {
-                Town = currShipment.From,
+                Town = fromCity.Name,
                 Street = input.LoadingStreet,
-                StreetNumber = input.LoadingNumber,
-
+                StreetNumber = input.LoadingNumber
             };
 
             var unloadingAddress = new Address
             {
-                Town = currShipment.To,
+                Town = toCity.Name,
                 Street = input.UnloadingStreet,
                 StreetNumber = input.UnloadingNumber
             };

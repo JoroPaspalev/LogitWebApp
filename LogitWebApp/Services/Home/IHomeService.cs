@@ -1,13 +1,16 @@
-﻿using LogitWebApp.ViewModels.Offer;
-using System;
+﻿using LogitWebApp.Data.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using LogitWebApp.ViewModels.Offer;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LogitWebApp.Services.Home
 {
     public interface IHomeService
-    {
-        public string CreateShipment(OfferInputModel input);
+    {        
+        IEnumerable<SelectListItem> GetCities();
+
+        bool IsThereThatCity(int cityId);
+
+        string CreateShipment(OfferInputModel input);
     }
 }

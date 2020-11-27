@@ -20,12 +20,14 @@ namespace LogitWebApp.Data.Models
         public int CountOfPallets { get; set; }
 
         [Required]
-        [MaxLength(20)]
-        public string From { get; set; }
+        public int FromCityId { get; set; }
+
+        public virtual City FromCity { get; set; }
 
         [Required]
-        [MaxLength(20)]
-        public string To { get; set; }
+        public int ToCityId { get; set; }
+
+        public virtual City ToCity { get; set; }
 
         public string Description { get; set; }
 
@@ -55,11 +57,11 @@ namespace LogitWebApp.Data.Models
 
         public DateTime? LoadingDate { get; set; }
 
-        public DateTime? UnloadingDate { get; set; }       
-        
+        public DateTime? UnloadingDate { get; set; }
+
         public int? LoadingAddressId { get; set; }
         public virtual Address LoadingAddress { get; set; }
-        
+
         public int? UnloadingAddressId { get; set; }
         public virtual Address UnloadingAddress { get; set; }
 
@@ -71,9 +73,9 @@ namespace LogitWebApp.Data.Models
 
         [ForeignKey("Driver")]
         public string DriverId { get; set; }
+
         public virtual ApplicationUser Driver { get; set; }
 
         public virtual ICollection<Image> Images { get; set; }
-
     }
 }

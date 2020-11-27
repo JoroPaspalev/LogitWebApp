@@ -1,9 +1,14 @@
 ﻿
 @using LogitWebApp.ViewModels.Offer
+@using Microsoft.AspNetCore.Mvc.Rendering;
 @using Ganss.XSS
 @model OfferInputModel
 @{
     ViewData["Title"] = "Logit";
+
+    //List<SelectListItem> selectItems = Model.Cities.Select(c => new SelectListItem(c.Name, c.Name)).ToList();
+    //List<SelectListItem> onlyFirstFiveCities = Model.OnlyFirstFiveCities.Select(x => new SelectListItem(x.Name, x.Name)).ToList();
+
     //var data = "<script>alert('Hasked!');</script>";
     //var data1 = "<style> body{color: red;}</style>";
     //var data2 = "<p>You are Idiot!!! That is not escaped from Sanitizer!!!</p>";
@@ -34,36 +39,9 @@
                                 <div class="form-group">
                                     <label asp-for="From">От</label>
                                     <label asp-for="From" style="width: 100%;">
-                                        <select class="js-example-basic-single js-states form-control" name="from" id="From" style="width: 100%;">
-
-                                            <option value="София">София</option>
-                                            <option value="Пловдив">Пловдив</option>
-                                            <option value="Варна">Варна</option>
-                                            <option value="Бургас">Бургас</option>
-                                            <option value="Стара Загора">Стара Загора</option>
-                                            <option value="Русе">Русе</option>
-                                            <option value="Шумен">Шумен</option>
-                                            <option value="Плевен">Плевен</option>
-                                            <option value="Велико Търново">Велико Търново</option>
-                                            <option value="Благоевград">Благоевград</option>
-                                            <option value="Сливен">Сливен</option>
-                                            <option value="Ямбол">Ямбол</option>
-                                            <option value="Видин">Видин</option>
-                                            <option value="Враца">Враца</option>
-                                            <option value="Добрич">Добрич</option>
-                                            <option value="Габрово">Габрово</option>
-                                            <option value="Перник">Перник</option>
-                                            <option value="Хасково">Хасково</option>
-                                            <option value="Търговище">Търговище</option>
-                                            <option value="Смолян">Смолян</option>
-                                            <option value="Силистра">Силистра</option>
-                                            <option value="Разград">Разград</option>
-                                            <option value="Пазарджик">Пазарджик</option>
-                                            <option value="Монтана">Монтана</option>
-                                            <option value="Ловеч">Ловеч</option>
-                                            <option value="Кюстендил">Кюстендил</option>
-                                            <option value="Кърджали">Кърджали</option>
+                                        <select class="js-example-basic-single js-states form-control" asp-for="From" asp-items="@Model.Cities" style="width: 100%;">
                                         </select>
+                                        <span asp-validation-for="From" class="text-danger text-lowercase"></span>
                                     </label>
                                 </div>
                             </div>
@@ -72,37 +50,36 @@
                                 <div class="form-group">
                                     <label asp-for="To">До</label>
                                     <label asp-for="To" style="width: 100%;">
-                                        <select class="js-example-basic-single js-states form-control" name="to" id="To" style="width: 100%;">
-
-                                            <option value="Пловдив">Пловдив</option>
-                                            <option value="Варна">Варна</option>
-                                            <option value="Бургас">Бургас</option>
-                                            <option value="Стара Загора">Стара Загора</option>
-                                            <option value="Русе">Русе</option>
-                                            <option value="Шумен">Шумен</option>
-                                            <option value="Плевен">Плевен</option>
-                                            <option value="Велико Търново">Велико Търново</option>
-                                            <option value="Благоевград">Благоевград</option>
-                                            <option value="Сливен">Сливен</option>
-                                            <option value="Ямбол">Ямбол</option>
-                                            <option value="Видин">Видин</option>
-                                            <option value="Враца">Враца</option>
-                                            <option value="Добрич">Добрич</option>
-                                            <option value="Габрово">Габрово</option>
-                                            <option value="Перник">Перник</option>
-                                            <option value="Хасково">Хасково</option>
-                                            <option value="Търговище">Търговище</option>
-                                            <option value="Смолян">Смолян</option>
-                                            <option value="Силистра">Силистра</option>
-                                            <option value="Разград">Разград</option>
-                                            <option value="Пазарджик">Пазарджик</option>
-                                            <option value="Монтана">Монтана</option>
-                                            <option value="Ловеч">Ловеч</option>
-                                            <option value="Кюстендил">Кюстендил</option>
-                                            <option value="Кърджали">Кърджали</option>
-                                            <option value="София">София</option>
-
+                                        <select class="js-example-basic-single js-states form-control" asp-for="To" asp-items="@Model.Cities" style="width: 100%;">
+                                            @*<option value="София">София</option>
+                                                <option value="Пловдив">Пловдив</option>
+                                                <option value="Варна">Варна</option>
+                                                <option value="Бургас">Бургас</option>
+                                                <option value="Стара Загора">Стара Загора</option>*@
+                                            @*<option value="Русе">Русе</option>
+                                                <option value="Шумен">Шумен</option>
+                                                <option value="Плевен">Плевен</option>
+                                                <option value="Велико Търново">Велико Търново</option>
+                                                <option value="Благоевград">Благоевград</option>
+                                                <option value="Сливен">Сливен</option>
+                                                <option value="Ямбол">Ямбол</option>
+                                                <option value="Видин">Видин</option>
+                                                <option value="Враца">Враца</option>
+                                                <option value="Добрич">Добрич</option>
+                                                <option value="Габрово">Габрово</option>
+                                                <option value="Перник">Перник</option>
+                                                <option value="Хасково">Хасково</option>
+                                                <option value="Търговище">Търговище</option>
+                                                <option value="Смолян">Смолян</option>
+                                                <option value="Силистра">Силистра</option>
+                                                <option value="Разград">Разград</option>
+                                                <option value="Пазарджик">Пазарджик</option>
+                                                <option value="Монтана">Монтана</option>
+                                                <option value="Ловеч">Ловеч</option>
+                                                <option value="Кюстендил">Кюстендил</option>
+                                                <option value="Кърджали">Кърджали</option>*@
                                         </select>
+                                        <span asp-validation-for="To" class="text-danger text-lowercase"></span>
                                     </label>
                                 </div>
                             </div>
@@ -111,13 +88,11 @@
 
                         <div class='row mb-5'>
                             <div class="col-md-6">
-                                <label>Брой палети</label>
+                                <label asp-for="CountOfPallets">Брой палети</label>
                                 <div class="probootstrap_select-wrap">
                                     <label for="id_label_single2" style="width: 100%;">
-                                        <select class="js-example-basic-single js-states form-control" name="countOfPallets" id="id_label_single2" style="width: 100%;">
-
+                                        <select class="js-example-basic-single js-states form-control" asp-for="CountOfPallets" id="id_label_single2" style="width: 100%;">
                                             <option value="1">1</option>
-
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                             <option value="4">4</option>
@@ -126,6 +101,7 @@
                                             <option value="7">Над 6</option>
                                         </select>
                                     </label>
+                                    <span asp-validation-for="CountOfPallets" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -173,11 +149,11 @@
         </div>
     </div>
 
-   
+
 </section>
 
 @section LogitLogoImg
 {
-    <img src="~/img/logit15.png" /> 
+    <img src="~/img/logit15.png" />
 }
 

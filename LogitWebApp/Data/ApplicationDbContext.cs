@@ -32,6 +32,8 @@ namespace LogitWebApp.Data
 
         public DbSet<Distance> Distances { get; set; }
 
+        public DbSet<City> Cities { get; set; }
+
         public DbSet<Image> Images { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -78,6 +80,19 @@ namespace LogitWebApp.Data
               .WithMany(x => x.ShipmentReceivers)
               .HasForeignKey(x => x.ReceiverId)
               .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Shipment>()
+                 .HasOne(x => x.FromCity)
+                 .WithMany(x => x.ShipmentsFromThisCity)
+                 .HasForeignKey(x => x.FromCityId)
+                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Shipment>()
+                .HasOne(x => x.ToCity)
+                .WithMany(x => x.ShipmentsToThisCity)
+                .HasForeignKey(x => x.ToCityId)
+                .OnDelete(DeleteBehavior.Restrict);
+
 
         }
     }

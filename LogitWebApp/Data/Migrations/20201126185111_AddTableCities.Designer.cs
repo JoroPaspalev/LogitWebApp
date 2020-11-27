@@ -4,14 +4,16 @@ using LogitWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LogitWebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201126185111_AddTableCities")]
+    partial class AddTableCities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -292,8 +294,10 @@ namespace LogitWebApp.Migrations
                     b.Property<string>("DriverId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("FromCityId")
-                        .HasColumnType("int");
+                    b.Property<string>("From")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<double?>("Height")
                         .IsRequired()
@@ -330,8 +334,10 @@ namespace LogitWebApp.Migrations
                     b.Property<string>("SenderId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("ToCityId")
-                        .HasColumnType("int");
+                    b.Property<string>("To")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int?>("UnloadingAddressId")
                         .HasColumnType("int");
@@ -351,15 +357,11 @@ namespace LogitWebApp.Migrations
 
                     b.HasIndex("DriverId");
 
-                    b.HasIndex("FromCityId");
-
                     b.HasIndex("LoadingAddressId");
 
                     b.HasIndex("ReceiverId");
 
                     b.HasIndex("SenderId");
-
-                    b.HasIndex("ToCityId");
 
                     b.HasIndex("UnloadingAddressId");
 
@@ -539,12 +541,6 @@ namespace LogitWebApp.Migrations
                         .WithMany()
                         .HasForeignKey("DriverId");
 
-                    b.HasOne("LogitWebApp.Data.Models.City", "FromCity")
-                        .WithMany("ShipmentsFromThisCity")
-                        .HasForeignKey("FromCityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("LogitWebApp.Data.Models.Address", "LoadingAddress")
                         .WithMany("ShipmentsLoading")
                         .HasForeignKey("LoadingAddressId")
@@ -560,12 +556,6 @@ namespace LogitWebApp.Migrations
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("LogitWebApp.Data.Models.City", "ToCity")
-                        .WithMany("ShipmentsToThisCity")
-                        .HasForeignKey("ToCityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("LogitWebApp.Data.Models.Address", "UnloadingAddress")
                         .WithMany("ShipmentsUnloading")
                         .HasForeignKey("UnloadingAddressId")
@@ -573,15 +563,11 @@ namespace LogitWebApp.Migrations
 
                     b.Navigation("Driver");
 
-                    b.Navigation("FromCity");
-
                     b.Navigation("LoadingAddress");
 
                     b.Navigation("Receiver");
 
                     b.Navigation("Sender");
-
-                    b.Navigation("ToCity");
 
                     b.Navigation("UnloadingAddress");
                 });
@@ -642,13 +628,6 @@ namespace LogitWebApp.Migrations
                     b.Navigation("ShipmentsLoading");
 
                     b.Navigation("ShipmentsUnloading");
-                });
-
-            modelBuilder.Entity("LogitWebApp.Data.Models.City", b =>
-                {
-                    b.Navigation("ShipmentsFromThisCity");
-
-                    b.Navigation("ShipmentsToThisCity");
                 });
 
             modelBuilder.Entity("LogitWebApp.Data.Models.Participant", b =>

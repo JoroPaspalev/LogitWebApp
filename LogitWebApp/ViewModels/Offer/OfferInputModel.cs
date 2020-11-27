@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LogitWebApp.Attributes.ModelValidationAttributes;
+using LogitWebApp.Data.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,14 +13,16 @@ namespace LogitWebApp.ViewModels.Offer
     {
 
         //[BindNever] - Това означава да не се Binder-ва (mapp-ва) стойност за това пропърти. Трябва много да се внимава, защото ако това пропърти, както в момента е [Required], му сложа [BindNever] означава че няма да му търси стойност и ще остане default-ната му, което ще гръмне при проверката за [Required]
-        [Required]
-        public string From { get; set; }
+        [Required(ErrorMessage ="Изберете един от посочените градове!")]
+        [CheckCityExist]
+        public int From { get; set; }
+
+        [Required(ErrorMessage = "Изберете един от посочените градове!")]
+        [CheckCityExist]
+        public int To { get; set; }
 
         [Required]
-        public string To { get; set; }
-
-        [Required]
-        [Range(1, 30, ErrorMessage = "Броя на превозваните палети не трябва да надвишава 30бр.")]
+        [Range(1, 30, ErrorMessage = "Броя на превозваните палети трябва да е между 1 и 30бр.")]
         public int CountOfPallets { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Полето Ширина на палета не може да бъде празно!")]
@@ -39,5 +44,9 @@ namespace LogitWebApp.ViewModels.Offer
         public bool IsExpressDelivery { get; set; }
 
         public bool IsFragile { get; set; }
+
+        public IEnumerable<SelectListItem> Cities{ get; set; }
+
+        public IEnumerable<City> OnlyFirstFiveCities{ get; set; }
     }
 }

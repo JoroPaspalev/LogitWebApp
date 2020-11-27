@@ -32,7 +32,7 @@ namespace LogitWebApp.Controllers
             //ще си вземе по shipmentId Shipment-а и ще го подаде на View-то което ще покаже офертата с цената
             Shipment currShipment = this.offersService.GetShipmentById(ShipmentId);
 
-            Shipment offerForShipment = this.offersService.GetOffer(currShipment);
+            ShipmentViewModel offerForShipment = this.offersService.GetOffer(currShipment);
 
             return this.View(offerForShipment);
 

@@ -614,7 +614,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
     <Folder Include="Views\Shipment\" />
     <Folder Include="wwwroot\lib\jquery\dist\" />
   </ItemGroup>

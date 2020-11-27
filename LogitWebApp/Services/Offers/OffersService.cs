@@ -2,26 +2,31 @@
 using LogitWebApp.Data.Models;
 using static LogitWebApp.Common.GlobalConstants;
 using System.Linq;
-
+using LogitWebApp.ViewModels.Offer;
 
 namespace LogitWebApp.Services.Offers
 {
     public class OffersService : IOffersService
     {
-        private readonly ApplicationDbContext db;       
+        private readonly ApplicationDbContext db;
 
         public OffersService(ApplicationDbContext db)
         {
             this.db = db;
         }
 
-        public Shipment GetOffer(Shipment input)
+        public ShipmentViewModel GetOffer(Shipment input)
         {
+            var fromCity = this.db.Shipments.Where(s => s.Id == input.Id).Select(x => new { Name = x.FromCity.Name }).First();
+
+            var toCity = this.db.Shipments.Where(s => s.Id == input.Id).Select(x => new { Name = x.ToCity.Name })
+                .First();
+
             double kilometers = this.db.Distances
                 .Where(d =>
-                (d.FromCity.ToLower() == input.From.ToLower() && d.ToCity.ToLower() == input.To.ToLower())
+                (d.FromCity.ToLower() == fromCity.Name.ToLower() && d.ToCity.ToLower() == toCity.Name.ToLower())
                 ||
-                (d.FromCity.ToLower() == input.To.ToLower() && d.ToCity.ToLower() == input.From.ToLower())
+                (d.FromCity.ToLower() == toCity.Name.ToLower() && d.ToCity.ToLower() == fromCity.Name.ToLower())
                 )
                 .Select(x => x.DistanceInKM)
                 .FirstOrDefault();
@@ -66,8 +71,22 @@ namespace LogitWebApp.Services.Offers
 
             input.Price = cellingPricePerPallet * input.CountOfPallets;
             this.db.SaveChanges();
-           
-            return input;
+
+            var viewModel = new ShipmentViewModel
+            {
+                Id = input.Id,
+                From = fromCity.Name,
+                To = toCity.Name,
+                CountOfPallets = input.CountOfPallets,
+                Length = input.Length,
+                Width = input.Width,
+                Height = input.Height,
+                Weight = input.Weight,
+                Price = input.Price,
+                IsExpressDelivery = input.IsExpressDelivery
+            };
+
+            return viewModel;
         }
 
         public Shipment GetShipmentById(string shipmentId)

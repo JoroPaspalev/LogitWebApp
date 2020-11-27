@@ -22,8 +22,9 @@ namespace LogitWebApp.Controllers
 
         public IActionResult Index()
         {
-            var isAuthenticated = this.HttpContext.User.Identity.IsAuthenticated;
-            return View();
+            var model = new OfferInputModel();
+            model.Cities = this.homeService.GetCities();
+            return View(model);
         }
 
         [HttpPost]
@@ -31,15 +32,16 @@ namespace LogitWebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return this.View();
+                input.Cities = this.homeService.GetCities();
+                return this.View(input);
             }
 
-            if (input.From.ToLower() == input.To.ToLower())
+            if (input.From == input.To)
             {
                 return this.Redirect($"/Offers/ShipmentInSameCity?cityName={input.From}");
             }
 
-           string shipmentId = this.homeService.CreateShipment(input);
+            string shipmentId = this.homeService.CreateShipment(input);
 
             return this.RedirectToAction("Calculate", "Offers", new { ShipmentId = shipmentId });
         }

@@ -4,14 +4,16 @@ using LogitWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LogitWebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201127125504_new")]
+    partial class @new
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -292,7 +294,10 @@ namespace LogitWebApp.Migrations
                     b.Property<string>("DriverId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("FromCityId")
+                    b.Property<string>("From")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("FromCityId")
                         .HasColumnType("int");
 
                     b.Property<double?>("Height")
@@ -330,7 +335,10 @@ namespace LogitWebApp.Migrations
                     b.Property<string>("SenderId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("ToCityId")
+                    b.Property<string>("To")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ToCityId")
                         .HasColumnType("int");
 
                     b.Property<int?>("UnloadingAddressId")
@@ -542,8 +550,7 @@ namespace LogitWebApp.Migrations
                     b.HasOne("LogitWebApp.Data.Models.City", "FromCity")
                         .WithMany("ShipmentsFromThisCity")
                         .HasForeignKey("FromCityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("LogitWebApp.Data.Models.Address", "LoadingAddress")
                         .WithMany("ShipmentsLoading")
@@ -563,8 +570,7 @@ namespace LogitWebApp.Migrations
                     b.HasOne("LogitWebApp.Data.Models.City", "ToCity")
                         .WithMany("ShipmentsToThisCity")
                         .HasForeignKey("ToCityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("LogitWebApp.Data.Models.Address", "UnloadingAddress")
                         .WithMany("ShipmentsUnloading")

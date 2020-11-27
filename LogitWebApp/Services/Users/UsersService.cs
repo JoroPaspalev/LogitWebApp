@@ -22,8 +22,8 @@ namespace LogitWebApp.Services.Users
                 .Select(x => new UserOrderViewModel
                 {
                     OrderId = x.Id,
-                    From = x.Shipment.From,
-                    To = x.Shipment.To,
+                    From = x.Shipment.FromCity.Name,
+                    To = x.Shipment.ToCity.Name,
                     CountOfPallets = x.Shipment.CountOfPallets,
                     Width = x.Shipment.Width,
                     Length = x.Shipment.Length,
@@ -57,8 +57,8 @@ namespace LogitWebApp.Services.Users
                  .Select(x => new UserOrderViewModel
                  {
                      OrderId = x.Id,
-                     From = x.Shipment.From,
-                     To = x.Shipment.To,
+                     From = x.Shipment.FromCity.Name,
+                     To = x.Shipment.ToCity.Name,
                      CountOfPallets = x.Shipment.CountOfPallets,
                      Width = x.Shipment.Width,
                      Length = x.Shipment.Length,
