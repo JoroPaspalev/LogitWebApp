@@ -46,7 +46,5 @@ namespace LogitWebApp.ViewModels.Offer
         public bool IsFragile { get; set; }
 
         public IEnumerable<SelectListItem> Cities{ get; set; }
-
-        public IEnumerable<City> OnlyFirstFiveCities{ get; set; }
     }
 }

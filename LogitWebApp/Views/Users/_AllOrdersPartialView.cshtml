@@ -155,13 +155,12 @@
                 <!--<div class="col-xl-2">
                     <div class="row p-3 ">
                         <div class="col-12">-->
+                @*<label for="file-upload" class="custom-file-upload">
+                    <i class="fa fa-cloud-upload"></i>Качи снимка</label>
+                    <input hidden type="file" id="file-upload" asp-for="@editShipment.Picture" name="Picture"/>
+                    <span asp-validation-for="@editShipment.Picture"></span>*@
 
-                            @*<label for="file-upload" class="custom-file-upload">
-                                <i class="fa fa-cloud-upload"></i>Качи снимка</label>
-                                <input hidden type="file" id="file-upload" asp-for="@editShipment.Picture" name="Picture"/>
-                                <span asp-validation-for="@editShipment.Picture"></span>*@
-
-                        <!--</div>
+                <!--</div>
                     </div>
                 </div>-->
             </div>
@@ -172,5 +171,12 @@
 <form method="post" asp-controller="Export" asp-action="GetPdf" class="ml-2 mt-2">
     <input type="text" readonly hidden asp-for="@Model.OrderId" name="orderId" />
     <input type="submit" class="btn btn-sm btn-success m-2 p-2" value="Смъкни .pdf" />
+    <span class="inline-block">
+        @foreach (var image in Model.Images)
+        {
+            <a href="/Users/ShowImages?orderId=@Model.OrderId" target="_blank">
+                <img src="@image.ImageUrl" style="width: 50px;" />
+            </a>
+        }
+    </span>
 </form>
-

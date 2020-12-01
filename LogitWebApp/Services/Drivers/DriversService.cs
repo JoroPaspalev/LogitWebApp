@@ -66,6 +66,7 @@ namespace LogitWebApp.Services.Drivers
         {
             var myShipments = this.db.Shipments
                 .Where(x => x.DriverId == driverId && x.LoadingAddress != null && x.UnloadingAddress != null)
+                .OrderBy(x => x.LoadingDate)
                 .Select(s => new AllShipmentsWithAddresses
                 {
                     Id = s.Id,
@@ -81,7 +82,8 @@ namespace LogitWebApp.Services.Drivers
                     LoadingDate = s.LoadingDate ?? DateTime.UtcNow,
                     UnloadingDate = s.UnloadingDate ?? DateTime.UtcNow,
                     IsDelivered = s.IsDelivered
-                }).ToList();
+                })
+                .ToList();
 
             return myShipments;
         }
@@ -97,6 +99,11 @@ namespace LogitWebApp.Services.Drivers
             currShipment.CountOfPallets = input.CountOfPallets ?? 0;
             currShipment.Comment = input.Comment;
             currShipment.IsDelivered = input.IsDelivered;
+
+            if (input.Image != null)
+            {
+                currShipment.Images.Add(input.Image);
+            }
 
             this.db.SaveChanges();
         }

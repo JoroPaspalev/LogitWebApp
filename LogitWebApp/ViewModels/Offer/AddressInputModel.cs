@@ -96,7 +96,6 @@ namespace LogitWebApp.ViewModels.Offer
             {
                 yield return new ValidationResult("Your shipment cannot stay more than 1 week in our warehouse!", new List<string>() { "UnloadingDate", "LoadingDate" });
             }
-
         }
     }
 }

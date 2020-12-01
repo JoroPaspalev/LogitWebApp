@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogitWebApp.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -56,5 +57,7 @@ namespace LogitWebApp.ViewModels.Users
         public string DriverFirstName { get; set; }
 
         public string DriverLastName { get; set; }
+
+        public ICollection<Image> Images { get; set; }
     }
 }

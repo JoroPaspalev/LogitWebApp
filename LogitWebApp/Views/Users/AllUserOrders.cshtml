@@ -1,5 +1,5 @@
-﻿@using LogitWebApp.ViewModels.Users;
-@model List<UserOrderViewModel>
+﻿@using LogitWebApp.ViewModels.Pagination;
+@model PaginationViewModel
 
 <section class="probootstrap-cover overflow-hidden relative" style="background-image: url('/img/bg_1.jpg');" data-stellar-background-ratio="0.5" id="section-home">
     <div class="overlay"></div>
@@ -9,32 +9,32 @@
 
                 <!--This is option with TABLE-->
                 @*<table class="table table-striped table-dark">
-                    <thead class="">
-                        <tr>
-                            <th scope="col">Изпращач</th>
-                            <th scope="col">От град</th>
-                            <th scope="col">Получател</th>
-                            <th scope="col">До град</th>
-                            <th scope="col">Палети</th>
-                            <th scope="col">Цена</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        @foreach (var order in Model)
-                        {
-                            <tr class="bg-light text-dark">
-                                <td scope="row">@order.Sender</td>
-                                <td>@order.From</td>
-                                <td>@order.Receiver</td>
-                                <td>@order.To</td>
-                                <td>@order.CountOfPallets</td>
-                                <td>@order.Price</td>
+                        <thead class="">
+                            <tr>
+                                <th scope="col">Изпращач</th>
+                                <th scope="col">От град</th>
+                                <th scope="col">Получател</th>
+                                <th scope="col">До град</th>
+                                <th scope="col">Палети</th>
+                                <th scope="col">Цена</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>*@
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var order in Model)
+                            {
+                                <tr class="bg-light text-dark">
+                                    <td scope="row">@order.Sender</td>
+                                    <td>@order.From</td>
+                                    <td>@order.Receiver</td>
+                                    <td>@order.To</td>
+                                    <td>@order.CountOfPallets</td>
+                                    <td>@order.Price</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>*@
 
 
                 <div class="">
@@ -43,45 +43,52 @@
 
                             <div id="sources-list" class="u-accordion" role="tablist" aria-multiselectable="true">
 
-                                @foreach (var order in Model)
+                                @*@for (int i = 0; i < 6; i++)
                                 {
-                                    <p class="p-0 mb-1">                                       
+                                    <p class="p-0 mb-1">
+                                        <button class="btn btn-warning btn-rad btn-block text-left " type="button" data-toggle="collapse" data-target="#@Model[i].OrderId" aria-expanded="false" aria-controls="@Model[i].OrderId">
+                                            От: @Model[i].Sender/@Model[i].From <span class="text-light font-weight-bold">За: @Model[i].Receiver/@Model[i].To</span> - Палети @Model[i].CountOfPallets бр. Цена: @Model[i].Price
+                                        </button>
+                                    </p>
+                                    <div class="collapse" id="@Model[i].OrderId">
+                                        <div class="card card-body text-dark">
+
+                                            <partial name="_AllOrdersPartialView" , model="Model[i]" />
+
+
+                                        </div>
+                                    </div>
+                                }*@
+
+
+                                @foreach (var order in Model.Orders)
+                                {
+                                    <p class="p-0 mb-1">
                                         <button class="btn btn-warning btn-rad btn-block text-left " type="button" data-toggle="collapse" data-target="#@order.OrderId" aria-expanded="false" aria-controls="@order.OrderId">
                                             От: @order.Sender/@order.From <span class="text-light font-weight-bold">За: @order.Receiver/@order.To</span> - Палети @order.CountOfPallets бр. Цена: @order.Price
                                         </button>
                                     </p>
                                     <div class="collapse" id="@order.OrderId">
-                                        <div class="card card-body text-dark">
-                                           
-                                            <partial name="_AllOrdersPartialView", model="order" />
+                                        <div class="card card-body text-dark mb-2">
 
+                                            <partial name="_AllOrdersPartialView" , model="order" />
 
                                         </div>
                                     </div>
                                 }
-
-
-
                             </div>
                         </div>
                     </div>
 
+                    <partial name="_PaginationPartialView" model="@Model">
 
-
-
-
-                    <a href="/proof/1.jpg" class="nav nav-mtd tabs-info z-depth-1">Отвори снимката</a>
-
-                    @*Този таг ми показва директно снимката на дисплея без да има линк който да натисна за да се покаже*@
-                    <img src="/proof/1.jpg" />
-
-
+                        <!--<a href="/proof/1.jpg" class="nav nav-mtd tabs-info z-depth-1">Отвори снимката</a>-->
+                        @*Този таг ми показва директно снимката на дисплея без да има линк който да натисна за да се покаже*@
+                        <!--<img src="/proof/1.jpg" />-->
 
 
                 </div>
             </div>
         </div>
-
 </section>
 <!-- END section -->
-

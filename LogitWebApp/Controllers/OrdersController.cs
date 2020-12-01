@@ -26,7 +26,7 @@ namespace LogitWebApp.Controllers
         {
             this.ViewBag.ShipmentId = shipmentId;
 
-            return this.View();//Ще се връща View с всички поръчки на дадения потребител като последната ще е най-отгоре
+            return this.View();
         }
 
         [HttpPost]

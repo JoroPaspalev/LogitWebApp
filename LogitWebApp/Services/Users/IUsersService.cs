@@ -1,4 +1,5 @@
-﻿using LogitWebApp.ViewModels.Users;
+﻿using LogitWebApp.ViewModels.Pagination;
+using LogitWebApp.ViewModels.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,10 @@ namespace LogitWebApp.Services.Users
 {
     public interface IUsersService
     {
-        public IEnumerable<UserOrderViewModel> GetAllUserOrders(string userId);
+        PaginationViewModel GetAllUserOrders(string userId, int id, int items = 6);
 
-        public UserOrderViewModel GetOrder(string orderId);
+        UserOrderViewModel GetOrder(string orderId);
+
+        UserOrderViewModel GetImages(string orderId);
     }
 }

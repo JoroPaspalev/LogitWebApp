@@ -1,0 +1,76 @@
+﻿@using LogitWebApp.ViewModels.Pagination;
+@model PaginationViewModel
+
+<nav aria-label="..." class="pt-3">
+    <ul class="pagination justify-content-center">
+
+        @if (Model.HasPreviousPage)
+        {
+            <li class="page-item ">
+                <a class="page-link text-secondary" asp-controller="Users" asp-action="AllUserOrders" asp-route-id="@Model.PreviousPage">Предишна</a>
+            </li>
+
+            for (int i = Model.PageNumber - 5; i < Model.PageNumber; i++)
+            {
+                if (i > 0)
+                {
+                    <li class="page-item"><a class="page-link text-secondary" asp-controller="Users" asp-action="AllUserOrders" asp-route-id="@i">@i</a></li>
+                }
+            }
+
+            @*for (int i = 5; i > 0; i--)
+            {
+                int pageOfI = Model.PageNumber - i;
+
+                if (Model.PageNumber > i)
+                {
+                    <li class="page-item"><a class="page-link text-secondary" asp-controller="Users" asp-action="AllUserOrders" asp-route-id="@pageOfI">@pageOfI</a></li>
+                }
+            }*@
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <span class="page-link">Предишна</span>
+            </li>
+        }
+
+        <li class="page-item active">
+            <span class="page-link bg-warning border border-warning">
+                @Model.PageNumber
+                <span class="sr-only"> @Model.PageNumber</span>
+            </span>
+        </li>
+
+        @if (Model.HasNextPage)
+        {
+            for (int i = Model.PageNumber + 1; i <= Model.PageNumber + 5; i++)
+            {
+                if (i <= Model.TotalPagesCount)
+                {
+                    <li class="page-item"><a class="page-link text-secondary" asp-controller="Users" asp-action="AllUserOrders" asp-route-id="@i">@i</a></li>
+                }
+            }
+
+            @*for (int i = 1; i <= 5; i++)
+            {
+                var pageOfI = Model.PageNumber + i;
+
+                if ((Model.PageNumber + i) <= Model.TotalPagesCount)
+                {
+                    <li class="page-item"><a class="page-link text-secondary" asp-controller="Users" asp-action="AllUserOrders" asp-route-id="@pageOfI">@pageOfI</a></li>
+                }
+            }*@
+
+            <li class="page-item">
+                <a class="page-link text-secondary" asp-controller="Users" asp-action="AllUserOrders" asp-route-id="@Model.NextPage">Следваща</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <a class="page-link">Следваща</a>
+            </li>
+        }
+    </ul>
+</nav>

@@ -1,4 +1,5 @@
 ﻿using LogitWebApp.Attributes.ModelValidationAttributes;
+using LogitWebApp.Data.Models;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -40,5 +41,7 @@ namespace LogitWebApp.ViewModels.Drivers
         [Accept_Only_jpg_png]
         [ValidateImageSize(2)]
         public IFormFile Picture { get; set; }
+
+        public Image Image { get; set; }
     }
 }

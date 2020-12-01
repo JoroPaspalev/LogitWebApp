@@ -51,11 +51,6 @@ namespace LogitWebApp.Controllers
             throw new Exception("Error message by JP");
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

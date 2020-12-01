@@ -1,5 +1,7 @@
 ﻿using LogitWebApp.Data;
+using LogitWebApp.ViewModels.Pagination;
 using LogitWebApp.ViewModels.Users;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +18,12 @@ namespace LogitWebApp.Services.Users
             this.db = db;
         }
 
-        public IEnumerable<UserOrderViewModel> GetAllUserOrders(string userId)
+        public PaginationViewModel GetAllUserOrders(string userId, int id, int items = 6)
         {
-            var AllOrders = this.db.Orders.Where(o => o.CreatorId == userId)
+            var ordersPerPage = this.db.Orders.Where(o => o.CreatorId == userId)
+                .OrderByDescending(x => x.Shipment.OrderCreatedOn)
+                .Skip((id - 1) * items)
+                .Take(items)
                 .Select(x => new UserOrderViewModel
                 {
                     OrderId = x.Id,
@@ -43,12 +48,25 @@ namespace LogitWebApp.Services.Users
                     OrderCreatedOn = x.Shipment.OrderCreatedOn,
                     Price = x.Shipment.Price.ToString("F2"),
                     DriverFirstName = x.Shipment.Driver.FirstName,
-                    DriverLastName = x.Shipment.Driver.LastName
+                    DriverLastName = x.Shipment.Driver.LastName,
+                    Images = x.Shipment.Images
                 })
-                .OrderByDescending(x => x.OrderCreatedOn)
                 .ToList();
 
-            return AllOrders;
+            var paginationViewModel = new PaginationViewModel
+            {
+                PageNumber = id,
+                Orders = ordersPerPage,
+                OrdersCount = this.db.Orders.Where(o => o.CreatorId == userId).Count(),
+                ItemsPerPage = items
+            };
+
+            return paginationViewModel;
+        }
+
+        public UserOrderViewModel GetImages(string orderId)
+        {
+            throw new NotImplementedException();
         }
 
         public UserOrderViewModel GetOrder(string orderId)
@@ -78,7 +96,8 @@ namespace LogitWebApp.Services.Users
                      OrderCreatedOn = x.Shipment.OrderCreatedOn,
                      Price = x.Shipment.Price.ToString("F2"),
                      DriverFirstName = x.Shipment.Driver.FirstName,
-                     DriverLastName = x.Shipment.Driver.LastName
+                     DriverLastName = x.Shipment.Driver.LastName,
+                     Images = x.Shipment.Images
                  })
                  .FirstOrDefault();
 

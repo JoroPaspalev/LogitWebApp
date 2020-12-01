@@ -57,7 +57,7 @@ namespace LogitWebApp.Controllers
         }
 
         [HttpPost]
-        public async Task< IActionResult> DeleteDriver(DeleteDriverInputModel input)
+        public async Task<IActionResult> DeleteDriver(DeleteDriverInputModel input)
         {
             if (!this.driversService.IsDriverExist(input.Email))
             {
@@ -190,11 +190,28 @@ namespace LogitWebApp.Controllers
                 var extension = input.Picture.FileName.Substring(index);
 
                 //Отвори ми файлов стрийм към wwwroot/proof/име на файла в режим на създаване на нов файл и вземи данните от Picture и ми ги копирай в посочения stream
-                using (FileStream fileStream = new FileStream(this.webHostEnvironment.WebRootPath + "/proof/" + input.ShipmentId + "__" + currDate + "." + extension, FileMode.Create))
+                string imageUrl = "/proof/" + input.ShipmentId + "__" + currDate + "." + extension;
+
+                using (FileStream fileStream = new FileStream(this.webHostEnvironment.WebRootPath + imageUrl, FileMode.Create))
                 {
                     await input.Picture.CopyToAsync(fileStream);
                 }
-            }
+
+
+                //Трябва да създам нова снимка new Image и да и попълня properties
+                //Създадената снимка я добявам в List<Image> на Shipment
+                var currDriver = await this.userManager.GetUserAsync(User);
+                var currImage = new Image
+                {
+                    Extension = extension,
+                    ShipmentId = input.ShipmentId,
+                    AddedByDriverId = currDriver.Id,
+                    CreatedOn = DateTime.UtcNow,
+                    ImageUrl = imageUrl
+                };
+
+                input.Image = currImage;
+            }           
 
             //TODO - chain .jpg file with shipmentId
 

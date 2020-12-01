@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using LogitWebApp.Attributes.ModelValidationAttributes;
 
 namespace LogitWebApp.Areas.Identity.Pages.Account
 {
@@ -44,14 +45,14 @@ namespace LogitWebApp.Areas.Identity.Pages.Account
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
-        public class InputModel
+        public class InputModel : IValidatableObject
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Задължително поле!")]
+            [EmailAddress(ErrorMessage ="Невалиден email!")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage ="Задължително поле!")]
             [StringLength(50, ErrorMessage = "Дължината на паролата трябва да е между 6 и 50 символа", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Парола")]
@@ -62,15 +63,15 @@ namespace LogitWebApp.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "Паролите не съвпадат!")]
             public string ConfirmPassword { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Задължително поле!")]
             [Display(Name = "Фирма")]
             public string CompanyName { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Задължително поле!")]
             [Display(Name = "Адрес")]
             public string Address { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Задължително поле!")]
             [RegularExpression(@"^\+359[0-9]{9}$")]
             [Display(Name = "Мобилен номер")]
             public string PhoneNumber { get; set; }
@@ -78,22 +79,31 @@ namespace LogitWebApp.Areas.Identity.Pages.Account
             [Display(Name = "Факс")]
             public long? Fax { get; set; }
 
-
             [Display(Name = "ДДС Номер")]
+            [BulstatMustStartsWithBG]
             public string VatNumber { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Задължително поле!")]
             [Display(Name = "ЕИК")]
-            [RegularExpression(@"^[0-9]{9}$")] //117616084
+            [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "Булстата съдържа точно 9 на брой цифри!")] //117616084
+            [ValidateBulstat]            
             public int Bulstat { get; set; }
 
-            [Required]
-            [RegularExpression(@"^[а-яА-Яa-zA-z]+ [а-яА-Яa-zA-z]+ [а-яА-Яa-zA-z]+$")]
+            [Required(ErrorMessage = "Полето Управител не може да бъде празно!")]
+            [RegularExpression(@"^[а-яА-Яa-zA-z]+ [а-яА-Яa-zA-z]+ [а-яА-Яa-zA-z]+$", ErrorMessage = "Имената на управителя трябва да започват с голяма буква на кирилица, последвана само от малки!")]
             [Display(Name = "Управител")]
             public string Manager { get; set; }
 
             [Display(Name = "Сайт")]
             public string Site { get; set; }
+
+            public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+            {
+                if (this.VatNumber != "BG" + this.Bulstat.ToString())
+                {
+                    yield return new ValidationResult("ДДС и ЕИК номера не съвпадат!", new List<string>() { "Bulstat", "VatNumber" });
+                }
+            }
         }
 
         public async Task OnGetAsync(string returnUrl = null)

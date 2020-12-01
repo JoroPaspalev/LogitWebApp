@@ -2,6 +2,7 @@
 using LogitWebApp.Services.Export;
 using LogitWebApp.Services.Users;
 using LogitWebApp.ViewModels.Drivers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -36,6 +37,7 @@ namespace LogitWebApp.Controllers
             this.usersService = usersService;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> GetPdf(string orderId)
         {
@@ -54,6 +56,5 @@ namespace LogitWebApp.Controllers
             return this.File(fileContents, "application/pdf");
 
         }
-
     }
 }
