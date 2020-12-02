@@ -12,9 +12,12 @@ namespace LogitWebApp.Attributes.ModelValidationAttributes
 
             if (value != null)
             {
-                if (!((IFormFile)value).FileName.EndsWith(".png") && !((IFormFile)value).FileName.EndsWith(".jpg"))
+                foreach (var file in ((IEnumerable<IFormFile>)value))
                 {
-                    return new ValidationResult("Можете да качвате само файлове с разширение .png и .jpg!", new List<string>() { "Picture" });
+                    if (!file.FileName.EndsWith(".png") && !file.FileName.EndsWith(".jpg"))
+                    {
+                        return new ValidationResult("Можете да качвате само файлове с разширение .png и .jpg!", new List<string>() { "Pictures" });
+                    }
                 }
             }
 

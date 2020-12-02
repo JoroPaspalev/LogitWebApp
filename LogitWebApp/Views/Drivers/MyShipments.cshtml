@@ -1,6 +1,6 @@
 ﻿
 @using LogitWebApp.ViewModels.Drivers
-@model IEnumerable<AllShipmentsWithAddresses>
+@model DriverShipmentsPaginationViewModel
 
 <section class="probootstrap-cover overflow-hidden relative" style="background-image: url('/img/bg_1.jpg');" data-stellar-background-ratio="0.5" id="section-home">
     <div class="overlay"></div>
@@ -16,7 +16,7 @@
                     <div class="container pl-1 pr-1">
                         <table class="table table-sm  table-shipments">
                             <tbody>
-                                @foreach (var editShipment in Model)
+                                @foreach (var editShipment in Model.DriverShipmentsOfCurrentPage)
                                 {
                                     <form method="post" asp-controller="Drivers" asp-action="Edit">
                                         <tr class=" pt-5 m-5 ">
@@ -135,6 +135,9 @@
                                 }
                             </tbody>
                         </table>
+
+                        <partial name="_PaginationPartialView" model="Model" />
+
                     </div>
                 </section>
             </div>

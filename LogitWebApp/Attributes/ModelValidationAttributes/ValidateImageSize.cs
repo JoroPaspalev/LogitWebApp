@@ -20,9 +20,12 @@ namespace LogitWebApp.Attributes.ModelValidationAttributes
         {
             if (value != null)
             {
-                if (((IFormFile)value).Length > imgSize * 1024 * 1024) //по-голяма ли е от imgSize MB --> Error
+                foreach (var file in ((IEnumerable<IFormFile>)value))
                 {
-                    return new ValidationResult($"Можете да качвате файлове до {imgSize}MB!", new List<string>() { "Picture" });
+                    if (file.Length > imgSize * 1024 * 1024) //по-голяма ли е от imgSize MB --> Error
+                    {
+                        return new ValidationResult($"Можете да качвате файлове до {imgSize}MB!", new List<string>() { "Pictures" });
+                    }
                 }
             }
 

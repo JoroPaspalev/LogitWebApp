@@ -76,6 +76,6 @@ namespace LogitWebApp.Data.Models
 
         public virtual ApplicationUser Driver { get; set; }
 
-        public virtual ICollection<Image> Images { get; set; }
+        public virtual IEnumerable<Image> Images { get; set; }
     }
 }

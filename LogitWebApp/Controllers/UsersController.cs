@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LogitWebApp.Controllers
 {
+    [Authorize(Roles = "User, Admin")]
     public class UsersController : Controller
     {
         private readonly IWebHostEnvironment webHostEnvironment;
@@ -26,13 +27,12 @@ namespace LogitWebApp.Controllers
             this.userManager = userManager;
         }
 
-        [Authorize]
         public IActionResult AllUserOrders(int id = 1)
         {
             //Ще се връща View с всички поръчки на дадения потребител като последната ще е най-отгоре
             var userId = this.userManager.GetUserId(User);
 
-            PaginationViewModel allShipments = this.usersService.GetAllUserOrders(userId, id, 1);
+            PaginationViewModel allShipments = this.usersService.GetAllUserOrders(userId, id, 6);
 
             return View(allShipments);
 
@@ -41,14 +41,11 @@ namespace LogitWebApp.Controllers
             //<img style="-webkit-user-select: none;margin: auto;cursor: zoom-in;" src="https://localhost:44314/users/AllUserShipments" width="524" height="272">
         }
 
-
         public IActionResult ShowImages(string orderId)
         {
             UserOrderViewModel model = this.usersService.GetOrder(orderId);
 
             return this.View(model);
         }
-
-
     }
 }

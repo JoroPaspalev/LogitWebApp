@@ -1,2 +1,0 @@
-1. a computer which stores a website or other data that can be accessed over the Internet or which provides other services to a network.
-2. store (a website or other data) on a server or other computer so that it can be accessed over the Internet.

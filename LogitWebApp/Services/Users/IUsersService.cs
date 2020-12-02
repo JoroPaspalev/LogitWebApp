@@ -13,6 +13,6 @@ namespace LogitWebApp.Services.Users
 
         UserOrderViewModel GetOrder(string orderId);
 
-        UserOrderViewModel GetImages(string orderId);
+      
     }
 }

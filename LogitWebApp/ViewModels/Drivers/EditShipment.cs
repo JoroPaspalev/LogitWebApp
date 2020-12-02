@@ -11,6 +11,11 @@ namespace LogitWebApp.ViewModels.Drivers
 {
     public class EditShipment
     {
+        public EditShipment()
+        {
+            this.Images = new List<Image>();
+        }
+
         [Required(ErrorMessage = "Задължително поле")]
         public string ShipmentId { get; set; }
 
@@ -40,8 +45,8 @@ namespace LogitWebApp.ViewModels.Drivers
 
         [Accept_Only_jpg_png]
         [ValidateImageSize(2)]
-        public IFormFile Picture { get; set; }
+        public IEnumerable<IFormFile> Pictures { get; set; }
 
-        public Image Image { get; set; }
+        public ICollection<Image> Images { get; set; }
     }
 }

@@ -49,24 +49,19 @@ namespace LogitWebApp.Services.Users
                     Price = x.Shipment.Price.ToString("F2"),
                     DriverFirstName = x.Shipment.Driver.FirstName,
                     DriverLastName = x.Shipment.Driver.LastName,
-                    Images = x.Shipment.Images
+                    Images = x.Shipment.Images.ToList()
                 })
                 .ToList();
 
-            var paginationViewModel = new PaginationViewModel
+            var paginationViewModel = new OrdersPaginationViewModel
             {
                 PageNumber = id,
                 Orders = ordersPerPage,
-                OrdersCount = this.db.Orders.Where(o => o.CreatorId == userId).Count(),
+                ItemsCount = this.db.Orders.Where(o => o.CreatorId == userId).Count(),
                 ItemsPerPage = items
             };
 
             return paginationViewModel;
-        }
-
-        public UserOrderViewModel GetImages(string orderId)
-        {
-            throw new NotImplementedException();
         }
 
         public UserOrderViewModel GetOrder(string orderId)
@@ -97,7 +92,7 @@ namespace LogitWebApp.Services.Users
                      Price = x.Shipment.Price.ToString("F2"),
                      DriverFirstName = x.Shipment.Driver.FirstName,
                      DriverLastName = x.Shipment.Driver.LastName,
-                     Images = x.Shipment.Images
+                     Images = x.Shipment.Images.ToList()
                  })
                  .FirstOrDefault();
 

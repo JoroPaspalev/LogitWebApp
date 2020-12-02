@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using LogitWebApp.Data.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -50,6 +51,8 @@ namespace LogitWebApp.ViewModels.Drivers
         public string UnloadingAddress { get; set; }
 
         [Display(Name = "Прикачи снимка")]
-        public IFormFile Picture { get; set; }
+        public IEnumerable<IFormFile> Pictures { get; set; }
+
+        public ICollection<Image> Images { get; set; }
     }
 }

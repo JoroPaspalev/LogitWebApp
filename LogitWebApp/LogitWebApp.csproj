@@ -616,6 +616,7 @@
   <ItemGroup>
     <Folder Include="Views\Shipment\" />
     <Folder Include="wwwroot\lib\jquery\dist\" />
+    <Folder Include="wwwroot\proof\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -7,14 +7,14 @@
         @if (Model.HasPreviousPage)
         {
             <li class="page-item ">
-                <a class="page-link text-secondary" asp-controller="Users" asp-action="AllUserOrders" asp-route-id="@Model.PreviousPage">Предишна</a>
+                <a class="page-link text-secondary"  asp-route-id="@Model.PreviousPage">Предишна</a>
             </li>
 
             for (int i = Model.PageNumber - 5; i < Model.PageNumber; i++)
             {
                 if (i > 0)
                 {
-                    <li class="page-item"><a class="page-link text-secondary" asp-controller="Users" asp-action="AllUserOrders" asp-route-id="@i">@i</a></li>
+                    <li class="page-item"><a class="page-link text-secondary"  asp-route-id="@i">@i</a></li>
                 }
             }
 
@@ -48,7 +48,7 @@
             {
                 if (i <= Model.TotalPagesCount)
                 {
-                    <li class="page-item"><a class="page-link text-secondary" asp-controller="Users" asp-action="AllUserOrders" asp-route-id="@i">@i</a></li>
+                    <li class="page-item"><a class="page-link text-secondary"  asp-route-id="@i">@i</a></li>
                 }
             }
 
@@ -63,7 +63,7 @@
             }*@
 
             <li class="page-item">
-                <a class="page-link text-secondary" asp-controller="Users" asp-action="AllUserOrders" asp-route-id="@Model.NextPage">Следваща</a>
+                <a class="page-link text-secondary"  asp-route-id="@Model.NextPage">Следваща</a>
             </li>
         }
         else

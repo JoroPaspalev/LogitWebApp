@@ -1,6 +1,5 @@
 ﻿@using LogitWebApp.ViewModels.Drivers
-@model IEnumerable<AllShipmentsWithAddresses>
-
+@model ShipmentsPaginationViewModel
 <div class="bg-dark pt-5 pb-4"></div>
 
 <div class="pt-0">
@@ -11,7 +10,7 @@
 <div class="container pl-1 pr-1">
     <table class="table table-sm  table-shipments">
         <tbody>
-            @foreach (var shipment in Model)
+            @foreach (var shipment in Model.ShipmentsOfCurrPage)
             {
                 <tr class=" pt-5 m-5 ">
                     <td class="row border border-info rounded align-items-center pb-3">
@@ -65,16 +64,14 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-
                     </td>
                 </tr>
             }
+
         </tbody>
     </table>
+
+    <partial name="_PaginationPartialView" model="Model" />
+
 </div>
 

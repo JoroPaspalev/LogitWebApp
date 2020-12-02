@@ -40,10 +40,13 @@ namespace LogitWebApp.Services.Drivers
             }
         }
 
-        public IEnumerable<AllShipmentsWithAddresses> GetAllShipments()
+        public ShipmentsPaginationViewModel GetAllShipments(int id, int items)
         {
-            return this.db.Shipments
+            var shipmentsPerPage = this.db.Shipments
                 .Where(s => s.IsDelivered == false && s.LoadingAddress != null && s.UnloadingAddress != null && s.DriverId == null)
+                .OrderBy(s => s.LoadingDate)
+                .Skip((id - 1) * items)
+                .Take(items)
                 .Select(x => new AllShipmentsWithAddresses
                 {
                     Id = x.Id,
@@ -60,13 +63,25 @@ namespace LogitWebApp.Services.Drivers
                     UnloadingDate = x.UnloadingDate ?? DateTime.Now
                 })
                 .ToList();
+
+            var paginationViewModel = new ShipmentsPaginationViewModel
+            {
+                PageNumber = id,
+                ShipmentsOfCurrPage = shipmentsPerPage,
+                ItemsPerPage = items,
+                ItemsCount = this.db.Shipments.Where(s => s.IsDelivered == false && s.LoadingAddress != null && s.UnloadingAddress != null && s.DriverId == null).Count()
+            };
+
+            return paginationViewModel;
         }
 
-        public IEnumerable<AllShipmentsWithAddresses> GetMyShipments(string driverId)
+        public DriverShipmentsPaginationViewModel GetMyShipments(string driverId, int id, int itemsPerPage)
         {
-            var myShipments = this.db.Shipments
+            var myShipmentsPerPage = this.db.Shipments
                 .Where(x => x.DriverId == driverId && x.LoadingAddress != null && x.UnloadingAddress != null)
                 .OrderBy(x => x.LoadingDate)
+                .Skip((id - 1) * itemsPerPage)
+                .Take(itemsPerPage)
                 .Select(s => new AllShipmentsWithAddresses
                 {
                     Id = s.Id,
@@ -85,7 +100,16 @@ namespace LogitWebApp.Services.Drivers
                 })
                 .ToList();
 
-            return myShipments;
+            var pagingModel = new DriverShipmentsPaginationViewModel
+            {
+                PageNumber = id,
+                DriverShipmentsOfCurrentPage = myShipmentsPerPage,
+                ItemsPerPage = itemsPerPage,
+                ItemsCount = this.db.Shipments
+                .Where(x => x.DriverId == driverId && x.LoadingAddress != null && x.UnloadingAddress != null).Count()
+            };
+
+            return pagingModel;
         }
 
         public void ChangeShipmentData(EditShipment input)
@@ -100,9 +124,9 @@ namespace LogitWebApp.Services.Drivers
             currShipment.Comment = input.Comment;
             currShipment.IsDelivered = input.IsDelivered;
 
-            if (input.Image != null)
+            if (input.Images != null)
             {
-                currShipment.Images.Add(input.Image);
+                currShipment.Images = input.Images;
             }
 
             this.db.SaveChanges();
@@ -130,7 +154,8 @@ namespace LogitWebApp.Services.Drivers
                     Height = s.Height,
                     LoadingDate = s.LoadingDate ?? DateTime.UtcNow,
                     UnloadingDate = s.UnloadingDate ?? DateTime.UtcNow,
-                    IsDelivered = s.IsDelivered
+                    IsDelivered = s.IsDelivered,
+                    Images = s.Images.ToList()
                 })
                 .First();
 

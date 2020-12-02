@@ -15,9 +15,9 @@ namespace LogitWebApp.Services.Drivers
 
         public bool IsPhoneExist(string phone);
 
-        public IEnumerable<AllShipmentsWithAddresses> GetAllShipments();
+        public ShipmentsPaginationViewModel GetAllShipments(int id, int items);
 
-        public IEnumerable<AllShipmentsWithAddresses> GetMyShipments(string driverId);
+        public DriverShipmentsPaginationViewModel GetMyShipments(string driverId, int id, int itemsPerPage);
 
         public void ChangeShipmentData(EditShipment input);
 

@@ -22,6 +22,7 @@ namespace LogitWebApp.Controllers
         private readonly IDriversService driversService;
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly UserManager<ApplicationUser> userManager;
+        private const int CountOfItems = 6;
 
         public DriversController(IDriversService driversService, IWebHostEnvironment webHostEnvironment, UserManager<ApplicationUser> userManager)
         {
@@ -94,11 +95,11 @@ namespace LogitWebApp.Controllers
             return this.View();
         }
 
-        public IActionResult All()
+        public IActionResult All(int id = 1)
         {
-            var allShipments = this.driversService.GetAllShipments();
+            var model = this.driversService.GetAllShipments(id, CountOfItems);
 
-            return this.View(allShipments);
+            return this.View(model);
         }
 
         public async Task<IActionResult> TakeShipment(string shipmentId)
@@ -111,12 +112,8 @@ namespace LogitWebApp.Controllers
             return this.RedirectToAction("All");
         }
 
-        public IActionResult MyShipments()
+        public IActionResult MyShipments(int id = 1)
         {
-            //Вземи ми всички пратки по Id на този шофьор и ми ги покажи
-
-            //как да взема UserId?
-
             //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) // will give the user's userId
             //var userName = User.FindFirstValue(ClaimTypes.Name) // will give the user's userName
 
@@ -125,12 +122,10 @@ namespace LogitWebApp.Controllers
 
             var driverId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var driverShipments = this.driversService.GetMyShipments(driverId);
+            var driverShipments = this.driversService.GetMyShipments(driverId, id, 2);
 
             return this.View(driverShipments);
         }
-
-
 
         public IActionResult ShipmentChanged(ChangesApplied input)
         {
@@ -142,7 +137,6 @@ namespace LogitWebApp.Controllers
         {
             return RedirectToAction("EditShipment", "Drivers", new IdOfTheShipment { ShipmentId = shipmentId });
         }
-
 
         public IActionResult EditShipment(IdOfTheShipment idOfTheShipment)
         {
@@ -181,37 +175,36 @@ namespace LogitWebApp.Controllers
                 return this.View(shipmentForEdit);
             }
 
-            if (input.Picture != null)
+            if (input.Pictures != null)
             {
-                //Ако файла мине през проверките го записваме 
-                var currDate = DateTime.UtcNow.ToString("yyyy_MM_ddTHH_mm_ss", CultureInfo.InvariantCulture);
-
-                var index = input.Picture.FileName.LastIndexOf('.');
-                var extension = input.Picture.FileName.Substring(index);
-
-                //Отвори ми файлов стрийм към wwwroot/proof/име на файла в режим на създаване на нов файл и вземи данните от Picture и ми ги копирай в посочения stream
-                string imageUrl = "/proof/" + input.ShipmentId + "__" + currDate + "." + extension;
-
-                using (FileStream fileStream = new FileStream(this.webHostEnvironment.WebRootPath + imageUrl, FileMode.Create))
+                foreach (var picture in input.Pictures)
                 {
-                    await input.Picture.CopyToAsync(fileStream);
+                    var index = picture.FileName.LastIndexOf('.');
+                    var extension = picture.FileName.Substring(index);
+                    var currDriver = await this.userManager.GetUserAsync(User);
+
+                    var currImage = new Image
+                    {
+                        Extension = extension,
+                        ShipmentId = input.ShipmentId,
+                        AddedByDriverId = currDriver.Id,
+                        CreatedOn = DateTime.UtcNow,
+                        //ImageUrl = imageUrl
+                    };
+
+                    //Отвори ми файлов стрийм към wwwroot/proof/име на файла в режим на създаване на нов файл и вземи данните от Picture и ми ги копирай в посочения stream
+                    string imageUrl = "/proof/" + currImage.Id + "." + extension;
+
+                    using (FileStream fileStream = new FileStream(this.webHostEnvironment.WebRootPath + imageUrl, FileMode.Create))
+                    {
+                        await picture.CopyToAsync(fileStream);
+                    }
+
+                   currImage.ImageUrl = imageUrl;                    
+
+                    input.Images.Add(currImage);
                 }
-
-
-                //Трябва да създам нова снимка new Image и да и попълня properties
-                //Създадената снимка я добявам в List<Image> на Shipment
-                var currDriver = await this.userManager.GetUserAsync(User);
-                var currImage = new Image
-                {
-                    Extension = extension,
-                    ShipmentId = input.ShipmentId,
-                    AddedByDriverId = currDriver.Id,
-                    CreatedOn = DateTime.UtcNow,
-                    ImageUrl = imageUrl
-                };
-
-                input.Image = currImage;
-            }           
+            }
 
             //TODO - chain .jpg file with shipmentId
 
