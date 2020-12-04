@@ -575,47 +575,61 @@
     <Content Update="wwwroot\js\site.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css">
+    <Content Update="wwwroot\lib\fontawesome\css\all.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css">
+    <Content Update="wwwroot\lib\fontawesome\css\all.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\lib\bootstrap\dist\css\bootstrap.css">
+    <Content Update="wwwroot\lib\fontawesome\webfonts\fa-brands-400.eot">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\lib\bootstrap\dist\js\bootstrap.js">
+    <Content Update="wwwroot\lib\fontawesome\webfonts\fa-brands-400.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\lib\bootstrap\LICENSE">
+    <Content Update="wwwroot\lib\fontawesome\webfonts\fa-brands-400.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\lib\InitialSeedData\FromSofiaTo.txt">
+    <Content Update="wwwroot\lib\fontawesome\webfonts\fa-brands-400.woff">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js">
+    <Content Update="wwwroot\lib\fontawesome\webfonts\fa-brands-400.woff2">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt">
+    <Content Update="wwwroot\lib\fontawesome\webfonts\fa-regular-400.eot">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\lib\jquery-validation\dist\additional-methods.js">
+    <Content Update="wwwroot\lib\fontawesome\webfonts\fa-regular-400.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\lib\jquery-validation\dist\jquery.validate.js">
+    <Content Update="wwwroot\lib\fontawesome\webfonts\fa-regular-400.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\lib\jquery-validation\LICENSE.md">
+    <Content Update="wwwroot\lib\fontawesome\webfonts\fa-regular-400.woff">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\lib\jquery\LICENSE.txt">
+    <Content Update="wwwroot\lib\fontawesome\webfonts\fa-regular-400.woff2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\lib\fontawesome\webfonts\fa-solid-900.eot">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\lib\fontawesome\webfonts\fa-solid-900.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\lib\fontawesome\webfonts\fa-solid-900.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\lib\fontawesome\webfonts\fa-solid-900.woff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\lib\fontawesome\webfonts\fa-solid-900.woff2">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Views\Shipment\" />
-    <Folder Include="wwwroot\lib\jquery\dist\" />
     <Folder Include="wwwroot\proof\" />
   </ItemGroup>
 

@@ -65,7 +65,7 @@
                                 {
                                     <p class="p-0 mb-1">
                                         <button class="btn btn-warning btn-rad btn-block text-left " type="button" data-toggle="collapse" data-target="#@order.OrderId" aria-expanded="false" aria-controls="@order.OrderId">
-                                            От: @order.Sender/@order.From <span class="text-light font-weight-bold">За: @order.Receiver/@order.To</span> - Палети @order.CountOfPallets бр. Цена: @order.Price
+                                            @*<i class="fas fa-box-open"></i>*@<i class="fas fa-home"></i>  От: @order.Sender/@order.From <span class="text-light font-weight-bold"> <i class="fas fa-warehouse"></i>  За: @order.Receiver/@order.To</span> - <i class="fas fa-box-open"></i> Палети @order.CountOfPallets бр. <i class="far fa-money-bill-alt"></i> Цена: @order.Price
                                         </button>
                                     </p>
                                     <div class="collapse" id="@order.OrderId">

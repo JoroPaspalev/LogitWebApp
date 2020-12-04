@@ -56,7 +56,7 @@
                         <input asp-for="@Model.CountOfPallets" readonly class="form-control  mb-2" value="@Model.CountOfPallets">
                     </div>
 
-                    <div class="col-1" style="width: 123px; display: inline-block;">
+                    <div class="col-1">
                         <label asp-for="@Model.IsExpressDelivery" class="ptmtJoro">Експресна </label>
                         @if (!Model.IsExpressDelivery)
                         {
@@ -69,6 +69,46 @@
                             <input name="@Model.IsExpressDelivery" readonly value="Да" class="form-control" />
                         }
                     </div>
+
+
+                    <div class="col-1">
+                        <label asp-for="@Model.IsDelivered" class="ptmtJoro">Доставена</label>
+
+                        @if (!Model.IsDelivered)
+                        {
+
+                            <input name="@Model.IsDelivered" readonly value="Не" class="form-control" />
+
+                        }
+                        else
+                        {
+                            @*<input asp-for="@shipment.IsDelivered" readonly class="form-                                  control" checked disabled />*@
+
+                            <div class="text-center form-control p-0">
+                                <img src="/img/check.png" />
+                                <select hidden asp-for="@Model.IsDelivered" name="IsDelivered" class="form-control" mb-2>
+                                    <option value="true">Да</option>
+                                </select>
+                            </div>
+                        }
+                    </div>
+
+
+                    <div class="col-1">
+                        <label asp-for="@Model.IsFragile" class="ptmtJoro">Чуплива</label>
+
+                        @if (!Model.IsFragile)
+                        {
+
+                            <input name="@Model.IsFragile" readonly value="Не" class="form-control" />
+
+                        }
+                        else
+                        {
+                            <input name="@Model.IsFragile" readonly value="Да" class="form-control" />
+                        }
+                    </div>
+
 
                     <div class="col-4">
                         <label asp-for="@Model.UnloadingAddress" class="ptmtJoro">Адрес за разтоварване</label>
@@ -91,47 +131,16 @@
                         <input asp-for="@Model.Weight" readonly name="Weight" class="form-control  mb-2" value="@Model.Weight">
                     </div>
 
-                    <div class="col-1">
-                        <label asp-for="@Model.IsFragile" class="ptmtJoro">Чуплива</label>
+                    @*Ако има шофьор взел тази пратка за превоз нека се показва за да може User-а да го оцени*@
+                    @if (Model.DriverFirstName != null && Model.DriverLastName != null)
+                    {
+                        <div class="col-md-4">
+                            <label class="ptmtJoro">Обслужващ шофьор</label>
+                            <input asp-for="@Model.DriverFirstName" readonly name="@Model.DriverFirstName" class="form-control  mb-2" value="@Model.DriverFirstName @Model.DriverLastName">
+                        </div>
+                    }
 
-                        @if (!Model.IsFragile)
-                        {
 
-                            <input name="@Model.IsFragile" readonly value="Не" class="form-control" />
-
-                        }
-                        else
-                        {
-                            <input name="@Model.IsFragile" readonly value="Да" class="form-control" />
-                        }
-                    </div>
-
-                    <div class="col-1">
-                        <label asp-for="@Model.IsDelivered" class="mb-1">Доставена</label>
-
-                        @if (!Model.IsDelivered)
-                        {
-
-                            <input name="@Model.IsDelivered" readonly value="Не" class="form-control" />
-
-                        }
-                        else
-                        {
-                            @*<input asp-for="@shipment.IsDelivered" readonly class="form-                                  control" checked disabled />*@
-
-                            <div class="text-center form-control p-0">
-                                <img src="/img/check.png" />
-                                <select hidden asp-for="@Model.IsDelivered" name="IsDelivered" class="form-control" mb-2>
-                                    <option value="true">Да</option>
-                                </select>
-                            </div>
-                        }
-                    </div>
-
-                    <div class="col-2">
-                        <label class="ptmtJoro">Виж снимки</label>
-                        <input asp-for="@Model.Weight" readonly name="Weight" class="form-control  mb-2" value="Това е бутон">
-                    </div>
 
                 </div>
             </div>
