@@ -49,16 +49,13 @@
     }
     else if (currentUser.IsInRole("User"))
     {
-        userLogo = "<i class=\"fas fa-user-tie\"></i>";
+        userLogo = "<i class=\"fas fa-user-tie text-warning\"></i>";
     }
     else if (currentUser.IsInRole("Driver"))
     {
-        userLogo = " <i class=\"fas fa-truck\"></i>";
+        userLogo = " <i class=\"fas fa-truck text-warning\"></i>";
     }
-
 }
-
-
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))

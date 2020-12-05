@@ -54,10 +54,18 @@ namespace LogitWebApp.ViewModels.Users
 
         public string Receiver { get; set; }
 
+        public string DriverId { get; set; }
+
         public string DriverFirstName { get; set; }
 
         public string DriverLastName { get; set; }
 
         public ICollection<Image> Images { get; set; }
+
+        public double VotesTotal { get; set; }
+
+        public int VotesCount { get; set; }
+
+        public double AverageVote => this.VotesTotal / this.VotesCount;
     }
 }

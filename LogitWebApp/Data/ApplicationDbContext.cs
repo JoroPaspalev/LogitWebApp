@@ -24,6 +24,8 @@ namespace LogitWebApp.Data
 
         public DbSet<Driver> Drivers { get; set; }
 
+        public DbSet<Vote> Votes { get; set; }
+
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<Participant> Participants { get; set; }
@@ -93,7 +95,11 @@ namespace LogitWebApp.Data
                 .HasForeignKey(x => x.ToCityId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-
+            builder.Entity<ApplicationUser>()
+                .HasMany(x => x.DriverVotes)
+                .WithOne(x => x.Driver)
+                .HasForeignKey(x => x.DriverId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

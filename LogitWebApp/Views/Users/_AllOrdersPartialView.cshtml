@@ -76,14 +76,10 @@
 
                         @if (!Model.IsDelivered)
                         {
-
                             <input name="@Model.IsDelivered" readonly value="Не" class="form-control" />
-
                         }
                         else
                         {
-                            @*<input asp-for="@shipment.IsDelivered" readonly class="form-                                  control" checked disabled />*@
-
                             <div class="text-center form-control p-0">
                                 <img src="/img/check.png" />
                                 <select hidden asp-for="@Model.IsDelivered" name="IsDelivered" class="form-control" mb-2>
@@ -99,9 +95,7 @@
 
                         @if (!Model.IsFragile)
                         {
-
                             <input name="@Model.IsFragile" readonly value="Не" class="form-control" />
-
                         }
                         else
                         {
@@ -134,14 +128,63 @@
                     @*Ако има шофьор взел тази пратка за превоз нека се показва за да може User-а да го оцени*@
                     @if (Model.DriverFirstName != null && Model.DriverLastName != null)
                     {
-                        <div class="col-md-4">
-                            <label class="ptmtJoro">Обслужващ шофьор</label>
+                        <div class="col-md-2">
+                            <label class="ptmtJoro">Шофьор</label>
                             <input asp-for="@Model.DriverFirstName" readonly name="@Model.DriverFirstName" class="form-control  mb-2" value="@Model.DriverFirstName @Model.DriverLastName">
                         </div>
+
+                        <div class="col-md-2">
+
+
+                            @{
+                                var data = new Dictionary<string, string>
+                                                                                                                                {
+                                    {"driverId", Model.DriverId },
+                                    { "value", "0"}
+                                };
+                            }
+
+                            @if (Model.AverageVote > 0)
+                            {
+                                <div class="row ml-1 mb-2">
+                                    <label class="ptmtJoro">@Model.AverageVote.ToString("0.0")/5</label>
+                                </div>
+
+                                @for (int i = 1; i <= (int)Model.AverageVote; i++)
+                                {
+                                    data["value"] = i.ToString();
+
+                                    <a asp-controller="Votes" asp-action="Vote" asp-all-route-data="data">
+                                        <span class="star-fill"><i class="fas fa-star text-warning"></i></span>
+                                    </a>
+                                }
+
+                                @for (int i = (int)Model.AverageVote + 1; i <= 5; i++)
+                                {
+                                    data["value"] = i.ToString();
+
+                                    <a asp-controller="Votes" asp-action="Vote" asp-all-route-data="data">
+                                        <span class="star-fill"><i class="fas fa-star"></i></span>
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+                                <div class="row ml-1 mb-2">
+                                    <label class="ptmtJoro">0/5</label>
+                                </div>
+
+                                for (int i = 1; i <= 5; i++)
+                                {
+                                    data["value"] = i.ToString();
+
+                                    <a asp-controller="Votes" asp-action="Vote" asp-all-route-data="data">
+                                        <span class="star-fill"><i class="fas fa-star"></i></span>
+                                    </a>
+                                }
+                            }
+                        </div>
                     }
-
-
-
                 </div>
             </div>
 
@@ -189,3 +232,16 @@
         }
     </span>
 </form>
+
+
+
+
+@*@section Scripts {
+        <script>
+            $("li[data-vote]").each(function (el) {
+                $(this).click(function () {
+                    console.log($(this).attr("data-vote"));
+                })
+            });
+        </script>
+    }*@

@@ -86,7 +86,7 @@ namespace LogitWebApp
                 options.AppSecret = "a4bd3196130530380091c1cb9f617e13";
             });
 
-            services.AddTransient<IOffersService, OffersService>();            
+            services.AddTransient<IOffersService, OffersService>();
             services.AddTransient<IShortStringService, ShortStringService>();
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IDriversService, DriversService>();
@@ -94,6 +94,7 @@ namespace LogitWebApp
             services.AddTransient<IUsersService, UsersService>();
             services.AddScoped<IViewRenderService, ViewRenderService>();
             services.AddScoped<IHtmlToPdfConverter, HtmlToPdfConverter>();
+            services.AddTransient<IVoteService, VoteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -163,7 +164,7 @@ namespace LogitWebApp
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-            });            
+            });
         }
     }
 }

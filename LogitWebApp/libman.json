@@ -6,7 +6,7 @@
       "library": "jquery@3.3.1",
       "destination": "wwwroot/lib/jquery/dist/",
       "files": [ "jquery.js" ]
-    },
+    },    
     {
       "library": "font-awesome@5.15.1",
       "destination": "wwwroot/lib/fontawesome/",

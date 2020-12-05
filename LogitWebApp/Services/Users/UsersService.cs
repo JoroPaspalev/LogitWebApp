@@ -47,9 +47,12 @@ namespace LogitWebApp.Services.Users
                     UnloadingDate = x.Shipment.UnloadingDate,
                     OrderCreatedOn = x.Shipment.OrderCreatedOn,
                     Price = x.Shipment.Price.ToString("F2"),
+                    DriverId = x.Shipment.DriverId,
                     DriverFirstName = x.Shipment.Driver.FirstName,
                     DriverLastName = x.Shipment.Driver.LastName,
-                    Images = x.Shipment.Images.ToList()
+                    Images = x.Shipment.Images.ToList(),
+                    VotesCount = x.Shipment.Driver.DriverVotes.Count,
+                    VotesTotal = x.Shipment.Driver.DriverVotes.Sum(x=>x.Value)
                 })
                 .ToList();
 
