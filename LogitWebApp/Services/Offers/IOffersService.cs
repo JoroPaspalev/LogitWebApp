@@ -9,7 +9,7 @@ namespace LogitWebApp.Services.Offers
 {
     public interface IOffersService
     {
-        public ShipmentViewModel GetOffer(Shipment input);
+        public Task<ShipmentViewModel> GetOffer(Shipment input);
 
         public Shipment GetShipmentById(string shipmentId);
     }

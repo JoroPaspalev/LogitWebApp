@@ -3,6 +3,7 @@ using LogitWebApp.Data.Models;
 using static LogitWebApp.Common.GlobalConstants;
 using System.Linq;
 using LogitWebApp.ViewModels.Offer;
+using System.Threading.Tasks;
 
 namespace LogitWebApp.Services.Offers
 {
@@ -15,7 +16,7 @@ namespace LogitWebApp.Services.Offers
             this.db = db;
         }
 
-        public ShipmentViewModel GetOffer(Shipment input)
+        public async Task<ShipmentViewModel> GetOffer(Shipment input)
         {
             var fromCity = this.db.Shipments.Where(s => s.Id == input.Id).Select(x => new { Name = x.FromCity.Name }).First();
 
@@ -70,7 +71,7 @@ namespace LogitWebApp.Services.Offers
             }
 
             input.Price = cellingPricePerPallet * input.CountOfPallets;
-            this.db.SaveChanges();
+            await this.db.SaveChangesAsync();
 
             var viewModel = new ShipmentViewModel
             {
