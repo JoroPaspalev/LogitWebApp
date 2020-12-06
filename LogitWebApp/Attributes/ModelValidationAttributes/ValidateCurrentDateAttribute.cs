@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LogitWebApp.ValidationAttributes
+namespace LogitWebApp.Attributes.ModelValidationAttributes
 {
     public class ValidateCurrentDateAttribute : ValidationAttribute
     {

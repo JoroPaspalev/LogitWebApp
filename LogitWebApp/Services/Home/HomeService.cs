@@ -55,7 +55,14 @@ namespace LogitWebApp.Services.Home
         {
             var currCity = this.db.Cities.FirstOrDefault(c => c.Id == cityId);
 
-            return currCity == null ? false : true;
+            if (currCity == null)
+            {
+                return false;
+            }
+
+            return true;
+
+            //return currCity == null ? false : true;
         }
     }
 }
