@@ -22,7 +22,7 @@ namespace LogitWebApp.ViewModels.Drivers
         [Required(ErrorMessage = "Полето Email не може да бъде празно")]
         [EmailAddress(ErrorMessage = "Невалиден Email")]
         [Display(Name = "Email")]
-        [CheckDriverExist]
+        [CheckDriverExistAttribute]
         public string Email { get; set; }
 
         [Required(ErrorMessage ="Полето парола не може да бъде празно")]
@@ -51,7 +51,7 @@ namespace LogitWebApp.ViewModels.Drivers
         [Required(ErrorMessage ="Телефонния номер е задължителен!")]
         [RegularExpression(@"[0-9]{4}-[0-9]{3}-[0-9]{3}", ErrorMessage ="Телефонния номер е във формат xxxx-xxx-xxx")]
         [Display(Name = "Мобилен номер")]
-        [CheckPhoneExist]
+        [CheckPhoneExistAttribute]
         public string PhoneNumber { get; set; }
 
         //[CheckDriverExist(new DriverInputModel()

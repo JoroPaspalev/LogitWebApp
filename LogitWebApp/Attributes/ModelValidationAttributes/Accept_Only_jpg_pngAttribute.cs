@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LogitWebApp.Attributes.ModelValidationAttributes
 {
-    public class Accept_Only_jpg_png : ValidationAttribute
+    public class Accept_Only_jpg_pngAttribute : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {

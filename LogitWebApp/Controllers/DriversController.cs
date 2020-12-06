@@ -70,7 +70,7 @@ namespace LogitWebApp.Controllers
                 return this.View();
             }
 
-            var isDeleted = await this.driversService.DeleteDriver(input.Email);
+           await this.driversService.DeleteDriver(input.Email);
 
             return this.RedirectToAction("DriverDeleted", "Drivers", new ChangesApplied { Message = Driver_Deleted });
         }

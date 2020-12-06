@@ -43,8 +43,8 @@ namespace LogitWebApp.ViewModels.Drivers
 
         public bool IsDelivered { get; set; }
 
-        [Accept_Only_jpg_png]
-        [ValidateImageSize(2)]
+        [Accept_Only_jpg_pngAttribute]
+        [ValidateImageSizeAttribute(2)]
         public IEnumerable<IFormFile> Pictures { get; set; }
 
         public ICollection<Image> Images { get; set; }

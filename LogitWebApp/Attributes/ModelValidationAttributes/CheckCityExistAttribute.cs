@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace LogitWebApp.Attributes.ModelValidationAttributes
 {
-    public class CheckCityExist : ValidationAttribute
+    public class CheckCityExistAttribute : ValidationAttribute
     {
-        public CheckCityExist()
+        public CheckCityExistAttribute()
         {
         }
 

@@ -14,11 +14,11 @@ namespace LogitWebApp.ViewModels.Offer
 
         //[BindNever] - Това означава да не се Binder-ва (mapp-ва) стойност за това пропърти. Трябва много да се внимава, защото ако това пропърти, както в момента е [Required], му сложа [BindNever] означава че няма да му търси стойност и ще остане default-ната му, което ще гръмне при проверката за [Required]
         [Required(ErrorMessage ="Изберете един от посочените градове!")]
-        [CheckCityExist]
+        [CheckCityExistAttribute]
         public int From { get; set; }
 
         [Required(ErrorMessage = "Изберете един от посочените градове!")]
-        [CheckCityExist]
+        [CheckCityExistAttribute]
         public int To { get; set; }
 
         [Required]

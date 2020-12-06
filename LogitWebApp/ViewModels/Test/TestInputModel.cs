@@ -9,7 +9,7 @@ namespace LogitWebApp.ViewModels.Test
 {
     public class TestInputModel
     {       
-        [BornAfter(1983)]
+        [BornAfterAttribute(1983)]
         public int Age { get; set; }
     }
 }

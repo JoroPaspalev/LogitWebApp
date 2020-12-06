@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LogitWebApp.Attributes.ModelValidationAttributes
 {
-    public class CheckPhoneExist : ValidationAttribute
+    public class CheckPhoneExistAttribute : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {

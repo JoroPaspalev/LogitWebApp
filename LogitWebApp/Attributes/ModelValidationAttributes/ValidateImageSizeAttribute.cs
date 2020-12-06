@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace LogitWebApp.Attributes.ModelValidationAttributes
 {
-    public class ValidateImageSize : ValidationAttribute
+    public class ValidateImageSizeAttribute : ValidationAttribute
     {
         private readonly int imgSize;
 
-        public ValidateImageSize(int imgSize)
+        public ValidateImageSizeAttribute(int imgSize)
         {
             this.imgSize = imgSize;
         }

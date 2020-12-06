@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LogitWebApp.Attributes.ModelValidationAttributes
 {
-    public class BulstatMustStartsWithBG : ValidationAttribute
+    public class BulstatMustStartsWithBGAttribute : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {

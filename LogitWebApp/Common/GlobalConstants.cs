@@ -12,11 +12,11 @@
 
         public const string Admin_Pass = "Admin";
 
-        public const string Admin_Email = "joro_theXfiles@abv.bg";
+        public const string Admin_Email = "admin@abv.bg";
 
         public const string Admin_Phone = "+359888222777";
 
-        public const string Admin_Names = "Joro Paspalev"; // This is equal to property Manager in ApplicationUser
+        public const string Admin_Names = "admin"; // This is equal to property Manager in ApplicationUser
 
 
         public const int countOfPalletsInOneTruck = 30;

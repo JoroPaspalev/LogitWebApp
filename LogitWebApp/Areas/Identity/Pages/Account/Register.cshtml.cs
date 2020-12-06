@@ -80,13 +80,13 @@ namespace LogitWebApp.Areas.Identity.Pages.Account
             public long? Fax { get; set; }
 
             [Display(Name = "ДДС Номер")]
-            [BulstatMustStartsWithBG]
+            [BulstatMustStartsWithBGAttribute]
             public string VatNumber { get; set; }
 
             [Required(ErrorMessage = "Задължително поле!")]
             [Display(Name = "ЕИК")]
             [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "Булстата съдържа точно 9 на брой цифри!")] //117616084
-            [ValidateBulstat]            
+            [ValidateBulstatAttribute]            
             public int Bulstat { get; set; }
 
             [Required(ErrorMessage = "Полето Управител не може да бъде празно!")]

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace LogitWebApp.Attributes.ModelValidationAttributes
 {
-    public class CheckDriverExist : ValidationAttribute
+    public class CheckDriverExistAttribute : ValidationAttribute
     {         
         //Как да взема input модела runTime????? и да го подам тук?
-        public CheckDriverExist()
+        public CheckDriverExistAttribute()
         {           
         }
 

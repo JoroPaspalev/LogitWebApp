@@ -3,9 +3,9 @@
 namespace LogitWebApp.Attributes.ModelValidationAttributes
 {
     //This is how we make custom Validation Attribute
-    public class BornAfter : ValidationAttribute
+    public class BornAfterAttribute : ValidationAttribute
     {
-        public BornAfter(int year)
+        public BornAfterAttribute(int year)
         {
             Year = year;
             this.ErrorMessage = $"The value of the field should be more than {year}";
