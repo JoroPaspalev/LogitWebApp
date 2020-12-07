@@ -44,21 +44,21 @@
                             <div id="sources-list" class="u-accordion" role="tablist" aria-multiselectable="true">
 
                                 @*@for (int i = 0; i < 6; i++)
-                                {
-                                    <p class="p-0 mb-1">
-                                        <button class="btn btn-warning btn-rad btn-block text-left " type="button" data-toggle="collapse" data-target="#@Model[i].OrderId" aria-expanded="false" aria-controls="@Model[i].OrderId">
-                                            От: @Model[i].Sender/@Model[i].From <span class="text-light font-weight-bold">За: @Model[i].Receiver/@Model[i].To</span> - Палети @Model[i].CountOfPallets бр. Цена: @Model[i].Price
-                                        </button>
-                                    </p>
-                                    <div class="collapse" id="@Model[i].OrderId">
-                                        <div class="card card-body text-dark">
+                                    {
+                                        <p class="p-0 mb-1">
+                                            <button class="btn btn-warning btn-rad btn-block text-left " type="button" data-toggle="collapse" data-target="#@Model[i].OrderId" aria-expanded="false" aria-controls="@Model[i].OrderId">
+                                                От: @Model[i].Sender/@Model[i].From <span class="text-light font-weight-bold">За: @Model[i].Receiver/@Model[i].To</span> - Палети @Model[i].CountOfPallets бр. Цена: @Model[i].Price
+                                            </button>
+                                        </p>
+                                        <div class="collapse" id="@Model[i].OrderId">
+                                            <div class="card card-body text-dark">
 
-                                            <partial name="_AllOrdersPartialView" , model="Model[i]" />
+                                                <partial name="_AllOrdersPartialView" , model="Model[i]" />
 
 
+                                            </div>
                                         </div>
-                                    </div>
-                                }*@
+                                    }*@
 
 
                                 @foreach (var order in Model.Orders)
@@ -86,9 +86,9 @@
                         @*Този таг ми показва директно снимката на дисплея без да има линк който да натисна за да се покаже*@
                         <!--<img src="/proof/1.jpg" />-->
 
-
                 </div>
             </div>
         </div>
+    </div>
 </section>
 <!-- END section -->

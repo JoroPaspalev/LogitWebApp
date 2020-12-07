@@ -52,5 +52,50 @@ namespace LogitWebApp.Tests.Services
 
             Assert.Equal(208, Math.Round((double)result.Result.Price, 2));
         }
+
+        [Fact]
+        public async Task GetShipmentByIdShouldReturnShipmentIfExist()
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase("dbName");
+
+            var db = new ApplicationDbContext(optionsBuilder.Options);
+
+            var currShipment = new Shipment();
+            var secondShipment = new Shipment();
+            await db.Shipments.AddAsync(currShipment);
+            await db.Shipments.AddAsync(secondShipment);
+            await db.SaveChangesAsync();
+
+            var offerService = new OffersService(db);
+
+            var result = offerService.GetShipmentById(currShipment.Id);
+
+            Assert.Equal(currShipment, result);
+        }
+
+        [Fact]
+        public async Task GetShipmentByIdShouldReturnNullIfShipmentNotExist()
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase("dbName");
+
+            var db = new ApplicationDbContext(optionsBuilder.Options);
+
+            var currShipment = new Shipment();
+            var secondShipment = new Shipment();
+            await db.Shipments.AddAsync(currShipment);
+            await db.Shipments.AddAsync(secondShipment);
+            await db.SaveChangesAsync();
+
+            var offerService = new OffersService(db);
+
+            var result = offerService.GetShipmentById(Guid.NewGuid().ToString());
+
+            Assert.NotEqual(currShipment, result);
+        }
+
+
+
     }
 }

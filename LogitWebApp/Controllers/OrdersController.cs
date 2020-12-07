@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using LogitWebApp.Data.Models;
+﻿using System.Security.Claims;
 using LogitWebApp.Services.Orders;
 using LogitWebApp.ViewModels.Offer;
 using LogitWebApp.ViewModels.Shared;

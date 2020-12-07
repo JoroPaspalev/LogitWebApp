@@ -3,7 +3,7 @@
 @model OfferViewModel
 <!-- За да можем да използваме Service в самото View първо трябва да го регистираме в Startup, послед да напишем @@using с пътя до сървиса (LogitWebApp.Services.Offers;), трето @@inject Interface(IShortStringService) след него име с което ще се използва service(ShortString) -->
 @using LogitWebApp.Services.Offers;
-@inject IShortStringService ShortString
+@inject IShortStringService shortString
 
 @{
     <!-- this.Layout = null; -->
@@ -18,7 +18,7 @@
                 <h1>Price is: @ViewData["Price"]</h1>
                 <h1>Price: @Model.Price</h1>
 
-                @ShortString.ShortString(ViewBag.veryLongString, 10)
+                @*@shortString.ShortString(ViewBag.veryLongString, 10)*@
 
 
                 <!-- Когато е изписано като email го render-ира като email т.е. показва директно Date@DateTime.Now -->

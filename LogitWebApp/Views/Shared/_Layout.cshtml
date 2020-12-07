@@ -110,7 +110,7 @@
             </div>
         </div>
 
-        <div class="container pt-5">
+        <div class="pl-5 pr-5 pt-5 bg-dark">
             <div class="row mb-5">
                 <div class="col-md-3 col-xs-6">
                     <h3 class="probootstrap_font-18 mb-3">Quick Links</h3>
@@ -156,6 +156,10 @@
                 </div>
             </div>
         </div>
+
+        @*This is for Scroll To Top Button*@
+        <a class="to-top" href="#"><i class="fas fa-arrow-up"></i></a>
+
     </footer>
 
     <script src="/js/jquery.min.js"></script>
@@ -172,9 +176,12 @@
 
     <script src="/js/main.js"></script>
 
+    <script src="~/Joro/js/scrollToTop.js"></script>
+
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
-    @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", required: false)    
+
 </body>
 </html>

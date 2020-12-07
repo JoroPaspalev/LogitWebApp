@@ -21,7 +21,35 @@
     display: inline;
 }
 
-.ptmtJoro{
+.ptmtJoro {
     padding-top: 3px;
     margin-bottom: 2px;
+}
+
+.to-top {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background: #ffc107;
+    bottom: 20px;
+    right: 25px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    font-size: 32px;
+    box-shadow: 0 0 7px #D6D6D6;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .4s;
+}
+
+.to-top.active{
+    bottom: 20px;
+    pointer-events: auto;
+    opacity:1;
+}
+
+html {
+    scroll-behavior: smooth;
 }

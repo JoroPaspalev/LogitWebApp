@@ -87,7 +87,7 @@ namespace LogitWebApp
             });
 
             services.AddTransient<IOffersService, OffersService>();
-            services.AddTransient<IShortStringService, ShortStringService>();
+            //services.AddTransient<IShortStringService, ShortStringService>();
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IDriversService, DriversService>();
             services.AddTransient<IHomeService, HomeService>();
