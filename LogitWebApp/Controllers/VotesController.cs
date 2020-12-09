@@ -17,12 +17,10 @@ namespace LogitWebApp.Controllers
     public class VotesController /*: ControllerBase*/ : Controller
     {
         private readonly IVoteService voteService;
-        private readonly Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> userManager;
 
-        public VotesController(IVoteService voteService, UserManager<ApplicationUser> userManager)
+        public VotesController(IVoteService voteService)
         {
             this.voteService = voteService;
-            this.userManager = userManager;
         }
 
         //[Authorize]

@@ -17,12 +17,12 @@ using LogitWebApp.Services.Orders;
 using LogitWebApp.Services.Drivers;
 using LogitWebApp.Services.Home;
 using Microsoft.AspNetCore.Mvc;
-
 using LogitWebApp.Data.Seeding;
 using LogitWebApp.Data.Models;
 using LogitWebApp.Services.Users;
 using LogitWebApp.Services.Export;
 using WHMS.Services.Common;
+using LogitWebApp.Hubs;
 
 namespace LogitWebApp
 {
@@ -95,6 +95,7 @@ namespace LogitWebApp
             services.AddScoped<IViewRenderService, ViewRenderService>();
             services.AddScoped<IHtmlToPdfConverter, HtmlToPdfConverter>();
             services.AddTransient<IVoteService, VoteService>();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -164,6 +165,7 @@ namespace LogitWebApp
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/chat");
             });
         }
     }

@@ -15,13 +15,23 @@ namespace LogitWebApp.Services.Drivers
         private readonly ApplicationDbContext db;
         private readonly UserManager<ApplicationUser> userManager;
 
+        public DriversService(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
+
         public DriversService(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
             this.db = db;
             this.userManager = userManager;
         }
 
-        public async Task AddDriver(DriverInputModel input)
+        public DriversService(UserManager<ApplicationUser> userManager)
+        {
+            this.userManager = userManager;
+        }
+
+        public async Task AddDriverAsync(DriverInputModel input)
         {
             var currDriver = new ApplicationUser
             {
@@ -40,12 +50,12 @@ namespace LogitWebApp.Services.Drivers
             }
         }
 
-        public ShipmentsPaginationViewModel GetAllShipments(int id, int items)
+        public ShipmentsPaginationViewModel GetAllShipments(int pageId, int items)
         {
             var shipmentsPerPage = this.db.Shipments
                 .Where(s => s.IsDelivered == false && s.LoadingAddress != null && s.UnloadingAddress != null && s.DriverId == null)
                 .OrderBy(s => s.LoadingDate)
-                .Skip((id - 1) * items)
+                .Skip((pageId - 1) * items)
                 .Take(items)
                 .Select(x => new AllShipmentsWithAddresses
                 {
@@ -66,7 +76,7 @@ namespace LogitWebApp.Services.Drivers
 
             var paginationViewModel = new ShipmentsPaginationViewModel
             {
-                PageNumber = id,
+                PageNumber = pageId,
                 ShipmentsOfCurrPage = shipmentsPerPage,
                 ItemsPerPage = items,
                 ItemsCount = this.db.Shipments.Where(s => s.IsDelivered == false && s.LoadingAddress != null && s.UnloadingAddress != null && s.DriverId == null).Count()
@@ -112,7 +122,7 @@ namespace LogitWebApp.Services.Drivers
             return pagingModel;
         }
 
-        public void ChangeShipmentData(EditShipment input)
+        public async Task ChangeShipmentDataAsync(EditShipment input)
         {
             var currShipment = this.db.Shipments.FirstOrDefault(s => s.Id == input.ShipmentId);
 
@@ -129,12 +139,12 @@ namespace LogitWebApp.Services.Drivers
                 currShipment.Images = input.Images;
             }
 
-            this.db.SaveChanges();
+            await this.db.SaveChangesAsync();
         }
 
         public bool IsDriverExist(string email)
         {
-            return this.userManager.Users.Any(u => u.Email == email) ? true : false;
+            return this.db.Users.Any(u => u.Email == email) ? true : false;
         }
 
         public AllShipmentsWithAddresses GetShipment(string shipmentId)
@@ -164,17 +174,17 @@ namespace LogitWebApp.Services.Drivers
 
         public bool IsPhoneExist(string phone)
         {
-            return this.userManager.Users.Any(u => u.PhoneNumber == phone) ? true : false;
+            return this.db.Users.Any(u => u.PhoneNumber == phone) ? true : false;
         }
 
-        public void AttachShipmentToDriver(string shipmentId, string userId)
+        public async Task AttachShipmentToDriverAsync(string shipmentId, string userId)
         {
             var currShipment = this.db.Shipments.FirstOrDefault(s => s.Id == shipmentId);
             currShipment.DriverId = userId;
-            this.db.SaveChanges();
+            await this.db.SaveChangesAsync();
         }
 
-        public async Task<bool> DeleteDriver(string email)
+        public async Task<bool> DeleteDriverAsync(string email)
         {
             var currUser = this.userManager.Users.FirstOrDefault(u => u.Email == email);
 

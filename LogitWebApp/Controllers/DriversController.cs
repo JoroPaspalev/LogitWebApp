@@ -47,7 +47,7 @@ namespace LogitWebApp.Controllers
                 return this.View();
             }
 
-            await this.driversService.AddDriver(input);
+            await this.driversService.AddDriverAsync(input);
 
             return this.RedirectToAction(nameof(DriverAdded), "Drivers", new ChangesApplied { Message = Driver_Added });
         }
@@ -70,7 +70,7 @@ namespace LogitWebApp.Controllers
                 return this.View();
             }
 
-           await this.driversService.DeleteDriver(input.Email);
+           await this.driversService.DeleteDriverAsync(input.Email);
 
             return this.RedirectToAction("DriverDeleted", "Drivers", new ChangesApplied { Message = Driver_Deleted });
         }
@@ -105,7 +105,7 @@ namespace LogitWebApp.Controllers
         public async Task<IActionResult> TakeShipment(string shipmentId)
         {
             var currUser = await this.userManager.GetUserAsync(User);
-            this.driversService.AttachShipmentToDriver(shipmentId, currUser.Id);
+            await this.driversService.AttachShipmentToDriverAsync(shipmentId, currUser.Id);
 
             //Няма още такова View 
             //Трябва да намеря пратката по Id и да и закача Id-то на логнатия Driver
@@ -208,7 +208,7 @@ namespace LogitWebApp.Controllers
 
             //TODO - chain .jpg file with shipmentId
 
-            this.driversService.ChangeShipmentData(input);
+            await this.driversService.ChangeShipmentDataAsync(input);
 
             return this.RedirectToAction("ShipmentChanged", "Drivers", new ChangesApplied
             {

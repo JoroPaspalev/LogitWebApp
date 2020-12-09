@@ -51,7 +51,7 @@ namespace LogitWebApp.Tests.Services
 
             var homeService = new HomeService(db);
 
-            string shipmentId = homeService.CreateShipment(input);
+            homeService.CreateShipment(input);
 
             int result = db.Shipments.Count();
 

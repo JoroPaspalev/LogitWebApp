@@ -6,6 +6,7 @@ using LogitWebApp.Models;
 using LogitWebApp.ViewModels.Offer;
 using LogitWebApp.Services.Home;
 using LogitWebApp.Views.Home;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LogitWebApp.Controllers
 {
@@ -25,6 +26,12 @@ namespace LogitWebApp.Controllers
             var model = new OfferInputModel();
             model.Cities = this.homeService.GetCities();
             return View(model);
+        }
+
+        [Authorize]
+        public IActionResult Chat()
+        {
+            return this.View();
         }
 
         [HttpPost]

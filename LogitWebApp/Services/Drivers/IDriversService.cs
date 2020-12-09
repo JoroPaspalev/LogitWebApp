@@ -9,7 +9,7 @@ namespace LogitWebApp.Services.Drivers
 {
     public interface IDriversService
     {
-        public Task AddDriver(DriverInputModel input);
+        public Task AddDriverAsync(DriverInputModel input);
 
         public bool IsDriverExist(string email);
 
@@ -19,12 +19,12 @@ namespace LogitWebApp.Services.Drivers
 
         public DriverShipmentsPaginationViewModel GetMyShipments(string driverId, int id, int itemsPerPage);
 
-        public void ChangeShipmentData(EditShipment input);
+        public Task ChangeShipmentDataAsync(EditShipment input);
 
         public AllShipmentsWithAddresses GetShipment(string shipmentId);
 
-        public void AttachShipmentToDriver(string shipmentId, string userId);
+        public Task AttachShipmentToDriverAsync(string shipmentId, string userId);
 
-        public Task<bool> DeleteDriver(string email);
+        public Task<bool> DeleteDriverAsync(string email);
     }
 }

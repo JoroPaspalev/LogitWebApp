@@ -60,6 +60,10 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a class="nav-link" href="/">Начало</a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About">За Нас</a></li>
+                    @*This call SignalRHub*@
+                    <li class="nav-item"><a class="nav-link" href="/Home/Chat">Чат</a></li>
+
+                    
 
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -177,7 +181,7 @@
     <script src="/js/main.js"></script>
 
     <script src="~/Joro/js/scrollToTop.js"></script>
-
+    <script src="~/lib/signalr/signalr.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 

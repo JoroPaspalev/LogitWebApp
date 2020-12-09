@@ -1,4 +1,4 @@
-# ASP.NET Core ## :v: **Logit - Transport Company**
+# ASP.NET Core  :v: **Logit - Transport Company**
 
 ## :point_right: Project Introduction :point_left:
 
