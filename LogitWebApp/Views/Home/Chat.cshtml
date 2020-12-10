@@ -1,12 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
-@inject SignInManager<ApplicationUser> SignInManager
 
 <!DOCTYPE html>
-
 <html>
 <head>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="~/css/chat/style.css" rel="stylesheet" />
@@ -16,119 +13,52 @@
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Source+Serif+Pro:wght@200&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Source+Serif+Pro:wght@200&display=swap" rel="stylesheet">
-
 </head>
-<body class="bg-info">
+<body class="bg-dark">
+    <section class="probootstrap-cover overflow-hidden relative pt-2 m-0" style="background-image: url('/img/bg_1.jpg');" data-stellar-background-ratio="0.5" id="section-home">
+        <div class="container">
+            <h3 class="heading text-center font-weight-bold">Чат система на фирма Logit</h3>
+            <hr class="bg-white mt-1" style="width: 70px" />
+            <div class="messaging bg-white">
+                <div class="inbox_msg">
+                    <div class="col-md-12 bg-warning msg_box_heading p-2 pl-3 m-0 ">Пишете ни</div>
+                    <div class="container">
+                        <div class="row">
+                        </div>
+                        <div class="mesgs">
+                            <div class="msg_history">
 
+                                <!--This is where we will put messages from the HUB-->
+                                <div id="messagesList" style="font-size: 14px;">
 
-
-
-
-
-    <div class="container">
-        <h3 class="heading text-center">Чат система на фирма Logit</h3>
-        <div class="messaging">
-            <div class="inbox_msg">
-
-                <div class="container">
-
-                    <hr style="height: 3px;" class="bg-info rounded" />
-                    <div class="mesgs">
-                        <div class="msg_history">
-
-                            <div id="messagesList" style="font-size: 14px;">
-
-
-
-
-                                <div class="outgoing_msg">
-                                    <div class="sent_msg">
-                                        <div id="messagesList" style="font-size: 14px;">
-
-                                            @{ var culture1 = new System.Globalization.CultureInfo("bg-BG");
-                                                var day1 = culture1.DateTimeFormat.GetDayName(DateTime.UtcNow.DayOfWeek);
-
-                                                ApplicationUser currUser11 = await UserManager.GetUserAsync(User); }
-                                            <span class="time_date pr-2">Вие сте логнат като:</span>
-                                            <span class="time_date pr-2">@currUser11.UserName</span>
-                                            <span class="time_date pr-2"> @DateTime.UtcNow.AddHours(2).ToString("H:mm") | @day1</span>
+                                    <div class="outgoing_msg">
+                                        <div class="sent_msg">
+                                            <div id="messagesList" style="font-size: 14px;">
+                                                @{ var culture1 = new System.Globalization.CultureInfo("bg-BG");
+                                                    var day1 = culture1.DateTimeFormat.GetDayName(DateTime.UtcNow.DayOfWeek);
+                                                    ApplicationUser currUser = await UserManager.GetUserAsync(User); }
+                                                <div class="incoming_msg_img_first_line mr-4"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                                <span class="time_date pr-2">Вие сте логнат като:</span>
+                                                <span class="time_date pr-2">@currUser.UserName</span>
+                                                <span class="time_date pr-2"> @DateTime.UtcNow.AddHours(2).ToString("H:mm") | @day1</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
-
-                                @*<div style="float: right; width: 70%; text-align: right;">texttexttexttexttexttexttexttexttext</div>*@
-
-
-
-
-
-
-
-                                @*<div class="incoming_msg">
-                                    <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                    <div class="received_msg">
-                                        <div class="received_withd_msg">
-                                            <p>Test, which is a nsdassaSasaSsaSAsaSAsaSAsa SAsaSAsadfsafas fdsfdsfdsfdsfdsfdsfd sfdsfdsfdsfdsfsd approach to have</p>
-                                            <span class="time_date"> 11:01 AM    |    Yesterday</span>
-                                        </div>
-                                    </div>
-                                </div>*@
-
-
-
-                                @*<div class="outgoing_msg">
-                                    <div class="sent_msg">
-                                        <p>Apollo University, Delhi, India Test</p>
-                                        <span class="time_date"> 11:01 AM    |    Today</span>
-                                    </div>
-                                </div>*@
-
-
-                                @*<div class="incoming_msg">
-                                    <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                    <div class="received_msg">
-                                        <div class="received_withd_msg">
-                                            <p>
-                                                We work directly with our designers and suppliers,
-                                                and sell direct to you, which means quality, exclusive
-                                                products, at a price anyone can afford.
-                                            </p>
-                                            <span class="time_date"> 11:01 AM    |    Today</span>
-                                        </div>
-                                    </div>
-                                </div>*@
-
-
-
                             </div>
-
-                        </div>
-
-                        <div id="message-holder" class="mt-3 mb-3 d-flex justify-content-start">
-                            <h4></h4>
-                            <input class="w-75 ml-4 pl-3" type="text" id="messageInput" placeholder="..." />
-                            <button id="sendButton" class="ml-4 btn btn-dark text-white">Изпрати</button>
+                            <div id="message-holder" class="mt-3 mb-3 d-flex justify-content-start">
+                                <h4></h4>
+                                <input class="w-75 ml-4 pl-3" type="text" id="messageInput" placeholder="Напишете съобщение..." />
+                                <button id="sendButton" class="ml-4 btn btn-dark text-white chat_btn">Изпрати</button>
+                            </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
-    </div>
-
-
+    </section>    
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 @section Scripts {
     <script>
@@ -139,29 +69,43 @@
 
         connection.on("NewMessage",
             function (message) {
+                  var time = new Date().toLocaleTimeString('en-US', { hour12: false, 
+                      hour: "numeric", 
+                      minute: "numeric",
+                      second: "numeric"});
                 var chatInfo = ` <div class="incoming_msg">
-                                    <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                    <div class="received_msg">
-                                        <div class="received_withd_msg">
-                                            <p>${message.user} ${escapeHtml(message.text)}</p>
-                                            <span class="time_date"> 11:01 AM    |    June 9</span>
-                                        </div>
-                                    </div>`;
-                var answer = `  <div class="pb-3" style="float: right; width: 96%; text-align: right;">
-                <div class="d-inline p-2 bg-primary text-white">${escapeHtml(message.text)}</div>
-            </div>`;
+                                            <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                            <div class="received_msg">
+                                                <div class="received_withd_msg">
+                                                    <p><span class="font-weight-bold font-italic">${message.user}</span> ${escapeHtml(message.text)}</p>
+                                                    <span class="time_date"> ${time}</span>
+                                                </div>
+                                            </div>`;
+                var answer = `  <div class="pb-1 pt-2 pr-2" style="float: right; width: 96%; text-align: right;">
+                        <div class="d-inline p-2 bg-info rounded text-white">${escapeHtml(message.text)}</div>
+ <span class="time_date"> ${time}</span>
+                    </div>`;
+                //This is Admin Email. If you use another email to logging Administrator, please change it here!
                 if (message.user != "joro_theXfiles@abv.bg") {
                     $("#messagesList").append(chatInfo);
+                    var bleep = new Audio();
+                    bleep.src = "/lib/Chat/new_message-received.wav";
+                    bleep.play();
                 } else {
                     $("#messagesList").append(answer);
+                    var bleep = new Audio();
+                    bleep.src = "/lib/Chat/new_message-received.wav";
+                    bleep.play();
                 }
 
             });
 
         $("#sendButton").click(function () {
             var message = $("#messageInput").val();
-            connection.invoke("Send", message);
-            $("#messageInput").val("");
+            if (message != "") {
+                connection.invoke("Send", message);
+                $("#messageInput").val("");
+            }            
         });
 
         connection.start().catch(function (err) {
@@ -175,5 +119,5 @@
                 .replace(/>/g, "&gt;")
                 .replace(/"/g, "&quot;")
                 .replace(/'/g, "&#039;");
-        }</script>
+        }</script>   
 }

@@ -578,6 +578,9 @@
     <Content Update="wwwroot\lib\bootstrap\dist\css\bootstrap.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\lib\Chat\new_message-received.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\lib\fontawesome\css\all.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
