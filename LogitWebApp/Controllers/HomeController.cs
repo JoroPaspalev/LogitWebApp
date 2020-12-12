@@ -15,7 +15,9 @@ namespace LogitWebApp.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IHomeService homeService;
 
-        public HomeController(ILogger<HomeController> logger, IHomeService homeService)
+        public HomeController(
+            ILogger<HomeController> logger, 
+            IHomeService homeService)
         {
             _logger = logger;
             this.homeService = homeService;

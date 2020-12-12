@@ -86,7 +86,7 @@
  <span class="time_date"> ${time}</span>
                     </div>`;
                 //This is Admin Email. If you use another email to logging Administrator, please change it here!
-                if (message.user != "joro_theXfiles@abv.bg") {
+                if (message.user != "joro_theXfiles@abv.bg" && message.user != "admin@abv.bg" ) {
                     $("#messagesList").append(chatInfo);
                     var bleep = new Audio();
                     bleep.src = "/lib/Chat/new_message-received.wav";
