@@ -69,7 +69,7 @@ Logit е проект, който обединява на едно място у
 * In-Memmory Cache
 
 ## :floppy_disk: Database Diagram
-![] (https://storageaccountdemo000.blob.core.windows.net/pictures/Diagram.png)
+![](https://storageaccountdemo000.blob.core.windows.net/pictures/Diagram.png)
 
 # Link
 https://logitruse.azurewebsites.net/
