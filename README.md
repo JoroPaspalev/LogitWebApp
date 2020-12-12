@@ -47,9 +47,9 @@ It is a ready-to-use ASP.NET 5.0 application.
 За потребителския профил е използвана стандартната функционалност, която се предоставя от ASP.NET Core Identity, разширена с допълнителни свойства, според нуждите на проекта.
 
 **_Допълнителни функционалности:_**
-Интегриран е Facebook login, който може да бъде използван вместо стандартната регистрация.
-На лице е и "Scroll to top" бутон, който улеснява потребителя, връщайки го в началото на страницата, без да е нужно да скролира.
-При получаване на ново съобщение в чата се издава звуков сигнал.
+* Интегриран е Facebook login, който може да бъде използван вместо стандартната регистрация.
+* На лице е и "Scroll to top" бутон, който улеснява потребителя, връщайки го в началото на страницата, без да е нужно да скролира.
+* При получаване на ново съобщение в чата се издава звуков сигнал.
 
 **_Заключение:_**
 Logit е проект, който обединява на едно място удобен потребителски интерфейс, възможност за моментално получаване на оферта и лесното и преобразуване в поръчка.
@@ -60,8 +60,8 @@ Logit е проект, който обединява на едно място у
 
 ## :hammer: Used technologies
 * ASP.NET [5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
-* ASP.NET Core areas
-* Entity Framework [CORE 5.0.0](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/whatsnew)*
+* ASP.NET MVC areas
+* Entity Framework [CORE 5.0.0](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/whatsnew)
 * [Bootstrap](https://github.com/twbs/bootstrap)
 * JavaScript and JS animations
 * [Facebook for developers](https://developers.facebook.com)
@@ -69,7 +69,7 @@ Logit е проект, който обединява на едно място у
 * In-Memmory Cache
 
 ## :floppy_disk: Database Diagram
-![](https://app.box.com/s/rbm5rjsf9pvliemgdw7gt0tk4h6p4teg)
+https://app.box.com/s/rbm5rjsf9pvliemgdw7gt0tk4h6p4teg
 
 # Link
 https://logitruse.azurewebsites.net/
