@@ -56,7 +56,7 @@ Logit е проект, който обединява на едно място у
  
 ## Unit tests Code coverage
 
-![Code coverage](https://app.box.com/s/67wa4uuxsdran3hduq9sklj68gul40hb)
+![Code coverage](https://d2slcw3kip6qmk.cloudfront.net/marketing/pages/consideration-page/Diagram-Maker/diagram-maker-presentation-mode.png)
 
 ## :hammer: Used technologies
 * ASP.NET [5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
