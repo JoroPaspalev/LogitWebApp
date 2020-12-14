@@ -93,7 +93,7 @@
                             <div class="col-xl-2">
                                 <div class="row pt-3 text-right">
                                     <div class="col-12">
-                                        <input type="submit" class="btn btn-warning pl-1 pr-1 pt-5 pb-5" value="Редактирай" />
+                                        <input type="submit" class="btn btn-warning pl-1 pr-1 pt-5 pb-5" value="Редактирай" onclick="return confirm('Моля потрвърдете редакцията?');"/>
                                     </div>
                                 </div>
                             </div>
@@ -110,10 +110,6 @@
                                         <label asp-for="@Model.Pictures"></label>
                                         <input asp-for="@Model.Pictures" />
                                         <span asp-validation-for="@Model.Pictures" class="text-danger"></span>
-
-
-
-
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +117,6 @@
                             <div class="col-xl-8 offset-2">
                                 <div class="row p-3 ">
                                     <div class="col-12">
-
 
                                         @foreach (var image in Model.Images)
                                         {
@@ -135,9 +130,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </div>
                 </form>
             </div>

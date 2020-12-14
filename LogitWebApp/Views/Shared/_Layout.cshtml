@@ -1,7 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using static LogitWebApp.Common.GlobalConstants
+@using LogitWebApp.Services.Orders
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@inject IOrdersService ordersService
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,11 +48,11 @@
         <div class="container pl-0 ml-5">
             @if (IsSectionDefined("LogitLogoImg"))//Ако има секция с името "LogitLogoImg" покажи я, ако не направи другото
             {
-                <a class="navbar-brand navbar-dark rounded-0" href="/">@RenderSection("LogitLogoImg", false)</a>
+            <a class="navbar-brand navbar-dark rounded-0" href="/">@RenderSection("LogitLogoImg", false)</a>
             }
             else
             {
-                <a class="navbar-brand navbar-dark rounded-0" href="/">LOGIT</a>
+            <a class="navbar-brand navbar-dark rounded-0" href="/">LOGIT</a>
             }
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu" aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <span><i class="ion-navicon"></i></span>
@@ -65,33 +67,30 @@
                     {
                         ApplicationUser currUser = await UserManager.GetUserAsync(User);
 
-                        //if (User.IsInRole(Admin_RoleName))
-                        //{
-
-                        //}
-
                         if (await UserManager.IsInRoleAsync(currUser, Admin_RoleName))
                         {
-                            @*This call SignalRHub*@
-                            <li class="nav-item"><a class="nav-link" href="/Home/Chat">Чат</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Register">Добави нов Шофьор</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="DeleteDriver">Изтрий Шофьор</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Shipments">Пратки на шофьора</a></li>
+                            var newMessages = ordersService.GetAllNotReadFromAdminMessages().Count;
+
+                    @if (newMessages > 0)
+                            {
+                    <li class="nav-item"><a class="nav-link" asp-controller="Messages" asp-action="AllUnreadMessages">Нови съобщения<span class="text-dark">-</span><span class="bg-warning msgcount">@newMessages</span></a></li>
+                            }
+
+                    <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Register">Добави нов Шофьор</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="DeleteDriver">Изтрий Шофьор</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Shipments">Пратки на шофьора</a></li>
                         }
                         else if (await UserManager.IsInRoleAsync(currUser, Driver_RoleName))
                         {
-                            <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Shipments">Пратки на шофьора</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Shipments">Пратки на шофьора</a></li>
                         }
                         else if (await UserManager.IsInRoleAsync(currUser, User_RoleName))
                         {
-                            @*This call SignalRHub*@
-                            <li class="nav-item"><a class="nav-link" href="/Home/Chat">Чат</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Users" asp-action="AllUserOrders">Моите поръчки</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Users" asp-action="AllUserOrders">Моите поръчки</a></li>
                         }
                     }
 
                     <partial name="_LoginPartial" />
-
 
                     <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Contact">Контакти</a></li>
                 </ul>
@@ -100,12 +99,12 @@
     </nav>
 
     <div>
-        <main role="main" class="pb-3">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class=" probootstrap-border-top">
+    <div class=" probootstrap-border-top">
         <div class="">
             <div class="row">
                 <div class="col-md-12">
@@ -113,58 +112,78 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="pl-5 pr-5 pt-5 bg-dark">
-            <div class="row mb-5">
-                <div class="col-md-3 col-xs-6">
-                    <h3 class="probootstrap_font-18 mb-3">Quick Links</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="https://free-template.co" target="_blank">Home</a></li>
-                        <li><a href="https://free-template.co" target="_blank">About</a></li>
-                        <li><a href="https://free-template.co" target="_blank">Services</a></li>
-                        <li><a href="https://free-template.co" target="_blank">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-xs-6">
-                    <h3 class="probootstrap_font-18 mb-3">Quick Links</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="https://free-template.co" target="_blank">Home</a></li>
-                        <li><a href="https://free-template.co" target="_blank">About</a></li>
-                        <li><a href="https://free-template.co" target="_blank">Services</a></li>
-                        <li><a href="https://free-template.co" target="_blank">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-xs-6">
-                    <h3 class="probootstrap_font-18 mb-3">Quick Links</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="https://free-template.co" target="_blank">Home</a></li>
-                        <li><a href="https://free-template.co" target="_blank">About</a></li>
-                        <li><a href="https://free-template.co" target="_blank">Services</a></li>
-                        <li><a href="https://free-template.co" target="_blank">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-xs-6">
-                    <h3 class="probootstrap_font-18 mb-3">Quick Links</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="https://free-template.co" target="_blank">Home</a></li>
-                        <li><a href="https://free-template.co" target="_blank">About</a></li>
-                        <li><a href="https://free-template.co" target="_blank">Services</a></li>
-                        <li><a href="https://free-template.co" target="_blank">Contact</a></li>
-                    </ul>
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer bg-dark">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-info">
+                            <h3>Logit<span>.</span></h3>
+                            <p>
+                                гр. Мартен 7058, <br>
+                                ул. Свети св. Кирил и Методий<br><br>
+                                <strong>Тел:</strong> 088 952 3711<br>
+                                <strong>Email:</strong> info@logit.bg<br>
+                            </p>
+                            <div class="social-links mt-3">
+                                <a href="#" class="twitter"><i class="fab fa-twitter-square"></i></a>
+                                <a href="#" class="facebook"><i class="fab fa-facebook-square"></i></a>
+                                <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="google-plus"><i class="fab fa-skype"></i></a>
+                                <a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Полезни линкове</h4>
+                        <ul>
+                            <li><i class="fas fa-home"></i> <a asp-controller="Home" asp-action="Index">Начало</a></li>
+                            <li><i class="fas fa-info-circle"></i> <a asp-controller="Home" asp-action="About" asp-area="">За нас</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Нашите услуги</h4>
+                        <ul>
+                            @if (this.SignInManager.IsSignedIn(this.User))
+                            {
+                            <li><i class="fas fa-tasks"></i><a asp-controller="Users" asp-action="AllUserOrders">Моите поръчки</a></li>
+                            }
+                            else
+                            {
+                            <li><i class="fas fa-soap"></i> <a asp-area="Identity" asp-page="/Account/Register">Регистрация</a></li>
+                            <li><i class="fas fa-shield-alt"></i>  <a asp-area="Identity" asp-page="/Account/Login">Вход</a></li>
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Новини</h4>
+                        <p>Абонирайте се за последни новини от Logit</p>
+                        <form method="get" asp-controller="Home" asp-action="index">
+                            <input type="email" name="email" placeholder="Въведете email"><input type="submit" value="Абонирай се">
+                        </form>
+                    </div>
                 </div>
             </div>
-            <div class="row pt-5">
-                <div class="col-md-12 text-center">
-                    <p class="probootstrap_font-14">&copy; 2017. All Rights Reserved. <br> Designed &amp; Developed by <a href="https://uicookies.com/" target="_blank">uiCookies</a><small> (Don't remove credit link on this footer. See <a href="https://uicookies.com/license/">license</a>)</small></p>
-                    <p class="probootstrap_font-14">Demo Images: <a href="https://unsplash.com/" target="_blank">Unsplash</a></p>
+
+            <div class="container">
+                <div class="copyright">
+                    &copy; Copyright <span style="font-size: 15px;">Logit</span>. Всички права запазени
                 </div>
             </div>
         </div>
-
-        @*This is for Scroll To Top Button*@
-        <a class="to-top" href="#"><i class="fas fa-arrow-up"></i></a>
-
     </footer>
+
+    <!-- End Footer -->
+    @*This is for Scroll To Top Button*@
+    <a class="to-top" href="#"><i class="fas fa-arrow-up"></i></a>
+
+
 
     <script src="/js/jquery.min.js"></script>
 

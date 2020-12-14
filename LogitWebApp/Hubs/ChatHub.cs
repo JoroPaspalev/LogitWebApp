@@ -6,24 +6,43 @@ using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
-
-
-//public class Group
-//{
-//    public string Name { get; set; }
-
-//    public string Admin_Name { get; set; }
-
-//    public string User_Name { get; set; }
-//}
+using LogitWebApp.Common;
+using System.Security.Claims;
+using System;
+using LogitWebApp.Data;
 
 namespace LogitWebApp.Hubs
 {
     [Authorize]
     public class ChatHub : Hub
     {
-        public async Task Send(string message)
+        private readonly ApplicationDbContext db;
+
+        public ChatHub(ApplicationDbContext db)
         {
+            this.db = db;
+        }
+
+        public async Task Send(string message, string orderId)
+        {
+            bool isAdmin = this.Context.User.IsInRole(GlobalConstants.Admin_RoleName);
+            var userId = this.Context.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var currMessage = new Message
+            {
+                IsAdmin = isAdmin,
+                CreatedOn = DateTime.UtcNow,
+                OrderId = orderId,
+                Text = message
+            };
+
+            await this.db.Messages.AddAsync(currMessage);
+            await this.db.SaveChangesAsync();
+
+            await this.Clients.OthersInGroup(orderId)
+                .SendAsync("NewMessage", message);
+
+
             //string adminUsername = "joro_thexfiles@abv.bg";
 
             //List<Group> groups = new List<Group>();
@@ -62,7 +81,7 @@ namespace LogitWebApp.Hubs
             //}
 
 
-            await this.Clients.All.SendAsync("NewMessage", new Message
+            await this.Clients.All.SendAsync("NewMessage", new MessageViewModel
             {
                 User = this.Context.User.Identity.Name,
                 Text = message,

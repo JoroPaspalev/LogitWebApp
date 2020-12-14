@@ -113,7 +113,7 @@ img {
 }
 
 .received_withd_msg p {
-    background: #e4e8fb none repeat scroll 0 0;
+    background: #f6f6f6 none repeat scroll 0 0;
     border-radius: 3px;
     color: #646464;
     font-size: 14px;
@@ -123,10 +123,11 @@ img {
 }
 
 .time_date {
-    color: #464646;
+    color: #989898;
     display: block;
     font-size: 12px;
     margin: 3px 0 0;
+   
 }
 
 .received_withd_msg {

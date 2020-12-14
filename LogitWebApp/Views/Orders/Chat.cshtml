@@ -1,5 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
+@using LogitWebApp.ViewModels.ChatHub
+@using LogitWebApp.Common
+@model List<MessagesViewModel>
 
 <!DOCTYPE html>
 <html>
@@ -31,6 +34,7 @@
                                 <!--This is where we will put messages from the HUB-->
                                 <div id="messagesList" style="font-size: 14px;">
 
+                                    <!--This is for the User information-->
                                     <div class="outgoing_msg">
                                         <div class="sent_msg">
                                             <div id="messagesList" style="font-size: 14px;">
@@ -44,10 +48,47 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div>
+                                        @if (Model != null)
+                                        {
+                                            @foreach (var message in Model)
+                                            {
+                                                @if (message.IsAdmin == false)
+                                                {
+                                                    <div class="incoming_msg">
+                                                        <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                                        <div class="received_msg">
+                                                            <div class="received_withd_msg">
+                                                                @{
+                                                                    ApplicationUser currentUser = await UserManager.GetUserAsync(User);
+                                                                }
+                                                                <p><span class="font-weight-bold font-italic">@message.userWhoSendMessage</span> @message.Text</p>
+                                                                <span class="time_date"> @message.CreatedOn.ToString("dd/MM/yy HH:mm")</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="pb-1 pt-2 pr-2" style="float: right; width: 96%; text-align: right;">
+                                                        <div class="d-inline p-2 bg-info rounded text-white">@message.Text</div>
+                                                        <span class="time_date">@message.CreatedOn.ToString("dd/MM/yy HH:mm")</span>
+                                                    </div>
+                                                }
+                                            }
+                                        }
+                                    </div>
+
+
+
                                 </div>
                             </div>
                             <div id="message-holder" class="mt-3 mb-3 d-flex justify-content-start">
                                 <h4></h4>
+                                @*Тук взимам номера на поръчката/пратката*@
+                                <input name="orderId" hidden readonly id="messageOrderId" value="@ViewBag.orderId " />
+
                                 <input class="w-75 ml-4 pl-3" type="text" id="messageInput" placeholder="Напишете съобщение..." />
                                 <button id="sendButton" class="ml-4 btn btn-dark text-white chat_btn">Изпрати</button>
                             </div>
@@ -56,7 +97,7 @@
                 </div>
             </div>
         </div>
-    </section>    
+    </section>
 </body>
 </html>
 
@@ -69,24 +110,26 @@
 
         connection.on("NewMessage",
             function (message) {
-                  var time = new Date().toLocaleTimeString('en-US', { hour12: false, 
-                      hour: "numeric", 
-                      minute: "numeric",
-                      second: "numeric"});
+                var time = new Date().toLocaleTimeString('en-US', {
+                    hour12: false,
+                    hour: "numeric",
+                    minute: "numeric",
+                    second: "numeric"
+                });
                 var chatInfo = ` <div class="incoming_msg">
-                                            <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                            <div class="received_msg">
-                                                <div class="received_withd_msg">
-                                                    <p><span class="font-weight-bold font-italic">${message.user}</span> ${escapeHtml(message.text)}</p>
-                                                    <span class="time_date"> ${time}</span>
-                                                </div>
-                                            </div>`;
+                                                                                    <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                                                                    <div class="received_msg">
+                                                                                        <div class="received_withd_msg">
+                                                                                            <p><span class="font-weight-bold font-italic">${message.user}</span> ${escapeHtml(message.text)}</p>
+                                                                                            <span class="time_date"> ${time}</span>
+                                                                                        </div>
+                                                                                    </div>`;
                 var answer = `  <div class="pb-1 pt-2 pr-2" style="float: right; width: 96%; text-align: right;">
-                        <div class="d-inline p-2 bg-info rounded text-white">${escapeHtml(message.text)}</div>
- <span class="time_date"> ${time}</span>
-                    </div>`;
+                                                                <div class="d-inline p-2 bg-info rounded text-white">${escapeHtml(message.text)}</div>
+                                         <span class="time_date"> ${time}</span>
+                                                            </div>`;
                 //This is Admin Email. If you use another email to logging Administrator, please change it here!
-                if (message.user != "joro_theXfiles@abv.bg" && message.user != "admin@abv.bg" ) {
+                if (message.user != "joro_theXfiles@abv.bg" && message.user != "admin@abv.bg") {
                     $("#messagesList").append(chatInfo);
                     var bleep = new Audio();
                     bleep.src = "/lib/Chat/new_message-received.wav";
@@ -102,10 +145,11 @@
 
         $("#sendButton").click(function () {
             var message = $("#messageInput").val();
+            var orderId = $("#messageOrderId").val();
             if (message != "") {
-                connection.invoke("Send", message);
+                connection.invoke("Send", message, orderId);
                 $("#messageInput").val("");
-            }            
+            }
         });
 
         connection.start().catch(function (err) {
@@ -119,5 +163,5 @@
                 .replace(/>/g, "&gt;")
                 .replace(/"/g, "&quot;")
                 .replace(/'/g, "&#039;");
-        }</script>   
+        }</script>
 }

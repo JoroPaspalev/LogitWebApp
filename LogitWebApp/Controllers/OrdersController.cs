@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using LogitWebApp.Common;
 using LogitWebApp.Services.Orders;
 using LogitWebApp.ViewModels.Offer;
 using LogitWebApp.ViewModels.Shared;
@@ -49,6 +50,21 @@ namespace LogitWebApp.Controllers
         //{
         //    return this.Redirect("/");
         //}
+
+        [Authorize]
+        public IActionResult Chat(string orderId)
+        {
+            var isAdmin = this.User.IsInRole(GlobalConstants.Admin_RoleName);
+            //Ако currUser е в роля Admin то тогава отбележи, че непрочетените messages са прочетени
+            if (isAdmin)
+            {
+                this.ordersService.ChangeAllUnreadMessagesWithThisOrderId(orderId);
+            }
+
+            var messages = this.ordersService.GetAllMessages(orderId);
+            ViewBag.orderId = orderId;
+            return this.View(messages);
+        }
 
         public IActionResult OrderAdded(ChangesApplied input)
         {

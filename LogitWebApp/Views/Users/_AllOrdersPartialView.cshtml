@@ -138,7 +138,7 @@
 
                             @{
                                 var data = new Dictionary<string, string>
-                                                                                                                                {
+                                                                                                                                                {
                                     {"driverId", Model.DriverId },
                                     { "value", "0"}
                                 };
@@ -220,18 +220,30 @@
     </tr>
 </form>
 
-<form method="post" asp-controller="Export" asp-action="GetPdf" class="ml-2 mt-2">
-    <input type="text" readonly hidden asp-for="@Model.OrderId" name="orderId" />
-    <input type="submit" class="btn btn-sm btn-success m-2 p-2" value="Смъкни .pdf" />
-    <span class="inline-block">
-        @foreach (var image in Model.Images)
-        {
-            <a href="/Users/ShowImages?orderId=@Model.OrderId" target="_blank">
-                <img src="@image.ImageUrl" style="width: 50px;" />
-            </a>
-        }
-    </span>
-</form>
+<div class="row">
+    <div class="col">
+        <form method="post" asp-controller="Export" asp-action="GetPdf" class="ml-2 mt-2" style="float:left;">
+            <input type="text" readonly hidden asp-for="@Model.OrderId" name="orderId" />
+            <input type="submit" class="btn btn-sm btn-success m-2 p-2" value="Смъкни .pdf" />
+
+            <span class="inline-block">
+                @foreach (var image in Model.Images)
+                {
+                    <a href="/Users/ShowImages?orderId=@Model.OrderId" target="_blank">
+                        <img src="@image.ImageUrl" style="width: 50px;" />
+                    </a>
+                }
+            </span>
+        </form>
+
+        <form method="post" asp-controller="Orders" asp-action="Chat" class="ml-2 mt-2 inline-block">
+            <input type="text" readonly hidden  name="orderId" value="@Model.OrderId" />
+            <input type="submit" class="btn btn-sm btn-success m-2 p-2" value="Пишете ни" />
+        </form>
+
+    </div>
+</div>
+
 
 
 

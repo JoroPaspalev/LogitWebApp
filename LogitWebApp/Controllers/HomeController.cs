@@ -30,11 +30,7 @@ namespace LogitWebApp.Controllers
             return View(model);
         }
 
-        [Authorize]
-        public IActionResult Chat()
-        {
-            return this.View();
-        }
+       
 
         [HttpPost]
         public IActionResult Index(OfferInputModel input)

@@ -13,6 +13,7 @@ namespace LogitWebApp.Data.Models
         public Order()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.Messages = new HashSet<Message>();
         }
 
         [Key]
@@ -27,5 +28,7 @@ namespace LogitWebApp.Data.Models
         public string ShipmentId { get; set; }
 
         public Shipment Shipment { get; set; }
+
+        public ICollection<Message> Messages { get; set; }
     }
 }

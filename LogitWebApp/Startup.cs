@@ -23,6 +23,7 @@ using LogitWebApp.Services.Users;
 using LogitWebApp.Services.Export;
 using WHMS.Services.Common;
 using LogitWebApp.Hubs;
+using LogitWebApp.Services.Messages;
 
 namespace LogitWebApp
 {
@@ -95,7 +96,9 @@ namespace LogitWebApp
             services.AddScoped<IViewRenderService, ViewRenderService>();
             services.AddScoped<IHtmlToPdfConverter, HtmlToPdfConverter>();
             services.AddTransient<IVoteService, VoteService>();
+            services.AddTransient<IMessagesService, MessagesService>();
             services.AddSignalR();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

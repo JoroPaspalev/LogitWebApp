@@ -1,5 +1,6 @@
 ﻿using LogitWebApp.Data;
 using LogitWebApp.Data.Models;
+using LogitWebApp.ViewModels.ChatHub;
 using LogitWebApp.ViewModels.Offer;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,22 @@ namespace LogitWebApp.Services.Orders
             this.db = db;
         }
 
+        public void ChangeAllUnreadMessagesWithThisOrderId(string orderId)
+        {
+            var unreadMessages = this.db.Messages
+                .Where(x => x.OrderId == orderId && x.IsRead == false);
+
+            foreach (var message in unreadMessages)
+            {
+                message.IsRead = true;
+            }
+
+            this.db.SaveChanges();
+        }
+
         public string CreateOrder(AddressInputModel input, string userId)
         {
-            var currShipment = this.db.Shipments.FirstOrDefault(s=>s.Id == input.ShipmentId);
+            var currShipment = this.db.Shipments.FirstOrDefault(s => s.Id == input.ShipmentId);
 
             var fromCity = this.db.Shipments.Where(s => s.Id == input.ShipmentId).Select(x => new { Name = x.FromCity.Name }).First();
 
@@ -91,6 +105,38 @@ namespace LogitWebApp.Services.Orders
 
             return currOrder.Id;
 
+        }
+
+        public ICollection<MessagesViewModel> GetAllMessages(string orderId)
+        {
+            return this.db.Messages
+                .Where(m => m.OrderId == orderId)
+                .Select(x => new MessagesViewModel
+                {
+                    Text = x.Text,
+                    CreatedOn = x.CreatedOn,
+                    IsAdmin = x.IsAdmin,
+                    OrderId = x.OrderId,
+                    IsRead = x.IsRead,
+                    userWhoSendMessage = x.Order.Creator.UserName
+                })
+                .ToList();
+        }
+
+
+        public ICollection<MessagesViewModel> GetAllNotReadFromAdminMessages()
+        {
+            var unreadFromAdminMessages = this.db.Messages
+                .Where(m => m.IsAdmin == false && m.IsRead == false)
+                .Select(x => new MessagesViewModel
+                {
+                    CreatedOn = x.CreatedOn,
+                    OrderId = x.OrderId,
+                    Text = x.Text
+                })
+                .ToList();
+
+            return unreadFromAdminMessages;
         }
     }
 }

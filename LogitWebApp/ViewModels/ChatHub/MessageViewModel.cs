@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace LogitWebApp.ViewModels.ChatHub
 {
-    public class Message
+    public class MessageViewModel
     {
         public string User { get; set; }
 

@@ -106,10 +106,19 @@ namespace LogitWebApp.Areas.Identity.Pages.Account
             }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
+            bool isUserSignIn = _signInManager.IsSignedIn(this.User);
+
+            if (isUserSignIn)
+            {
+                return this.RedirectToAction("Index", "Home");
+            }
+
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)

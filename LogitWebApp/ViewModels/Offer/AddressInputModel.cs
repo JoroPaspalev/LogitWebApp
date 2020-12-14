@@ -86,13 +86,13 @@ namespace LogitWebApp.ViewModels.Offer
             //Искам датата на товарене да не е след повече от 1 месец от датата на офертата
             if (this.LoadingDate >= DateTime.UtcNow.AddMonths(1))
             {
-                yield return new ValidationResult("Your loading date cannot be more than 30 days after date of your order!", new List<string>() { "LoadingDate" }); //Чрез това new List<string>() { "LoadingDate" } добавям в ModelState-а за кое property name e станала тази грешка, за да може после да покаже грешката под него, иначе ако го няма просто отчита грешката, но на client-а не се показва нищо и само се презарежда страницата все едно
+                yield return new ValidationResult("Датата за товарене не може да бъде повече от 30 дни след датата на поръчката!", new List<string>() { "LoadingDate" }); //Чрез това new List<string>() { "LoadingDate" } добавям в ModelState-а за кое property name e станала тази грешка, за да може после да покаже грешката под него, иначе ако го няма просто отчита грешката, но на client-а не се показва нищо и само се презарежда страницата все едно
             }
 
             //Искам датата на разтоварване да не е след повече от 7 дни, защото тази стока ще ми заема място в склада
             if ((this.UnloadingDate - this.LoadingDate)?.Days > 7)
             {
-                yield return new ValidationResult("Your shipment cannot stay more than 1 week in our warehouse!", new List<string>() { "UnloadingDate", "LoadingDate" });
+                yield return new ValidationResult("Вашата пратка не може да стои повече от 1 седмица в наш склад!", new List<string>() { "UnloadingDate", "LoadingDate" });
             }
         }
     }

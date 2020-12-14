@@ -20,6 +20,8 @@ namespace LogitWebApp.Data
         {
         }
 
+        public DbSet<Message> Messages { get; set; }
+
         public DbSet<Address> Addresses { get; set; }
 
         public DbSet<Driver> Drivers { get; set; }

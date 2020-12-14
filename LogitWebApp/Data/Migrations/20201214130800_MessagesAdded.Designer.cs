@@ -4,14 +4,16 @@ using LogitWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LogitWebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201214130800_MessagesAdded")]
+    partial class MessagesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -251,14 +253,12 @@ namespace LogitWebApp.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("OrderId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Messages");
                 });
@@ -573,15 +573,6 @@ namespace LogitWebApp.Migrations
                     b.Navigation("Shipment");
                 });
 
-            modelBuilder.Entity("LogitWebApp.Data.Models.Message", b =>
-                {
-                    b.HasOne("LogitWebApp.Data.Models.Order", "Order")
-                        .WithMany("Messages")
-                        .HasForeignKey("OrderId");
-
-                    b.Navigation("Order");
-                });
-
             modelBuilder.Entity("LogitWebApp.Data.Models.Order", b =>
                 {
                     b.HasOne("LogitWebApp.Data.Models.ApplicationUser", "Creator")
@@ -736,11 +727,6 @@ namespace LogitWebApp.Migrations
                     b.Navigation("ShipmentsFromThisCity");
 
                     b.Navigation("ShipmentsToThisCity");
-                });
-
-            modelBuilder.Entity("LogitWebApp.Data.Models.Order", b =>
-                {
-                    b.Navigation("Messages");
                 });
 
             modelBuilder.Entity("LogitWebApp.Data.Models.Participant", b =>
