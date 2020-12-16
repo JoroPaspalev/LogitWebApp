@@ -1,20 +1,25 @@
-﻿@using LogitWebApp.ViewModels.Users;
-@model OrdersPaginationViewModel
+﻿@using LogitWebApp.ViewModels.Users
+@model ICollection<UserOrderViewModel>
+
 
 <section class="probootstrap-cover overflow-hidden relative" style="background-image: url('/img/bg_1.jpg');" data-stellar-background-ratio="0.5" id="section-home">
     <div class="overlay"></div>
     <div class="container">
         <div class="row p-0">
+            <div class="col-12">
+                <h1 class="text-light text-center">Резултати от търсенето</h1>
+                <hr class="col-3 bg-light mb-4">
+            </div>
             <div class="col-md">
                 <div class="">
                     <div class="row">
                         <div class="col-md-12 ">
                             <div id="sources-list" class="u-accordion" role="tablist" aria-multiselectable="true">
-                                @foreach (var order in Model.Orders)
+                                @foreach (var order in Model)
                                 {
                                     <p class="p-0 mb-1">
                                         <button class="btn btn-warning btn-rad btn-block text-left " type="button" data-toggle="collapse" data-target="#@order.OrderId" aria-expanded="false" aria-controls="@order.OrderId">
-                                            @*<i class="fas fa-box-open"></i>*@<i class="fas fa-home"></i>  От: @order.Sender/@order.From <span class="text-light font-weight-bold"> <i class="fas fa-warehouse"></i>  За: @order.Receiver/@order.To</span> - <i class="fas fa-box-open"></i> Палети @order.CountOfPallets бр. <i class="far fa-money-bill-alt"></i> Цена: @order.Price
+                                            <i class="fas fa-home"></i>  От: @order.Sender/@order.From <span class="text-light font-weight-bold"> <i class="fas fa-warehouse"></i>  За: @order.Receiver/@order.To</span> - <i class="fas fa-box-open"></i> Палети @order.CountOfPallets бр. <i class="far fa-money-bill-alt"></i> Цена: @order.Price
                                         </button>
                                     </p>
                                     <div class="collapse" id="@order.OrderId">
@@ -28,12 +33,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <partial name="_PaginationPartialView" model="@Model">
-
-                        <!--<a href="/proof/1.jpg" class="nav nav-mtd tabs-info z-depth-1">Отвори снимката</a>-->
-                        @*Този таг ми показва директно снимката на дисплея без да има линк който да натисна за да се покаже*@
-                        <!--<img src="/proof/1.jpg" />-->
                 </div>
             </div>
         </div>

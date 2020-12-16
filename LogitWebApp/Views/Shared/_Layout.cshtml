@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="/css/helpers.css">
     <link rel="stylesheet" href="/css/style.css">
 
-    <link rel="stylesheet" href="~/Joro/css/main.css">
+    <link rel="stylesheet" href="~/Joro/css/main.css" asp-append-version="true">
 
 </head>
 <body>
@@ -71,22 +71,24 @@
                         {
                             var newMessages = ordersService.GetAllNotReadFromAdminMessages().Count;
 
-                    @if (newMessages > 0)
+                            @if (newMessages > 0)
                             {
-                    <li class="nav-item"><a class="nav-link" asp-controller="Messages" asp-action="AllUnreadMessages">Нови съобщения<span class="text-dark">-</span><span class="bg-warning msgcount">@newMessages</span></a></li>
+                                <li class="nav-item"><a class="nav-link" asp-controller="Messages" asp-action="AllUnreadMessages">Нови съобщения<span class="text-dark">-</span><span class="bg-warning msgcount">@newMessages</span></a></li>
                             }
 
-                    <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Register">Добави нов Шофьор</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="DeleteDriver">Изтрий Шофьор</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Shipments">Пратки на шофьора</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Register">Добави нов Шофьор</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="DeleteDriver">Изтрий Шофьор</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Shipments">Пратки на шофьора</a></li>
                         }
                         else if (await UserManager.IsInRoleAsync(currUser, Driver_RoleName))
                         {
-                    <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Shipments">Пратки на шофьора</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Shipments">Пратки на шофьора</a></li>
                         }
                         else if (await UserManager.IsInRoleAsync(currUser, User_RoleName))
                         {
-                    <li class="nav-item"><a class="nav-link" asp-controller="Users" asp-action="AllUserOrders">Моите поръчки</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Search" asp-action="Index">Търсене</a></li>
+
+                            <li class="nav-item"><a class="nav-link" asp-controller="Users" asp-action="AllUserOrders">Моите поръчки</a></li>
                         }
                     }
 

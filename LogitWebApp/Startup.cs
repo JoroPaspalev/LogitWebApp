@@ -24,6 +24,7 @@ using LogitWebApp.Services.Export;
 using WHMS.Services.Common;
 using LogitWebApp.Hubs;
 using LogitWebApp.Services.Messages;
+using LogitWebApp.Services.Search;
 
 namespace LogitWebApp
 {
@@ -97,6 +98,7 @@ namespace LogitWebApp
             services.AddScoped<IHtmlToPdfConverter, HtmlToPdfConverter>();
             services.AddTransient<IVoteService, VoteService>();
             services.AddTransient<IMessagesService, MessagesService>();
+            services.AddTransient<ISearchService, SearchService>();
             services.AddSignalR();
 
         }
@@ -162,14 +164,20 @@ namespace LogitWebApp
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints(
+                endpoints =>
             {
+                //“ова ми добав€ routing-а за Area, ако го махна н€ма да се отвар€т controllers в areas
+                endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapRazorPages();
                 endpoints.MapHub<ChatHub>("/chat");
             });
+
         }
     }
 }

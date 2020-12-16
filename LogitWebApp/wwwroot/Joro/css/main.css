@@ -244,3 +244,13 @@ html {
         color: #fff;
     }
 
+
+.btn_admin {
+    padding: 5px 5px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    font-weight: 400;
+    border-radius: 3px;
+}
+

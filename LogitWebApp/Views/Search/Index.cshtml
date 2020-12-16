@@ -1,0 +1,48 @@
+﻿@using LogitWebApp.ViewModels.Search
+@model SearchInputModel
+
+<section class="probootstrap-cover overflow-hidden relative" style=" background-image: url('/img/bg_1.jpg');" data-stellar-background-ratio="0.5" id="section-home">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row  p-0">
+            <div class="col-12">
+                <h1 class="text-light text-center">Търсене</h1>
+                <hr class="col-3 bg-light mb-1">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div asp-validation-summary="All" class="text-danger no-bullets"></div>
+
+                        <form method="get" class="form-group" asp-controller="Search" asp-action="Result">
+                            <label asp-for="@Model.SenderName" class="control-label probootstrap_text-gray-300 mb-0" ></label>
+                            <input asp-for="@Model.SenderName" class="form-control" />
+                            <span asp-validation-for="@Model.SenderName" class="text-danger error-text-size"></span>
+
+                            <label asp-for="@Model.ReceiverName" class="control-label probootstrap_text-gray-300 pt-2 mb-0"></label>
+                            <input asp-for="@Model.ReceiverName" class="form-control" />
+                            <span asp-validation-for="@Model.ReceiverName" class="text-danger error-text-size"></span>
+
+                            <label asp-for="@Model.LoadingDate" class="control-label probootstrap_text-gray-300 pt-2 mb-0"></label>
+                            <input asp-for="@Model.LoadingDate" class="form-control" />
+                            <span asp-validation-for="@Model.LoadingDate" class="text-danger error-text-size"></span>
+
+                            <label asp-for="@Model.UnloadingDate" class="control-label probootstrap_text-gray-300 pt-2 mb-0"></label>
+                            <input asp-for="@Model.UnloadingDate" class="form-control" />
+                            <span asp-validation-for="@Model.UnloadingDate" class="text-danger error-text-size"></span>
+
+                            <input type="submit" class="btn btn-warning mt-4" value="Търси" />
+                        </form>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}

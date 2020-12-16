@@ -140,34 +140,13 @@ namespace LogitWebApp.Controllers
 
         public IActionResult EditShipment(IdOfTheShipment idOfTheShipment)
         {
-            //да взема данните на тази пратка по Id-то да направя viewModel и да го подам на view-то
-
             var shipmentForEdit = this.driversService.GetShipment(idOfTheShipment.ShipmentId);
-
             return this.View(shipmentForEdit);
         }
 
         [HttpPost]
         public async Task<IActionResult> EditShipment(EditShipment input)
         {
-            //if (input.Picture != null)
-            //{
-            //    if (!input.Picture.FileName.EndsWith(".png") && !input.Picture.FileName.EndsWith(".jpg"))
-            //    {
-            //        //Така добавяме грешки в Controller-а
-            //        this.ModelState.AddModelError("Picture", "Можете да качвате само файлове с разширение .png и .jpg!"); 
-            //    }
-            //}
-
-            //if (input.Picture != null)
-            //{
-            //    if (input.Picture.Length > 2 * 1024 * 1024)
-            //    {
-            //        this.ModelState.AddModelError("Picture", $"Можете да качвате файлове до 2MB!");
-            //    }
-            //}
-
-
             if (!ModelState.IsValid)
             {
                 var shipmentForEdit = this.driversService.GetShipment(input.ShipmentId);

@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogitWebApp", "LogitWebApp\LogitWebApp.csproj", "{792165CB-5716-4A2C-A239-DD9ADD4DD0AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogitWebApp.Tests", "LogitWebApp.Tests\LogitWebApp.Tests.csproj", "{4E8332F6-E490-4CB8-8BCD-CB3DEBDADEBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogitWebApp.Tests", "LogitWebApp.Tests\LogitWebApp.Tests.csproj", "{4E8332F6-E490-4CB8-8BCD-CB3DEBDADEBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

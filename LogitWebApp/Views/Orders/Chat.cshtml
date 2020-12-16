@@ -132,12 +132,12 @@
                 if (message.user != "joro_theXfiles@abv.bg" && message.user != "admin@abv.bg") {
                     $("#messagesList").append(chatInfo);
                     var bleep = new Audio();
-                    bleep.src = "/lib/Chat/new_message-received.wav";
+                    bleep.src = "/lib/Chat/send_message.mp3";
                     bleep.play();
                 } else {
                     $("#messagesList").append(answer);
                     var bleep = new Audio();
-                    bleep.src = "/lib/Chat/new_message-received.wav";
+                    bleep.src = "/lib/Chat/send_message.mp3";
                     bleep.play();
                 }
 

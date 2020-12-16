@@ -59,9 +59,9 @@ namespace LogitWebApp.Services.Users
             var paginationViewModel = new OrdersPaginationViewModel
             {
                 PageNumber = id,
-                Orders = ordersPerPage,
                 ItemsCount = this.db.Orders.Where(o => o.CreatorId == userId).Count(),
-                ItemsPerPage = items
+                ItemsPerPage = items,
+                Orders = ordersPerPage,
             };
 
             return paginationViewModel;
