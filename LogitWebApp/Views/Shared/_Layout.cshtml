@@ -76,9 +76,10 @@
                                 <li class="nav-item"><a class="nav-link" asp-controller="Messages" asp-action="AllUnreadMessages">Нови съобщения<span class="text-dark">-</span><span class="bg-warning msgcount">@newMessages</span></a></li>
                             }
 
+                            <li class="nav-item"><a class="nav-link" asp-controller="Delete" asp-action="DeleteOrder">Изтриване на поръчка</a></li>
                             <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Register">Добави нов Шофьор</a></li>
                             <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="DeleteDriver">Изтрий Шофьор</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Shipments">Пратки на шофьора</a></li>
+                            @*<li class="nav-item"><a class="nav-link" asp-controller="Drivers" asp-action="Shipments">Пратки на шофьора</a></li>*@
                         }
                         else if (await UserManager.IsInRoleAsync(currUser, Driver_RoleName))
                         {

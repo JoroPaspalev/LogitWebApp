@@ -1,17 +1,11 @@
-﻿using LogitWebApp.Common;
-using LogitWebApp.Data.Models;
+﻿using LogitWebApp.Data.Models;
 using LogitWebApp.Services.Search;
-using LogitWebApp.Services.Users;
-using LogitWebApp.ViewModels.Pagination;
 using LogitWebApp.ViewModels.Search;
 using LogitWebApp.ViewModels.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LogitWebApp.Controllers
 {
@@ -21,9 +15,7 @@ namespace LogitWebApp.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ISearchService searchService;
 
-        public SearchController(
-            UserManager<ApplicationUser> userManager,
-            ISearchService searchService)
+        public SearchController(UserManager<ApplicationUser> userManager, ISearchService searchService)
         {
             this.userManager = userManager;
             this.searchService = searchService;

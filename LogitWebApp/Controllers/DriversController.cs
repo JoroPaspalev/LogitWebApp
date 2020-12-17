@@ -1,8 +1,6 @@
 ﻿using System;
 using static LogitWebApp.Common.GlobalConstants;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using LogitWebApp.Data.Models;
@@ -62,7 +60,7 @@ namespace LogitWebApp.Controllers
         {
             if (!this.driversService.IsDriverExist(input.Email))
             {
-                ModelState.AddModelError("Email", "Такъв Email несъществува!");
+                ModelState.AddModelError("Email", "Такъв Email не съществува!");
             }
 
             if (!ModelState.IsValid)

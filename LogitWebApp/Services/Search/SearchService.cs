@@ -69,8 +69,7 @@ namespace LogitWebApp.Services.Search
                 allOrders = allOrders.Where(o => o.UnloadingDate <= input.UnloadingDate);
             }
 
-            var allOrders1 = allOrders.ToList();
-            return allOrders1;
+            return allOrders.OrderByDescending(x=>x.OrderCreatedOn).ToList();
         }
     }
 }

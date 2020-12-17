@@ -25,6 +25,7 @@ using WHMS.Services.Common;
 using LogitWebApp.Hubs;
 using LogitWebApp.Services.Messages;
 using LogitWebApp.Services.Search;
+using LogitWebApp.Services.DeleteOrder;
 
 namespace LogitWebApp
 {
@@ -99,6 +100,7 @@ namespace LogitWebApp
             services.AddTransient<IVoteService, VoteService>();
             services.AddTransient<IMessagesService, MessagesService>();
             services.AddTransient<ISearchService, SearchService>();
+            services.AddTransient<IDeleteOrderService, DeleteOrderService>();
             services.AddSignalR();
 
         }

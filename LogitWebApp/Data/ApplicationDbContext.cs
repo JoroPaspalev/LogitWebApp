@@ -102,6 +102,13 @@ namespace LogitWebApp.Data
                 .WithOne(x => x.Driver)
                 .HasForeignKey(x => x.DriverId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Order>()
+                .HasMany(x => x.Messages)
+                .WithOne(x => x.Order)
+                .HasForeignKey(x => x.OrderId)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

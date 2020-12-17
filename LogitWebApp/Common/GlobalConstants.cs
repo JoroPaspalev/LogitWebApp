@@ -26,6 +26,8 @@
         public const string Driver_Added = "Вие успешно добавихте шофьор към базата данни!";
         public const string Driver_Deleted = "Вие успешно премахнахте шофьора от базата данни!";
 
+        public const string Order_Deleted = "Вие успешно премахнахте поръчката от базата данни!";
+
 
 
 
