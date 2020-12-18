@@ -56,7 +56,7 @@ Logit е проект, който обединява на едно място у
  
 ## Unit tests Code coverage
 
-![Code coverage](https://storageaccountdemo000.blob.core.windows.net/pictures/Code%20Coverage.JPG)
+![Code coverage](https://storageaccountdemo000.blob.core.windows.net/pictures/Code_Coverage.jpg)
 
 ## :hammer: Used technologies
 * ASP.NET [5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
@@ -69,7 +69,7 @@ Logit е проект, който обединява на едно място у
 * In-Memmory Cache
 
 ## :floppy_disk: Database Diagram
-![](https://storageaccountdemo000.blob.core.windows.net/pictures/Code Coverage.JPG)
+![](https://storageaccountdemo000.blob.core.windows.net/pictures/Diagram.png)
 
 # Link
 https://logitruse.azurewebsites.net/
