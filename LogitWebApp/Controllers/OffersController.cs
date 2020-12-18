@@ -1,13 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using LogitWebApp.Services.Offers;
 using LogitWebApp.ViewModels.Offer;
 using LogitWebApp.Data.Models;
 
 namespace LogitWebApp.Controllers
-{
-    [Authorize]
+{   
     public class OffersController : Controller
     {
         private readonly IOffersService offersService;

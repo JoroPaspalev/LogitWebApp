@@ -38,8 +38,8 @@
     <link rel="stylesheet" href="~/Joro/css/main.css" asp-append-version="true">
 
 </head>
-<body>
 
+<body>
 
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/bg_BG/sdk.js#xfbml=1&version=v9.0&appId=1283745898662878&autoLogAppEvents=1" nonce="nG2SIhe2"></script>
@@ -60,8 +60,8 @@
             <div class="collapse navbar-collapse" id="probootstrap-menu">
 
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a class="nav-link" href="/">Начало</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About">За Нас</a></li>
+                    <li class="nav-item active"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Начало</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">За Нас</a></li>
 
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -95,7 +95,7 @@
 
                     <partial name="_LoginPartial" />
 
-                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Contact">Контакти</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Контакти</a></li>
                 </ul>
             </div>
         </div>
