@@ -1,9 +1,5 @@
-﻿using LogitWebApp.Data.Models;
+﻿using System.Threading.Tasks;
 using LogitWebApp.ViewModels.Drivers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LogitWebApp.Services.Drivers
 {
@@ -25,6 +21,6 @@ namespace LogitWebApp.Services.Drivers
 
         public Task AttachShipmentToDriverAsync(string shipmentId, string userId);
 
-        public Task<bool> DeleteDriverAsync(string email);
+        public void DeleteDriver(string email);
     }
 }

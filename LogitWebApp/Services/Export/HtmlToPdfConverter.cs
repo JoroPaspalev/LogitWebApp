@@ -1,11 +1,10 @@
-﻿namespace WHMS.Services.Common
-{
-    using LogitWebApp.Services.Export;
-    using System;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Text;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
 
+namespace WHMS.Services.Common
+{
     public class HtmlToPdfConverter : IHtmlToPdfConverter
     {
         public byte[] Convert(string basePath, string htmlCode, string formatType = "A4", string orientationType = "portrait")

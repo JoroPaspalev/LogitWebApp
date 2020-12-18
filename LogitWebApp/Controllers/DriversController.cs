@@ -1,5 +1,4 @@
 ﻿using System;
-using static LogitWebApp.Common.GlobalConstants;
 using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -11,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using static LogitWebApp.Common.GlobalConstants;
 
 namespace LogitWebApp.Controllers
 {
@@ -56,7 +56,7 @@ namespace LogitWebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteDriver(DeleteDriverInputModel input)
+        public IActionResult DeleteDriver(DeleteDriverInputModel input)
         {
             if (!this.driversService.IsDriverExist(input.Email))
             {
@@ -68,7 +68,7 @@ namespace LogitWebApp.Controllers
                 return this.View();
             }
 
-           await this.driversService.DeleteDriverAsync(input.Email);
+            this.driversService.DeleteDriver(input.Email);
 
             return this.RedirectToAction("DriverDeleted", "Drivers", new ChangesApplied { Message = Driver_Deleted });
         }
@@ -105,19 +105,11 @@ namespace LogitWebApp.Controllers
             var currUser = await this.userManager.GetUserAsync(User);
             await this.driversService.AttachShipmentToDriverAsync(shipmentId, currUser.Id);
 
-            //Няма още такова View 
-            //Трябва да намеря пратката по Id и да и закача Id-то на логнатия Driver
             return this.RedirectToAction("All");
         }
 
         public IActionResult MyShipments(int id = 1)
-        {
-            //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) // will give the user's userId
-            //var userName = User.FindFirstValue(ClaimTypes.Name) // will give the user's userName
-
-            //ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
-            //string userEmail = applicationUser?.Email; // will give the user's Email
-
+        {            
             var driverId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var driverShipments = this.driversService.GetMyShipments(driverId, id, 2);
@@ -166,7 +158,6 @@ namespace LogitWebApp.Controllers
                         ShipmentId = input.ShipmentId,
                         AddedByDriverId = currDriver.Id,
                         CreatedOn = DateTime.UtcNow,
-                        //ImageUrl = imageUrl
                     };
 
                     //Отвори ми файлов стрийм към wwwroot/proof/име на файла в режим на създаване на нов файл и вземи данните от Picture и ми ги копирай в посочения stream
@@ -177,13 +168,11 @@ namespace LogitWebApp.Controllers
                         await picture.CopyToAsync(fileStream);
                     }
 
-                   currImage.ImageUrl = imageUrl;                    
+                    currImage.ImageUrl = imageUrl;
 
                     input.Images.Add(currImage);
                 }
             }
-
-            //TODO - chain .jpg file with shipmentId
 
             await this.driversService.ChangeShipmentDataAsync(input);
 
@@ -193,7 +182,5 @@ namespace LogitWebApp.Controllers
                 ShipmentId = input.ShipmentId
             });
         }
-
-
     }
 }

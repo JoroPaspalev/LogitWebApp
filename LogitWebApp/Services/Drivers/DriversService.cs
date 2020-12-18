@@ -1,12 +1,11 @@
-﻿using LogitWebApp.Data;
-using LogitWebApp.Data.Models;
-using LogitWebApp.ViewModels.Drivers;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using static LogitWebApp.Common.GlobalConstants;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using LogitWebApp.Data;
+using LogitWebApp.Data.Models;
+using LogitWebApp.ViewModels.Drivers;
+using static LogitWebApp.Common.GlobalConstants;
 
 namespace LogitWebApp.Services.Drivers
 {
@@ -23,11 +22,6 @@ namespace LogitWebApp.Services.Drivers
         public DriversService(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
             this.db = db;
-            this.userManager = userManager;
-        }
-
-        public DriversService(UserManager<ApplicationUser> userManager)
-        {
             this.userManager = userManager;
         }
 
@@ -184,13 +178,12 @@ namespace LogitWebApp.Services.Drivers
             await this.db.SaveChangesAsync();
         }
 
-        public async Task<bool> DeleteDriverAsync(string email)
+        public void DeleteDriver(string email)
         {
-            var currUser = this.userManager.Users.FirstOrDefault(u => u.Email == email);
+            var currUser = this.db.Users.FirstOrDefault(u => u.Email == email);
 
-            var result = await this.userManager.DeleteAsync(currUser);
-
-            return result.Succeeded ? true : false;
+            var result = this.db.Users.Remove(currUser);
+            this.db.SaveChanges();
         }
     }
 }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using LogitWebApp.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using LogitWebApp.Data.Models;
 
 namespace LogitWebApp.Data
 {
@@ -60,7 +55,6 @@ namespace LogitWebApp.Data
             //        NormalizedName = "Admin".ToUpper()
             //    });
 
-
             builder.Entity<Shipment>()
                  .HasOne(x => x.LoadingAddress)
                  .WithMany(x => x.ShipmentsLoading)
@@ -108,7 +102,6 @@ namespace LogitWebApp.Data
                 .WithOne(x => x.Order)
                 .HasForeignKey(x => x.OrderId)
                 .OnDelete(DeleteBehavior.Cascade);
-
         }
     }
 }

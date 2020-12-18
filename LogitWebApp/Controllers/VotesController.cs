@@ -1,14 +1,8 @@
-﻿using LogitWebApp.Data.Models;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using LogitWebApp.Services.Users;
 using LogitWebApp.ViewModels.Votes;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace LogitWebApp.Controllers
 {
@@ -47,9 +41,5 @@ namespace LogitWebApp.Controllers
 
             return this.RedirectToAction("AllUserOrders", "Users");
         }
-
-
-
-
     }
 }

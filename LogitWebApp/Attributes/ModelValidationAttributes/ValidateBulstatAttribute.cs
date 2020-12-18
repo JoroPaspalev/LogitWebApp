@@ -1,9 +1,7 @@
-﻿using LogitWebApp.Data;
-using System;
+﻿using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using LogitWebApp.Data;
 
 namespace LogitWebApp.Attributes.ModelValidationAttributes
 {
@@ -21,7 +19,6 @@ namespace LogitWebApp.Attributes.ModelValidationAttributes
                 return new ValidationResult("Този Булстат вече фигурира в базата ни данни!", new List<string> { "Bulstat" });
             }
             return ValidationResult.Success;
-
         }
     }
 }

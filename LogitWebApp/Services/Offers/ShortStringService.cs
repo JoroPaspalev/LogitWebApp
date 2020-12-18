@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿
 namespace LogitWebApp.Services.Offers
 {
     //Може да го използвам за рязане на дълъг текст. Да се вземат само първите 10 символа и да се добавя ... към тях

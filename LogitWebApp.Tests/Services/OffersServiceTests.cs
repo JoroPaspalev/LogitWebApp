@@ -17,7 +17,7 @@ namespace LogitWebApp.Tests.Services
         public async Task GetOfferShouldGiveMeRealOffer()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase("name");
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
 
             var db = new ApplicationDbContext(optionsBuilder.Options);
             var distance = new Distance()
@@ -52,6 +52,89 @@ namespace LogitWebApp.Tests.Services
 
             Assert.Equal(208, Math.Round((double)result.Result.Price, 2));
         }
+
+        [Fact]
+        public async Task GetOfferShouldGiveMeRealOfferWith3Pallets()
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+
+            var db = new ApplicationDbContext(optionsBuilder.Options);
+            var distance = new Distance()
+            {
+                Id = 1,
+                FromCity = "Sofia",
+                ToCity = "Ruse",
+                DistanceInKM = 304.1
+            };
+            await db.Distances.AddRangeAsync(distance);
+            await db.SaveChangesAsync();
+
+            var currShipment = new Shipment()
+            {
+                FromCity = new City { Id = 1, Name = "Sofia" },
+                ToCity = new City { Id = 2, Name = "Ruse" },
+                IsExpressDelivery = false,
+                IsFragile = false,
+                CountOfPallets = 3,
+                Width = 0.80,
+                Length = 1.30,
+                Height = 1,
+                Weight = 600
+            };
+
+            await db.Shipments.AddAsync(currShipment);
+            await db.SaveChangesAsync();
+
+            //Price 246.32lv
+
+            var offerService = new OffersService(db);
+            var result = offerService.GetOffer(currShipment);
+
+            Assert.Equal(246.32, Math.Round((double)result.Result.Price, 2));
+        }
+
+        [Fact]
+        public async Task GetOfferShouldGiveMeRealOfferWith4OrMorePallets()
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+
+            var db = new ApplicationDbContext(optionsBuilder.Options);
+            var distance = new Distance()
+            {
+                Id = 1,
+                FromCity = "Sofia",
+                ToCity = "Ruse",
+                DistanceInKM = 304.1
+            };
+            await db.Distances.AddRangeAsync(distance);
+            await db.SaveChangesAsync();
+
+            var currShipment = new Shipment()
+            {
+                FromCity = new City { Id = 1, Name = "Sofia" },
+                ToCity = new City { Id = 2, Name = "Ruse" },
+                IsExpressDelivery = false,
+                IsFragile = false,
+                CountOfPallets = 4,
+                Width = 0.80,
+                Length = 1.30,
+                Height = 1,
+                Weight = 600
+            };
+
+            await db.Shipments.AddAsync(currShipment);
+            await db.SaveChangesAsync();
+
+            //Price  310.18lv
+
+            var offerService = new OffersService(db);
+            var result = offerService.GetOffer(currShipment);
+
+            Assert.Equal(310.18, Math.Round((double)result.Result.Price, 2));
+        }
+
 
         [Fact]
         public async Task GetShipmentByIdShouldReturnShipmentIfExist()

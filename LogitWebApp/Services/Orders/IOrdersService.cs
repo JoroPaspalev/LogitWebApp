@@ -1,9 +1,6 @@
-﻿using LogitWebApp.ViewModels.ChatHub;
+﻿using System.Collections.Generic;
+using LogitWebApp.ViewModels.ChatHub;
 using LogitWebApp.ViewModels.Offer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LogitWebApp.Services.Orders
 {

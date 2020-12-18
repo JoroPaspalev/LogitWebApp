@@ -1,10 +1,6 @@
-﻿using LogitWebApp.Services.Messages;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using LogitWebApp.Services.Messages;
 
 namespace LogitWebApp.Controllers
 {

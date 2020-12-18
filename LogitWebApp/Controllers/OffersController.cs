@@ -1,16 +1,13 @@
-﻿using LogitWebApp.Services.Offers;
-using LogitWebApp.ViewModels.Offer;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.UI.V4;
-using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Authorization;
+using LogitWebApp.Services.Offers;
+using LogitWebApp.ViewModels.Offer;
 using LogitWebApp.Data.Models;
 
 namespace LogitWebApp.Controllers
 {
+    [Authorize]
     public class OffersController : Controller
     {
         private readonly IOffersService offersService;
@@ -28,15 +25,50 @@ namespace LogitWebApp.Controllers
         }
 
         public async Task<IActionResult> Calculate(string ShipmentId)
-        {
-            //ще си вземе по shipmentId Shipment-а и ще го подаде на View-то което ще покаже офертата с цената
+        {            
             Shipment currShipment = this.offersService.GetShipmentById(ShipmentId);
 
             ShipmentViewModel offerForShipment = await this.offersService.GetOffer(currShipment);
 
             return this.View(offerForShipment);
-
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //[HttpPost]
         //public IActionResult Calculate(OfferInputModel input)

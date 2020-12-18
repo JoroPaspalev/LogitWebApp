@@ -1,27 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using LogitWebApp.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WHMS.Services.Common;
+using LogitWebApp.Data;
 using LogitWebApp.Services.Offers;
 using LogitWebApp.Services.Orders;
 using LogitWebApp.Services.Drivers;
 using LogitWebApp.Services.Home;
-using Microsoft.AspNetCore.Mvc;
 using LogitWebApp.Data.Seeding;
 using LogitWebApp.Data.Models;
 using LogitWebApp.Services.Users;
 using LogitWebApp.Services.Export;
-using WHMS.Services.Common;
 using LogitWebApp.Hubs;
 using LogitWebApp.Services.Messages;
 using LogitWebApp.Services.Search;
@@ -66,7 +60,6 @@ namespace LogitWebApp
                     //Изискваш ли в Db да има само един user с този emdil. Ако го дам на false ще може Pesho и Ivan да бъдат с един и същи Email. Което не е много OK
                     options.User.RequireUniqueEmail = true;
 
-
                     //Кои символи позволяваме да има в Username
                     //options.User.AllowedUserNameCharacters = "abcdefj... ABCDEFG... 0123456789_-!@#";
 
@@ -102,7 +95,6 @@ namespace LogitWebApp
             services.AddTransient<ISearchService, SearchService>();
             services.AddTransient<IDeleteOrderService, DeleteOrderService>();
             services.AddSignalR();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -124,7 +116,7 @@ namespace LogitWebApp
 
                 //1.
                 //това ми отваря оня готиния прозорец със сините бутони, когато app-a хвърли грешка
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
 
                 //2.
                 //Когато използваме този middleware и app-а хвърли някъде грешка, този middleware я улавя и извиква в HomeController --> action-a MyErrorAction, той пък ще извика viеw, което се намира в Views/Home/MyErrorAction.cshtml
@@ -133,16 +125,16 @@ namespace LogitWebApp
                 //3.
                 //Каква е идеята тук на този middleware? Ако възникне грешка се връща Response към Browser-а със статус код 302 т.е да направи Redirect към нов адрес. От къде се взема този нов адрес? Посочваме го тук като параметър --> в случая /Home/StatusCodeError?errorCode={0}, като на мястото на нулата се слага StatusCode на грешката (/Home/StatusCodeError?errorCode=404). Това пък от своя страна извиква в HomeController action StatusCodeError и му подава като аргумент 404. След това action-а извиква същото View и то се връща като отговор на Browser-а
                 //3.1
-                //app.UseStatusCodePagesWithRedirects("/Home/StatusCodeError?errorCode={0}");
+                app.UseStatusCodePagesWithRedirects("/Home/StatusCodeError?errorCode={0}");
 
                 //Тъй като UseStatusCodePagesWithRedirects не ми хваща грешки от тип 500, трябва да регистрирам и middleware UseExceptionHandler за да може той да ги улавя и връща View за тях
 
                 //Спри 1 и пусни тези трите неща за да ти излезе усмихнатото човече 
-                ////////app.UseExceptionHandler("/Home/MyErrorAction");
+                app.UseExceptionHandler("/Home/MyErrorAction");
                 //////////3.2
-                ////////app.UseStatusCodePagesWithReExecute("/Home/StatusCodeError", "?errorCode={0}");
+                app.UseStatusCodePagesWithReExecute("/Home/StatusCodeError", "?errorCode={0}");
 
-                ////////app.UseDatabaseErrorPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {

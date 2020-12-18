@@ -1,8 +1,8 @@
-﻿using LogitWebApp.Data.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using LogitWebApp.Data.Models;
 
 namespace LogitWebApp.Data.Seeding
 {

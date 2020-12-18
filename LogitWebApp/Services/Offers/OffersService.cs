@@ -1,9 +1,9 @@
-﻿using LogitWebApp.Data;
-using LogitWebApp.Data.Models;
-using static LogitWebApp.Common.GlobalConstants;
-using System.Linq;
-using LogitWebApp.ViewModels.Offer;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using LogitWebApp.Data;
+using LogitWebApp.Data.Models;
+using LogitWebApp.ViewModels.Offer;
+using static LogitWebApp.Common.GlobalConstants;
 
 namespace LogitWebApp.Services.Offers
 {
@@ -52,9 +52,9 @@ namespace LogitWebApp.Services.Offers
                 cellingPricePerPallet *= 0.9M;
             }
 
-            if (input.CountOfPallets > 4)
+            if (input.CountOfPallets >= 4)
             {
-                //15% discount for more than 4 pallets
+                //15% discount for equal or more than 4 pallets
                 cellingPricePerPallet *= 0.85M;
             }
 

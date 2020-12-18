@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LogitWebApp.Data.Models
 {
@@ -19,6 +17,7 @@ namespace LogitWebApp.Data.Models
         [Key]
         public string Id { get; set; }
        
+        [Required]
         public string CreatorId { get; set; }
 
         public ApplicationUser Creator { get; set; }

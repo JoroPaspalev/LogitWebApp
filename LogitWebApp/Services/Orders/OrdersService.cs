@@ -1,12 +1,10 @@
-﻿using LogitWebApp.Data;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+using LogitWebApp.Data;
 using LogitWebApp.Data.Models;
 using LogitWebApp.ViewModels.ChatHub;
 using LogitWebApp.ViewModels.Offer;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LogitWebApp.Services.Orders
 {
@@ -36,9 +34,14 @@ namespace LogitWebApp.Services.Orders
         {
             var currShipment = this.db.Shipments.FirstOrDefault(s => s.Id == input.ShipmentId);
 
-            var fromCity = this.db.Shipments.Where(s => s.Id == input.ShipmentId).Select(x => new { Name = x.FromCity.Name }).First();
+            var fromCity = this.db.Shipments
+                .Where(s => s.Id == input.ShipmentId)
+                .Select(x => new { Name = x.FromCity.Name })
+                .First();
 
-            var toCity = this.db.Shipments.Where(s => s.Id == input.ShipmentId).Select(x => new { Name = x.ToCity.Name })
+            var toCity = this.db.Shipments
+                .Where(s => s.Id == input.ShipmentId)
+                .Select(x => new { Name = x.ToCity.Name })
                 .First();
 
             var loadingAddress = new Address
@@ -104,7 +107,6 @@ namespace LogitWebApp.Services.Orders
             this.db.SaveChanges();
 
             return currOrder.Id;
-
         }
 
         public ICollection<MessagesViewModel> GetAllMessages(string orderId)
@@ -122,7 +124,6 @@ namespace LogitWebApp.Services.Orders
                 })
                 .ToList();
         }
-
 
         public ICollection<MessagesViewModel> GetAllNotReadFromAdminMessages()
         {

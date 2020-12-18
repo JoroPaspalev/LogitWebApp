@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using LogitWebApp.ViewModels.Test;
 using Microsoft.AspNetCore.Mvc;
 
@@ -52,14 +49,11 @@ namespace LogitWebApp.Controllers
         {
             return this.View();
         }
-
-
        
         public IActionResult Index1()
         {
             return this.View();
         }
-
 
         [ValidateAntiForgeryToken]
         [HttpPost]
@@ -69,12 +63,6 @@ namespace LogitWebApp.Controllers
 
             return this.View();
         }
-
-
-
-
-
-
 
         public IActionResult Index()
         {

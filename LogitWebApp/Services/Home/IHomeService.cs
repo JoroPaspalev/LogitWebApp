@@ -1,7 +1,6 @@
-﻿using LogitWebApp.Data.Models;
-using System.Collections.Generic;
-using LogitWebApp.ViewModels.Offer;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using LogitWebApp.ViewModels.Offer;
 
 namespace LogitWebApp.Services.Home
 {

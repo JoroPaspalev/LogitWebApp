@@ -1,11 +1,7 @@
-﻿using LogitWebApp.Data;
+﻿using System.Linq;
+using LogitWebApp.Data;
 using LogitWebApp.ViewModels.Pagination;
 using LogitWebApp.ViewModels.Users;
-using Microsoft.AspNetCore.Authorization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LogitWebApp.Services.Users
 {
@@ -52,9 +48,8 @@ namespace LogitWebApp.Services.Users
                     DriverLastName = x.Shipment.Driver.LastName,
                     Images = x.Shipment.Images.ToList(),
                     VotesCount = x.Shipment.Driver.DriverVotes.Count,
-                    VotesTotal = x.Shipment.Driver.DriverVotes.Sum(x=>x.Value)
-                })
-                .ToList();
+                    VotesTotal = x.Shipment.Driver.DriverVotes.Sum(x => x.Value)
+                });
 
             var paginationViewModel = new OrdersPaginationViewModel
             {

@@ -1,8 +1,7 @@
-﻿using LogitWebApp.Data;
+﻿using System.Linq;
+using LogitWebApp.Data;
 using LogitWebApp.ViewModels.Search;
 using LogitWebApp.ViewModels.Users;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace LogitWebApp.Services.Search
 {
@@ -15,7 +14,7 @@ namespace LogitWebApp.Services.Search
             this.db = db;
         }
 
-        public ICollection<UserOrderViewModel> GetAllUserOrders(string userId, SearchInputModel input)
+        public IQueryable<UserOrderViewModel> GetAllUserOrders(string userId, SearchInputModel input)
         {
             var allOrders = this.db.Orders.Where(o => o.CreatorId == userId)
                .Select(x => new UserOrderViewModel
@@ -49,6 +48,14 @@ namespace LogitWebApp.Services.Search
                    VotesTotal = x.Shipment.Driver.DriverVotes.Sum(x => x.Value)
                });
 
+            //Ако при празно търсене искам да се показват всички поръчки трябва да изтрия този блок
+            //В момента скривам всички поръчки, ако получа празни полета за търсене
+            if (input.SenderName == null && input.ReceiverName == null &&
+                input.LoadingDate == default && input.UnloadingDate == default)
+            {
+                return allOrders.Where(o => o.Sender == null);
+            }
+
             if (!string.IsNullOrWhiteSpace(input.SenderName))
             {
                 allOrders = allOrders.Where(o => o.Sender.Contains(input.SenderName));
@@ -69,7 +76,7 @@ namespace LogitWebApp.Services.Search
                 allOrders = allOrders.Where(o => o.UnloadingDate <= input.UnloadingDate);
             }
 
-            return allOrders.OrderByDescending(x=>x.OrderCreatedOn).ToList();
+            return allOrders;
         }
     }
 }

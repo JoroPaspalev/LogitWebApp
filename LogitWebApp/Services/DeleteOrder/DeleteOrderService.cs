@@ -1,6 +1,6 @@
-﻿using LogitWebApp.Data;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using LogitWebApp.Data;
 
 namespace LogitWebApp.Services.DeleteOrder
 {

@@ -1,9 +1,6 @@
-﻿using LogitWebApp.Data.CommonModels;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+using LogitWebApp.Data.CommonModels;
 
 namespace LogitWebApp.Data.Models
 {
@@ -26,6 +23,5 @@ namespace LogitWebApp.Data.Models
         public virtual ApplicationUser AddedByDriver { get; set; }
 
         public string ImageUrl { get; set; }
-
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System;
-using LogitWebApp.Data.Models;
-using LogitWebApp.ViewModels.ChatHub;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-using System.Threading.Tasks;
+using LogitWebApp.Data.Models;
+using LogitWebApp.ViewModels.ChatHub;
 using LogitWebApp.Common;
-using System.Security.Claims;
 using LogitWebApp.Data;
 
 namespace LogitWebApp.Hubs
@@ -23,7 +23,7 @@ namespace LogitWebApp.Hubs
         public async Task Send(string message, string orderId)
         {
             bool isAdmin = this.Context.User.IsInRole(GlobalConstants.Admin_RoleName);
-            var userId = this.Context.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var userId = this.Context.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var currMessage = new Message
             {
@@ -40,10 +40,10 @@ namespace LogitWebApp.Hubs
                 .SendAsync("NewMessage", message);
 
             await this.Clients.All.SendAsync("NewMessage", new MessageViewModel
-            {
-                User = this.Context.User.Identity.Name,
-                Text = message,
-            }
+                {
+                    User = this.Context.User.Identity.Name,
+                    Text = message,
+                }
             );
         }
     }

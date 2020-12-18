@@ -1,18 +1,12 @@
-﻿using LogitWebApp.Data;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
+using WHMS.Services.Common;
+using LogitWebApp.Data;
 using LogitWebApp.Services.Export;
 using LogitWebApp.Services.Users;
-using LogitWebApp.ViewModels.Drivers;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using System.Web;
-using WHMS.Services.Common;
 
 namespace LogitWebApp.Controllers
 {

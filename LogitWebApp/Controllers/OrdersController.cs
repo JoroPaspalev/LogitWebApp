@@ -1,10 +1,10 @@
 ﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using LogitWebApp.Common;
 using LogitWebApp.Services.Orders;
 using LogitWebApp.ViewModels.Offer;
 using LogitWebApp.ViewModels.Shared;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 
 namespace LogitWebApp.Controllers
 {
@@ -45,11 +45,6 @@ namespace LogitWebApp.Controllers
                 OrderId = orderId
             });
         }
-
-        //public IActionResult CreateOrder()
-        //{
-        //    return this.Redirect("/");
-        //}
 
         [Authorize]
         public IActionResult Chat(string orderId)

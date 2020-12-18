@@ -1,9 +1,7 @@
-﻿using LogitWebApp.Data;
-using LogitWebApp.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using LogitWebApp.Data;
+using LogitWebApp.Data.Models;
 
 namespace LogitWebApp.Services.Users
 {

@@ -1,10 +1,8 @@
-﻿using LogitWebApp.Data;
+﻿using System.Linq;
+using System.Collections.Generic;
+using LogitWebApp.Data;
 using LogitWebApp.Services.Orders;
 using LogitWebApp.ViewModels.Message;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LogitWebApp.Services.Messages
 {

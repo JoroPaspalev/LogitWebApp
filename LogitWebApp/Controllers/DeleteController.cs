@@ -1,15 +1,14 @@
-﻿using LogitWebApp.Common;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using LogitWebApp.Services.DeleteOrder;
 using LogitWebApp.ViewModels.Delete;
 using LogitWebApp.ViewModels.Shared;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using static LogitWebApp.Common.GlobalConstants;
 
 namespace LogitWebApp.Controllers
 {
-    [Authorize(Roles = GlobalConstants.Admin_RoleName)]
+    [Authorize(Roles = Admin_RoleName)]
     public class DeleteController : Controller
     {
         private readonly IDeleteOrderService deleteOrderService;
@@ -46,6 +45,5 @@ namespace LogitWebApp.Controllers
         {
             return this.View(input);
         }
-
     }
 }

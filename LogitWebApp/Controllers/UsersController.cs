@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LogitWebApp.Data.Models;
+﻿using LogitWebApp.Data.Models;
 using LogitWebApp.Services.Users;
 using LogitWebApp.ViewModels.Pagination;
 using LogitWebApp.ViewModels.Users;
@@ -18,7 +14,7 @@ namespace LogitWebApp.Controllers
     {
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly IUsersService usersService;
-        private readonly Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public UsersController(IWebHostEnvironment webHostEnvironment, IUsersService usersService, UserManager<ApplicationUser> userManager)
         {

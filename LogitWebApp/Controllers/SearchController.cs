@@ -1,11 +1,11 @@
-﻿using LogitWebApp.Data.Models;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using LogitWebApp.Data.Models;
 using LogitWebApp.Services.Search;
 using LogitWebApp.ViewModels.Search;
 using LogitWebApp.ViewModels.Users;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace LogitWebApp.Controllers
 {
@@ -31,7 +31,7 @@ namespace LogitWebApp.Controllers
         {
             var userId = this.userManager.GetUserId(User);
 
-            ICollection<UserOrderViewModel> filteredOrders = this.searchService.GetAllUserOrders(userId, input);
+            IQueryable<UserOrderViewModel> filteredOrders = this.searchService.GetAllUserOrders(userId, input);
 
             return View(filteredOrders);
         }

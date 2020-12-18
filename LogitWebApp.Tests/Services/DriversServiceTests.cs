@@ -16,6 +16,50 @@ namespace LogitWebApp.Tests.Services
     public class DriversServiceTests
     {
         [Fact]
+        public void DeleteDriverShouldDeleteDriverFromDb()
+        {
+            var listWithUsers = new List<ApplicationUser>()
+            {
+                new ApplicationUser()
+                {
+                    Email = "aaa@abv.bg",
+                    FirstName = "Pesho",
+                    LastName = "Ivanov",
+                    PhoneNumber = "0888-123-456"
+                },
+                new ApplicationUser()
+                {
+                    Email = "zzz@abv.bg",
+                    FirstName = "Ginko",
+                    LastName = "Ivanov",
+                    PhoneNumber = "0888-123-456"
+                },
+                new ApplicationUser()
+                {
+                    Email = "bbb@abv.bg",
+                    FirstName = "Pesho",
+                    LastName = "Ivanov",
+                    PhoneNumber = "0888-123-456"
+                }
+            };
+
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase("different_Fucking_name");
+            var dbContx = new ApplicationDbContext(optionsBuilder.Options);
+            dbContx.Users.AddRange(listWithUsers);
+            dbContx.SaveChanges();
+
+            var driversService1 = new DriversService(dbContx);
+
+            driversService1.DeleteDriver("aaa@abv.bg");
+            driversService1.DeleteDriver("bbb@abv.bg");
+            dbContx.SaveChanges();
+            int result = dbContx.Users.Count();
+
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
         public async Task AddDriverShouldCreateNewDriverInDbAndPutItToDriverRole()
         {
             List<ApplicationUser> _users = new List<ApplicationUser>();
@@ -29,18 +73,28 @@ namespace LogitWebApp.Tests.Services
                 PhoneNumber = "0888-123-456"
             };
 
+            var input1 = new DriverInputModel()
+            {
+                Email = "ddd@abv.bg",
+                Password = "123456",
+                FirstName = "Gosho",
+                LastName = "Ivanov",
+                PhoneNumber = "0888-123-456"
+            };
+
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase("name");
             var db = new ApplicationDbContext(optionsBuilder.Options);
-            //Трябва ми някой който да ме даде UserManager
+            
             UserManager<ApplicationUser> _userManager = MockUserManager<ApplicationUser>(_users).Object;
 
             var driversService = new DriversService(db, _userManager);
             await driversService.AddDriverAsync(input);
+            await driversService.AddDriverAsync(input1);
             int result = _users.Count;
             string resultFirstName = _users.FirstOrDefault(u => u.FirstName == "Pesho").FirstName;
 
-            Assert.Equal(1, result);
+            Assert.Equal(2, result);
             Assert.Equal("Pesho", resultFirstName);
         }
 
@@ -364,40 +418,7 @@ namespace LogitWebApp.Tests.Services
             Assert.Equal(currShipment.DriverId, driver.Id);
         }
 
-        [Fact]
-        public async Task DeleteDriverShouldDeleteDriverFromDb()
-        {
-            List<ApplicationUser> _users = new List<ApplicationUser>()
-            {
-                new ApplicationUser()
-                {
-                    Email = "aaa@abv.bg",
-                    FirstName = "Pesho",
-                    LastName = "Ivanov",
-                    PhoneNumber = "0888-123-456"
-                },
-                new ApplicationUser()
-                {
-                    Email = "rrr@rrr.bg",
-                    FirstName = "Misho",
-                    LastName = "Mishov",
-                    PhoneNumber = "0999-999-999"
-                }
-            };
-
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase("name");
-            var db = new ApplicationDbContext(optionsBuilder.Options);
-            //Трябва ми някой който да ме даде UserManager
-            UserManager<ApplicationUser> _userManager = MockUserManager<ApplicationUser>(_users).Object;
-
-            var driversService = new DriversService(_userManager);
-            await driversService.DeleteDriverAsync("aaa@abv.bg");
-            int result = _users.Count;
-            string resultFirstName = _users.FirstOrDefault(u => u.FirstName == "Pesho").FirstName;
-
-            Assert.Equal(1, result);
-        }
+       
 
         //Този метод ми създава userManager, който записва не в db а в подаден List<ApplicationUser> т.е. все едно данните за създадените Users не са в db.Users а са в този лист, който ни е достъпен
         public static Mock<UserManager<TUser>> MockUserManager<TUser>(List<TUser> users) where TUser : class
