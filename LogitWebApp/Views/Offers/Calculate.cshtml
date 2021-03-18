@@ -44,54 +44,50 @@
             <div class="container">
 
                 <div class="row pt-0 pb-0 pl-3 pr-3 align-items-center">
-                    <div class="col-12">
-
-                        <div class="">
+                    <div class="col-12">                      
                             <button type="button" class="btn btn-lg btn-block btn-secondary boreder border-dark">
                                 <h3 class="probootstrap_text-gray-200 font-weight-bold">
-                                    <span>
                                         Оферта за превоз на товари  №:
                                         <input asp-for="@Model.Id" readonly class="form-control font-weight-bold order-text text-center mt-2">
                                 </h3>
-                            </button>
-                        </div>
-                        <hr class="">
+                            </button>                       
+                        <hr>
                     </div>
                     <div class="col-6 text-dark">
                         <label for="departureTime" class="probootstrap_text-gray-300">От:</label>
                         <input type="text" readonly class="form-control" id="departureTime" name="from" value="@Model.From">
                     </div>
 
-                    <div class="col-6 text-dark">
+                    <div class="col-6 col-sm-6 text-dark">
                         <label for="departureTime" class="probootstrap_text-gray-300">До:</label>
                         <input type="text" readonly class="form-control" id="departureTime" name="to" value="@Model.To">
                     </div>
                 </div>
 
-                <div class="row p-3 align-items-center">
+                <div class="row p-3 align-items-top">
 
-                    <div class="col-3 text-dark">
+                    <div class="col-6 text-dark">
 
                         <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Брой палети:</label>
                         <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.CountOfPallets">
 
                         <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Дължина:</label>
-                        <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.Length">
+                        <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.Length.Value.ToString("0.00")">
 
                         <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Тегло:</label>
                         <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.Weight">
 
                     </div>
 
-                    <div class="col-3 text-dark">
+                    <div class="col-6 text-dark">
 
                         <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Ширина:</label>
-                        <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.Width">
+                        <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.Width.Value.ToString("0.00")">
 
                         <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Височина:</label>
-                        <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.Height">
+                        <input type="text" readonly class="form-control" id="departureTime" name="countOfPallets" value="@Model.Height.Value.ToString("0.00")">
 
-                        <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Експресна доставка:</label>
+                        <label class="pt-3 probootstrap_text-gray-300" for="departureTime">Експресна<span class="hide-delivery"> доставка</span>:</label>
                         @if (Model.IsExpressDelivery)
                         {
                             <input type="text" readonly class="form-control" name="countOfPallets" value="Да">
@@ -103,13 +99,13 @@
 
                     </div>
 
-                    <div class="col-6 pt-5 ">
+                    <div class="col-sm-12 pt-5 ">
                         <div class=" card shadow-sm border border-dark">
                             <div class="card-header border">
                                 <h2 class="text-secondary">Цена:</h2>
                             </div>
                             <div class="card-body">
-                                <button type="button" class="btn btn-lg btn-block btn-outline-dark"><h1 class="text-lowercase"><strong>@Model.Price.ToString("#.##") лв.</strong></h1></button>
+                                <button type="button" class="btn btn-lg btn-block btn-outline-dark"><h1 class="text-lowercase"><strong>@Model.Price.ToString("0.00") лв.</strong></h1></button>
                             </div>
                         </div>
                     </div>
